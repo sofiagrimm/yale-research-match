@@ -1,49 +1,91 @@
 # Yale Research Match
 
-A student-built research discovery tool for Yale undergraduates. Search labs across Yale College, FAS, YSM, and SEAS by topic, department, methods, and skill level. Built for the YCC Tech Developer Prize.
+A student-built research discovery tool for Yale undergraduates. Search labs by topic, methods, and experience level across Yale College, YSM, FAS, SEAS, and YSPH. Built for the YCC Tech Developer Prize.
+
+**Live site:** deploy via Railway (Procfile included) or any Python host.
 
 ## What it does
 
-Yale Research Match brings together lab data from the YURA Research Database and Yale departmental directories so undergrads can find real research openings without relying on insider knowledge or cold Googling.
+- Topic-first lab search: type "proteomics", "aging", "machine learning" instead of guessing department names
+- Filter by working style (wet lab, computational, hybrid, field), school, and undergrad-friendliness
+- Lab cards with PI, methods, skills, openings status, and a tailored outreach draft
+- Moderated student annotations per lab
+- Faculty-maintained openings via POST /api/labs/<id>/availability
+- Public JSON API at /api/labs_tagged.json for other Yale developers to build on
 
-- Topic-first search (type "aging" or "proteomics", not just "Chemistry")
-- Filters by department, working style (wet lab / computational / hybrid), and experience level
-- Lab cards with PI info, methods, prereqs, openings status, and student notes
-- Outreach helper that generates a tailored email draft
-- Public JSON API at `/api/labs` and `/api/labs_tagged.json`
+## Data sources
 
-## Quickstart
+- YURA Research Database (yura.yale.edu/ylabs)
+- Yale School of Medicine A-Z lab index
+- Departmental pages: Chemistry, MB&B, MCDB, EEB, BME, Physics, Earth Sciences, Statistics, YSPH
+
+## Run locally
 
 ```bash
 pip install -r requirements.txt
-python scrape_yale_labs.py     # builds labs_raw.json
-python tag_labs.py             # builds labs_tagged.json
-python api_server.py           # serves API on port 5000
+python api_server.py
+# open http://localhost:5000
 ```
 
-Open `index.html` in your browser, or point the frontend at the running API.
+## Refresh lab data
 
-## Public API
-
-```
-GET /api/labs                          all labs
-GET /api/labs?q=proteomics&dept=Chemistry   filtered
-GET /api/labs/<id>                     single lab with notes
-GET /api/labs_tagged.json              full static export
-POST /api/labs/<id>/annotations        submit a student note
-POST /api/labs/<id>/availability       faculty update openings
+```bash
+python scrape_yale_labs.py   # writes labs_raw.json
+python tag_labs.py           # writes labs_tagged.json
 ```
 
-## For developers
+## API
 
-`labs_tagged.json` is a public, versioned index of Yale labs with topics, methods, skills, openings status, and moderated student notes. Other YCC Tech projects are welcome to build on it. See the schema in `docs/schema.md`.
+```
+GET  /api/labs                         all labs, supports ?q= ?dept= ?mode= ?friendly=
+GET  /api/labs/<id>                    single lab with approved annotations
+GET  /api/labs_tagged.json             full static export (public API)
+POST /api/labs/<id>/availability       faculty updates openings
+POST /api/labs/<id>/annotations        student submits note
+GET  /api/labs/<id>/annotations        approved notes for a lab
+GET  /api/annotations/pending          moderation queue
+POST /api/annotations/<id>/approve
+POST /api/annotations/<id>/reject
+GET  /api/status                       health check
+```
 
-## Stack
+## Schema overview (labs_tagged.json)
 
-- Frontend: plain HTML/CSS/JS, no build step required
-- Backend: Python + Flask
-- Deployment: Railway (Procfile included)
+Each lab record includes:
+- `id`, `name`, `pi_name`, `pi_title`, `department`, `school`, `lab_url`, `contact_email`
+- `primary_topics`, `secondary_topics`, `tags`, `methods`
+- `skills_preferred`, `skills_optional`
+- `working_style`: wet_lab | computational | hybrid | field | unknown
+- `undergrad_friendly`: beginner_ok | experience_preferred | upper_level_only | unknown
+- `openings_status`: actively_recruiting | summer_only | not_recruiting | unknown
+- `openings_notes`, `min_commitment_weeks`, `recommended_years`, `campus_location`
+- `student_notes[]`: id, text, category, status (approved only surfaced in API)
+- `source_flags`: yura_listed, ysm_listed, dept_listed
+- `match_metadata`: topic_tokens, skills_tokens, last_indexed
+
+## Adding departments
+
+Open scrape_yale_labs.py and add an entry to the SOURCES list:
+
+```python
+{
+    "source": "dept_listing",
+    "school": "Faculty of Arts and Sciences",
+    "url": "https://yourdept.yale.edu/research",
+    "dept": "Your Department",
+    "parser": "generic_faculty",
+}
+```
+
+Run the two scripts and the new labs appear in the API.
+
+## Deploy (Railway)
+
+1. Push to GitHub
+2. Connect repo to Railway
+3. Railway uses Procfile: `web: python api_server.py`
+4. Set PORT env var if needed (defaults to 5000)
 
 ## License
 
-MIT
+MIT. Use it, extend it, build on top of it.
