@@ -1,9 +1,1 @@
-{
-  "generated_at": "2026-04-04T19:00:00Z",
-  "version": "2026.04.04-2",
-  "sources": ["yura", "ysm_lab_index", "dept_listing", "seas_directory", "ysph_directory"],
-  "total_labs": 310,
-  "curated_labs": 47,
-  "stub_labs": 263,
-  "labs": []
-}
+{output}
