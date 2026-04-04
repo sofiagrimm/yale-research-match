@@ -384,17 +384,26 @@ new_labs = [
 if __name__ == "__main__":
     json_path = os.path.join(os.path.dirname(__file__), "labs_tagged.json")
 
-    if os.path.exists(json_path):
-        with open(json_path, "r") as f:
-            existing = json.load(f)
-    else:
-        existing = []
+    with open(json_path, "r") as f:
+        data = json.load(f)
 
-    existing_ids = {entry["id"] for entry in existing}
+    # labs_tagged.json uses a wrapper object with a "labs" array
+    existing_labs = data["labs"]
+    existing_ids = {entry["id"] for entry in existing_labs}
+
     added = [l for l in new_labs if l["id"] not in existing_ids]
-    merged = existing + added
+    data["labs"] = existing_labs + added
+
+    # Update top-level metadata counters
+    total = len(data["labs"])
+    curated = sum(1 for l in data["labs"] if l.get("source_flags", {}).get("curated", False))
+    stub = total - curated
+    data["total_labs"] = total
+    data["curated_labs"] = curated
+    data["stub_labs"] = stub
+    data["generated_at"] = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
     with open(json_path, "w") as f:
-        json.dump(merged, f, indent=2)
+        json.dump(data, f, indent=2)
 
-    print(f"Done. Added {len(added)} new labs. Total: {len(merged)}.")
+    print(f"Done. Added {len(added)} new labs. Total: {total} ({curated} curated, {stub} stubs).")
