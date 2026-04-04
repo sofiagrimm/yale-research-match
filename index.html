@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yale Research Match</title>
+  <meta name="description" content="Student-built research discovery for Yale undergrads. Find labs by topic, methods, and real entry points across Yale College, YSM, SEAS, and more." />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f6f2; --surface: #f9f8f5; --surface2: #fbfbf9;
+      --offset: #f0ede8; --dynamic: #e6e3de; --border: #d4d1ca;
+      --text: #28251d; --muted: #6f6d67; --faint: #a8a59f;
+      --inv: #f9f8f4; --primary: #0e666c; --primary-h: #0b4e53;
+      --primary-hi: #d8e6e4; --success: #437a22; --warn: #964219; --blue: #006494;
+      --sh-sm: 0 1px 2px oklch(0.2 0.01 80 / 0.06);
+      --sh-md: 0 6px 18px oklch(0.2 0.01 80 / 0.1);
+      --r-sm: 0.375rem; --r-md: 0.5rem; --r-lg: 0.875rem; --r-xl: 1.125rem; --r-full: 9999px;
+      --ease: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --font: 'Satoshi', Inter, sans-serif;
+    }
+    [data-theme="dark"] {
+      --bg: #171614; --surface: #1c1b19; --surface2: #201f1d;
+      --offset: #1d1c1a; --dynamic: #2d2c2a; --border: #393836;
+      --text: #cdccca; --muted: #9d9b98; --faint: #6a6966;
+      --inv: #111; --primary: #4f98a3; --primary-h: #227f8b;
+      --primary-hi: #313b3b; --success: #6daa45; --warn: #bb653b; --blue: #5591c7;
+      --sh-sm: 0 1px 2px oklch(0 0 0 / 0.22); --sh-md: 0 12px 28px oklch(0 0 0 / 0.34);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100dvh; background: var(--bg); color: var(--text);
+      font-family: var(--font); font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem); line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; color: inherit; border: none; }
+    button { cursor: pointer; background: none; }
+    :focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: var(--r-sm); }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    /* layout */
+    .shell { display: grid; grid-template-columns: 270px 1fr; min-height: 100dvh; }
+    .sidebar {
+      position: sticky; top: 0; height: 100dvh; overflow-y: auto;
+      padding: 1.5rem 1.25rem; border-right: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: linear-gradient(180deg, var(--surface), var(--offset));
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .main-col { display: flex; flex-direction: column; min-height: 100dvh; }
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 0.875rem 1.75rem;
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+    }
+    .content { padding: 1.75rem; display: grid; gap: 1.5rem; flex: 1; }
+
+    /* brand */
+    .brand { display: flex; align-items: center; gap: 0.75rem; }
+    .logo {
+      width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center;
+      background: var(--primary-hi); color: var(--primary); flex: none;
+      box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--primary) 15%, transparent);
+    }
+    .brand-text h1 { font-size: 1.05rem; line-height: 1.1; }
+    .brand-text p { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+
+    /* nav */
+    .nav-section { display: grid; gap: 0.375rem; }
+    .nav-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--faint); padding: 0 0.5rem; margin-bottom: 0.25rem; }
+    .nav-btn {
+      display: flex; align-items: center; gap: 0.625rem; width: 100%;
+      padding: 0.65rem 0.75rem; border-radius: var(--r-lg);
+      border: 1px solid transparent; text-align: left; font-size: 0.875rem;
+      transition: background var(--ease), border-color var(--ease);
+    }
+    .nav-btn:hover, .nav-btn.active {
+      background: var(--surface2); border-color: color-mix(in oklab, var(--text) 10%, transparent);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+    .nav-count {
+      margin-left: auto; font-size: 0.7rem; padding: 0.1rem 0.45rem;
+      border-radius: var(--r-full); background: var(--dynamic); color: var(--muted);
+    }
+    .sidebar-footer {
+      margin-top: auto; padding: 0.875rem; border-radius: var(--r-xl);
+      background: var(--surface2); border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
+      font-size: 0.775rem; color: var(--muted); line-height: 1.5;
+    }
+    .sidebar-footer strong { color: var(--text); font-size: 0.8rem; }
+
+    /* topbar pieces */
+    .topbar-left { display: flex; align-items: center; gap: 1rem; }
+    .page-title { font-size: 0.95rem; font-weight: 600; }
+    .pill-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.4rem 0.875rem; border-radius: var(--r-full);
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: var(--surface2); font-size: 0.8rem;
+      transition: background var(--ease);
+    }
+    .pill-btn:hover { background: var(--dynamic); }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); }
+
+    /* hero */
+    .hero {
+      padding: 1.75rem 2rem;
+      border-radius: calc(var(--r-xl) + 2px);
+      background:
+        radial-gradient(circle at 80% 0%, color-mix(in oklab, var(--primary) 11%, transparent), transparent 45%),
+        linear-gradient(170deg, var(--surface), var(--surface2));
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      box-shadow: var(--sh-sm);
+      display: grid; grid-template-columns: 1fr 340px; gap: 2rem; align-items: start;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.3rem 0.7rem; border-radius: var(--r-full);
+      background: var(--primary-hi); color: var(--primary);
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .hero-h { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem); line-height: 1.05; margin: 0.875rem 0 0.75rem; }
+    .hero-sub { color: var(--muted); max-width: 58ch; line-height: 1.65; margin-bottom: 1.25rem; }
+    .search-row { display: flex; gap: 0.625rem; flex-wrap: wrap; }
+    .input, .select {
+      height: 44px; border-radius: var(--r-lg);
+      border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+      background: var(--surface2); padding: 0 0.875rem; font-size: 0.875rem;
+    }
+    .input { flex: 1; min-width: 180px; }
+    .select { min-width: 150px; }
+    .primary-btn {
+      height: 44px; padding: 0 1.25rem; border-radius: var(--r-lg);
+      background: var(--primary); color: var(--inv); font-weight: 700; font-size: 0.875rem;
+      box-shadow: var(--sh-sm); transition: background var(--ease), transform var(--ease);
+    }
+    .primary-btn:hover { background: var(--primary-h); transform: translateY(-1px); }
+    .hero-stats {
+      background: var(--surface);
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      border-radius: var(--r-xl); padding: 1.25rem; display: grid; gap: 1rem;
+    }
+    .stat-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; font-size: 0.85rem; }
+    .stat-row span { color: var(--muted); }
+    .stat-row strong { font-size: 1.25rem; }
+    .stat-divider { height: 1px; background: color-mix(in oklab, var(--text) 8%, transparent); }
+
+    /* filter bar */
+    .filter-bar {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;
+    }
+    .filter-label { font-size: 0.8rem; color: var(--muted); margin-right: 0.25rem; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      padding: 0.3rem 0.7rem; border-radius: var(--r-full);
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: var(--surface2); font-size: 0.78rem; cursor: pointer;
+      transition: background var(--ease), border-color var(--ease);
+    }
+    .chip.on { background: var(--primary-hi); border-color: color-mix(in oklab, var(--primary) 20%, transparent); color: var(--primary); }
+    .chip:hover:not(.on) { background: var(--dynamic); }
+    .result-count { margin-left: auto; font-size: 0.8rem; color: var(--muted); }
+
+    /* lab cards grid */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1rem; }
+    .lab-card {
+      background: var(--surface);
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      border-radius: var(--r-xl); padding: 1.25rem;
+      display: grid; gap: 0.875rem;
+      box-shadow: var(--sh-sm);
+      transition: box-shadow var(--ease), transform var(--ease);
+    }
+    .lab-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+    .card-top { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+    .card-pi { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+    .tag {
+      display: inline-flex; align-items: center; height: 26px; padding: 0 0.6rem;
+      border-radius: var(--r-full); font-size: 0.72rem;
+      border: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
+      background: var(--offset); color: var(--muted);
+    }
+    .tag.pri { background: var(--primary-hi); color: var(--primary); border-color: color-mix(in oklab, var(--primary) 15%, transparent); }
+    .tag.ok { background: color-mix(in oklab, var(--success) 12%, var(--surface)); color: var(--success); }
+    .tag.hyb { background: color-mix(in oklab, var(--blue) 12%, var(--surface)); color: var(--blue); }
+    .tag.warn { background: color-mix(in oklab, var(--warn) 12%, var(--surface)); color: var(--warn); }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .card-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+    .card-meta { display: grid; gap: 0.35rem; font-size: 0.8rem; color: var(--muted); }
+    .card-meta span strong { color: var(--text); }
+    .card-actions { display: flex; gap: 0.5rem; }
+    .ghost-btn {
+      display: inline-flex; align-items: center; height: 34px; padding: 0 0.875rem;
+      border-radius: var(--r-full); border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: var(--surface2); font-size: 0.78rem;
+      transition: background var(--ease);
+    }
+    .ghost-btn:hover { background: var(--dynamic); }
+    .note-pill {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      height: 24px; padding: 0 0.6rem; border-radius: var(--r-full);
+      background: color-mix(in oklab, var(--warn) 10%, var(--surface));
+      color: var(--warn); font-size: 0.7rem;
+      border: 1px solid color-mix(in oklab, var(--warn) 15%, transparent);
+    }
+
+    /* topic tiles */
+    .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; }
+    .topic-tile {
+      padding: 1rem; border-radius: var(--r-xl);
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: var(--surface); cursor: pointer; text-align: center;
+      transition: background var(--ease), transform var(--ease), box-shadow var(--ease);
+    }
+    .topic-tile:hover { background: var(--surface2); transform: translateY(-2px); box-shadow: var(--sh-md); }
+    .topic-tile .icon { font-size: 1.75rem; margin-bottom: 0.4rem; }
+    .topic-tile .t-name { font-size: 0.875rem; font-weight: 600; }
+    .topic-tile .t-count { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* drawer overlay */
+    .drawer-overlay {
+      position: fixed; inset: 0; background: oklch(0.1 0 0 / 0.5); z-index: 40;
+      display: none; align-items: flex-end; justify-content: flex-end;
+    }
+    .drawer-overlay.open { display: flex; }
+    .drawer {
+      width: min(520px, 100%); height: 100dvh; overflow-y: auto;
+      background: var(--surface); padding: 1.5rem;
+      border-left: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      display: grid; gap: 1.25rem; align-content: start;
+    }
+    .drawer-close {
+      justify-self: end; width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: var(--surface2); font-size: 1.1rem; display: grid; place-items: center;
+    }
+    textarea {
+      width: 100%; min-height: 200px; resize: vertical;
+      padding: 0.875rem; border-radius: var(--r-lg);
+      border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+      background: var(--surface2); color: var(--text); font-size: 0.85rem; line-height: 1.6;
+    }
+    .field-note { font-size: 0.75rem; color: var(--muted); }
+
+    /* dev section */
+    .dev-panel {
+      padding: 1.5rem; border-radius: var(--r-xl);
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: var(--surface); display: grid; gap: 1rem;
+    }
+    .dev-panel h2 { font-size: 1.1rem; }
+    .code-block {
+      background: var(--dynamic); border-radius: var(--r-lg); padding: 0.75rem 1rem;
+      font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 0.8rem; color: var(--text);
+      overflow-x: auto;
+    }
+    .dev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem; }
+    .dev-card {
+      padding: 0.875rem; border-radius: var(--r-lg);
+      border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
+      background: var(--surface2);
+    }
+    .dev-card h4 { font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .dev-card p { font-size: 0.78rem; color: var(--muted); }
+
+    /* prize strip */
+    .prize-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
+    }
+    .prize-card {
+      padding: 1rem; border-radius: var(--r-xl); border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: var(--surface);
+    }
+    .prize-card .p-num { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.35rem; }
+    .prize-card h4 { font-size: 0.875rem; margin-bottom: 0.3rem; }
+    .prize-card p { font-size: 0.78rem; color: var(--muted); }
+
+    /* empty state */
+    .empty { text-align: center; padding: 3rem 1rem; color: var(--muted); }
+    .empty p { margin-top: 0.5rem; font-size: 0.875rem; }
+
+    /* annotations submit form */
+    .annot-form { display: grid; gap: 0.625rem; }
+    .annot-submitted { color: var(--success); font-size: 0.85rem; display: none; }
+    .annot-error { color: var(--warn); font-size: 0.85rem; display: none; }
+
+    /* sections */
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+    .section-head h2 { font-size: 1.1rem; }
+    .section-head p { font-size: 0.8rem; color: var(--muted); }
+
+    @media (max-width: 1100px) {
+      .shell { grid-template-columns: 80px 1fr; }
+      .brand-text, .nav-btn span:not(.dot):not(.nav-count) { display: none; }
+      .sidebar { padding-inline: 0.75rem; }
+      .nav-btn { justify-content: center; }
+      .sidebar-footer { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-stats { display: none; }
+    }
+    @media (max-width: 768px) {
+      .shell { display: block; }
+      .sidebar { display: none; }
+      .content { padding: 1rem; }
+      .topbar { padding: 0.75rem 1rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .prize-strip { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+<a class="sr-only" href="#main">Skip to content</a>
+
+<div class="shell">
+  <!-- sidebar -->
+  <aside class="sidebar" aria-label="Navigation">
+    <div class="brand">
+      <div class="logo" aria-label="Yale Research Match">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m21 21-3.5-3.5"/>
+          <path d="M8 11h6M11 8v6"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>Yale Research Match</h1>
+        <p>Student-built lab discovery</p>
+      </div>
+    </div>
+
+    <nav class="nav-section" aria-label="Primary">
+      <div class="nav-label">Workspace</div>
+      <button class="nav-btn active" data-view="discover">
+        <span class="dot" style="background:var(--primary)"></span>
+        <span>Discover labs</span>
+        <span class="nav-count" id="navTotal">...</span>
+      </button>
+      <button class="nav-btn" data-view="topics">
+        <span class="dot" style="background:var(--blue)"></span>
+        <span>Browse by topic</span>
+      </button>
+      <button class="nav-btn" data-view="developers">
+        <span class="dot" style="background:var(--success)"></span>
+        <span>For developers</span>
+      </button>
+    </nav>
+
+    <div class="nav-section">
+      <div class="nav-label">Filter shortcuts</div>
+      <button class="nav-btn" data-quick="beginner"><span class="dot" style="background:var(--success)"></span><span>Beginner-friendly</span></button>
+      <button class="nav-btn" data-quick="open"><span class="dot" style="background:var(--warn)"></span><span>Actively recruiting</span></button>
+      <button class="nav-btn" data-quick="comp"><span class="dot" style="background:var(--blue)"></span><span>Computational</span></button>
+    </div>
+
+    <div class="sidebar-footer">
+      <strong>Built for Yale undergrads</strong><br>
+      Pulls from YURA, Yale School of Medicine, and departmental lab directories across FAS, SEAS, and YSPH. A YCC Tech project.
+    </div>
+  </aside>
+
+  <div class="main-col">
+    <!-- topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="page-title" id="topbarTitle">Discover labs</span>
+        <span class="pill-btn"><span class="status-dot"></span>Live data</span>
+      </div>
+      <div style="display:flex;gap:0.5rem;">
+        <button class="pill-btn" id="themeToggle" aria-label="Toggle theme">&#9680; Theme</button>
+        <a href="/api/labs_tagged.json" class="pill-btn" target="_blank" rel="noopener">API &rarr;</a>
+      </div>
+    </header>
+
+    <!-- main content -->
+    <main class="content" id="main">
+
+      <!-- VIEW: discover -->
+      <div id="viewDiscover">
+        <!-- hero -->
+        <section class="hero">
+          <div>
+            <span class="eyebrow">YCC Tech Developer Prize &middot; YCC</span>
+            <h2 class="hero-h">Find Yale labs the way Yale students actually search.</h2>
+            <p class="hero-sub">
+              Yale Research Match is a student-built tool that layers on top of the YURA Research Database and official Yale lab directories to make research discovery searchable in one place. No more guessing department names or relying on insider networks.
+            </p>
+            <div class="search-row">
+              <input class="input" id="qInput" placeholder="Topic: proteomics, aging, machine learning..." aria-label="Research topic" />
+              <select class="select" id="modeFilter" aria-label="Working style">
+                <option value="">Any style</option>
+                <option value="wet_lab">Wet lab</option>
+                <option value="computational">Computational</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="field">Field</option>
+              </select>
+              <button class="primary-btn" id="searchBtn">Search labs</button>
+            </div>
+          </div>
+          <div class="hero-stats" aria-label="Live stats">
+            <div><span style="font-size:0.75rem;color:var(--muted)">Labs indexed</span><br><strong id="statTotal" style="font-size:1.6rem">...</strong></div>
+            <div class="stat-divider"></div>
+            <div class="stat-row"><span>Actively recruiting</span><strong id="statOpen">...</strong></div>
+            <div class="stat-row"><span>Beginner-friendly</span><strong id="statBeg">...</strong></div>
+            <div class="stat-row"><span>Departments covered</span><strong id="statDepts">...</strong></div>
+            <div class="stat-row"><span>Schools covered</span><strong id="statSchools">...</strong></div>
+            <div style="font-size:0.72rem;color:var(--faint);margin-top:0.25rem">Sourced from YURA, YSM, FAS, SEAS, YSPH</div>
+          </div>
+        </section>
+
+        <!-- prize strip -->
+        <div class="prize-strip">
+          <div class="prize-card"><div class="p-num">01 Highest weight</div><h4>Community impact</h4><p>Yale undergrads across all years and majors struggle to find labs without inside connections. This tool fixes that directly.</p></div>
+          <div class="prize-card"><div class="p-num">02 High weight</div><h4>Usable today</h4><p>Shipped with real Yale lab data, live search, and an outreach helper. Students can use this the day after judging.</p></div>
+          <div class="prize-card"><div class="p-num">03 Medium weight</div><h4>Open for developers</h4><p>labs_tagged.json is a public JSON API other Yale student developers can build on. Schema and source code are open.</p></div>
+        </div>
+
+        <!-- filter bar -->
+        <div class="filter-bar" role="group" aria-label="Filters">
+          <span class="filter-label">Filter:</span>
+          <button class="chip" data-f="friendly" data-v="beginner_ok">Beginner-friendly</button>
+          <button class="chip" data-f="status" data-v="actively_recruiting">Actively recruiting</button>
+          <button class="chip" data-f="style" data-v="wet_lab">Wet lab</button>
+          <button class="chip" data-f="style" data-v="computational">Computational</button>
+          <button class="chip" data-f="style" data-v="hybrid">Hybrid</button>
+          <button class="chip" data-f="school" data-v="Faculty of Arts and Sciences">FAS</button>
+          <button class="chip" data-f="school" data-v="Yale School of Medicine">YSM</button>
+          <button class="chip" data-f="school" data-v="Yale School of Engineering and Applied Science">SEAS</button>
+          <button class="chip" data-f="school" data-v="Yale School of Public Health">YSPH</button>
+          <span class="result-count" id="resultCount"></span>
+        </div>
+
+        <!-- cards -->
+        <div class="cards-grid" id="cardsGrid" role="list" aria-live="polite"></div>
+      </div>
+
+      <!-- VIEW: topics -->
+      <div id="viewTopics" style="display:none">
+        <div class="section-head"><h2>Browse by topic</h2><p>Click a topic to see matching Yale labs instantly.</p></div>
+        <div class="topic-grid" id="topicGrid"></div>
+      </div>
+
+      <!-- VIEW: developers -->
+      <div id="viewDevelopers" style="display:none">
+        <div class="dev-panel">
+          <div>
+            <h2>For developers and builders</h2>
+            <p style="color:var(--muted);font-size:0.875rem;margin-top:0.4rem">
+              Yale Research Match is designed as a student-built layer on top of existing Yale research listings. We publish our normalized lab index as a simple JSON feed so other Yale developers can build new tools, visualizations, and integrations on top of the same data.
+            </p>
+          </div>
+
+          <div>
+            <h3 style="font-size:0.95rem;margin-bottom:0.5rem">Public API endpoints</h3>
+            <div class="code-block">GET /api/labs_tagged.json&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; full lab index (JSON)</div>
+            <div class="code-block" style="margin-top:0.4rem">GET /api/labs?q=aging&amp;dept=Chemistry&nbsp; filtered search</div>
+            <div class="code-block" style="margin-top:0.4rem">GET /api/labs/&lt;id&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; single lab with notes</div>
+            <div class="code-block" style="margin-top:0.4rem">GET /api/status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; health + index size</div>
+          </div>
+
+          <div>
+            <h3 style="font-size:0.95rem;margin-bottom:0.5rem">Core schema (labs_tagged.json)</h3>
+            <div class="dev-grid">
+              <div class="dev-card"><h4>Identity</h4><p>id, name, pi_name, pi_title, department, school, lab_url, contact_email</p></div>
+              <div class="dev-card"><h4>Discovery</h4><p>primary_topics, secondary_topics, tags, methods, skills_preferred, skills_optional</p></div>
+              <div class="dev-card"><h4>Fit signals</h4><p>working_style, undergrad_friendly, openings_status, openings_notes, min_commitment_weeks, recommended_years</p></div>
+              <div class="dev-card"><h4>Annotations</h4><p>student_notes[ ] with id, text, category, status (approved only shown), submitted_at, moderated_at</p></div>
+              <div class="dev-card"><h4>Provenance</h4><p>source_flags: yura_listed, ysm_listed, dept_listed. match_metadata: topic_tokens, skills_tokens, last_indexed</p></div>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size:0.95rem;margin-bottom:0.5rem">Adding departments</h3>
+            <p style="font-size:0.83rem;color:var(--muted)">
+              scrape_yale_labs.py covers Chemistry, MB&B, MCDB, EEB, BME, Physics, Earth Sciences, YSPH, Statistics, and YURA. Add a new entry to the SOURCES list with the department URL and a parser key. Run the script to update labs_raw.json, then run tag_labs.py to regenerate labs_tagged.json.
+            </p>
+          </div>
+
+          <div>
+            <a href="https://github.com/sofiagrimm/yale-research-match" target="_blank" rel="noopener" class="ghost-btn" style="width:fit-content">View source on GitHub &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- outreach drawer -->
+<div class="drawer-overlay" id="drawerOverlay" role="dialog" aria-modal="true" aria-label="Outreach helper">
+  <div class="drawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close">&times;</button>
+    <div>
+      <h2 style="font-size:1.1rem">Outreach helper</h2>
+      <p style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem">Tailored from the lab profile. Edit before sending.</p>
+    </div>
+    <div id="drawerLabInfo" style="font-size:0.85rem;color:var(--muted)"></div>
+    <textarea id="draftEmail" aria-label="Outreach email draft"></textarea>
+    <p class="field-note">This draft uses the lab profile only. Add your own coursework and experience before sending.</p>
+    <div id="drawerNotes" style="display:none">
+      <h3 style="font-size:0.875rem;margin-bottom:0.5rem">Student notes (moderated)</h3>
+      <div id="drawerNotesList" style="display:grid;gap:0.5rem;font-size:0.8rem"></div>
+    </div>
+    <div>
+      <h3 style="font-size:0.875rem;margin-bottom:0.5rem">Submit a note about this lab</h3>
+      <div class="annot-form">
+        <textarea id="annotText" style="min-height:80px" placeholder="e.g. Best to email after reading one paper. Postdoc is the main contact." aria-label="Your note"></textarea>
+        <select class="select" id="annotCat" style="height:38px" aria-label="Note category">
+          <option value="outreach">Outreach tip</option>
+          <option value="environment">Lab environment</option>
+          <option value="projects">Typical projects</option>
+          <option value="general">General</option>
+        </select>
+        <button class="primary-btn" id="annotSubmit" style="height:38px;font-size:0.82rem">Submit for review</button>
+        <p class="annot-submitted" id="annotOk">Submitted. Notes appear after moderation.</p>
+        <p class="annot-error" id="annotErr">Could not submit. Try again.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// config
+const BASE = window.location.origin;
+const API = `${BASE}/api`;
+
+// state
+let allLabs = [];
+let activeFilters = {};
+let currentLabId = null;
+
+// boot
+fetch(`${API}/labs`)
+  .then(r => r.json())
+  .then(d => {
+    allLabs = d.labs || [];
+    updateStats(allLabs);
+    renderCards(allLabs);
+    buildTopicGrid(allLabs);
+    document.getElementById('navTotal').textContent = allLabs.length;
+  })
+  .catch(() => {
+    // fallback: try static file for local file:// dev
+    fetch('labs_tagged.json')
+      .then(r => r.json())
+      .then(d => {
+        allLabs = d.labs || d;
+        updateStats(allLabs);
+        renderCards(allLabs);
+        buildTopicGrid(allLabs);
+        document.getElementById('navTotal').textContent = allLabs.length;
+      })
+      .catch(() => {
+        document.getElementById('cardsGrid').innerHTML = '<div class="empty"><strong>No data loaded.</strong><p>Start the Flask server: python api_server.py</p></div>';
+      });
+  });
+
+function updateStats(labs) {
+  document.getElementById('statTotal').textContent = labs.length;
+  document.getElementById('statOpen').textContent = labs.filter(l => l.openings_status === 'actively_recruiting').length;
+  document.getElementById('statBeg').textContent = labs.filter(l => l.undergrad_friendly === 'beginner_ok').length;
+  const depts = new Set(labs.map(l => l.department).filter(Boolean));
+  const schools = new Set(labs.map(l => l.school).filter(Boolean));
+  document.getElementById('statDepts').textContent = depts.size;
+  document.getElementById('statSchools').textContent = schools.size;
+}
+
+function score(lab, q) {
+  if (!q) return 1;
+  const tokens = q.toLowerCase().split(/[,\s]+/).filter(Boolean);
+  const haystack = JSON.stringify(lab).toLowerCase();
+  return tokens.reduce((acc, t) => acc + (haystack.includes(t) ? 1 : 0), 0);
+}
+
+function applyFilters(labs) {
+  const q = document.getElementById('qInput').value.trim();
+  const mode = document.getElementById('modeFilter').value;
+  let out = labs.filter(l => score(l, q) > 0);
+  if (mode) out = out.filter(l => l.working_style === mode);
+  if (activeFilters.friendly) out = out.filter(l => l.undergrad_friendly === activeFilters.friendly);
+  if (activeFilters.status) out = out.filter(l => l.openings_status === activeFilters.status);
+  if (activeFilters.style) out = out.filter(l => l.working_style === activeFilters.style);
+  if (activeFilters.school) out = out.filter(l => l.school === activeFilters.school);
+  if (q) out.sort((a, b) => score(b, q) - score(a, q));
+  return out;
+}
+
+function renderCards(labs) {
+  const grid = document.getElementById('cardsGrid');
+  document.getElementById('resultCount').textContent = `${labs.length} lab${labs.length !== 1 ? 's' : ''}`;
+  if (!labs.length) {
+    grid.innerHTML = '<div class="empty"><strong>No labs match.</strong><p>Try a different topic or remove a filter.</p></div>';
+    return;
+  }
+  grid.innerHTML = labs.map(lab => {
+    const friendlyTag = lab.undergrad_friendly === 'beginner_ok'
+      ? '<span class="tag ok">Beginner-friendly</span>'
+      : lab.undergrad_friendly === 'experience_preferred'
+      ? '<span class="tag warn">Experience preferred</span>'
+      : '<span class="tag">Level unknown</span>';
+    const styleTag = lab.working_style === 'computational' ? '<span class="tag hyb">Computational</span>'
+      : lab.working_style === 'hybrid' ? '<span class="tag hyb">Hybrid</span>'
+      : lab.working_style === 'field' ? '<span class="tag">Field</span>'
+      : '<span class="tag">Wet lab</span>';
+    const openTag = lab.openings_status === 'actively_recruiting' ? '<span class="tag ok">Actively recruiting</span>'
+      : lab.openings_status === 'summer_only' ? '<span class="tag warn">Summer only</span>'
+      : lab.openings_status === 'not_recruiting' ? '<span class="tag">Not recruiting</span>'
+      : '<span class="tag">Status unknown</span>';
+    const topics = (lab.primary_topics || []).slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('');
+    const noteCount = (lab.student_notes || []).filter(n => n.status === 'approved').length;
+    const notePill = noteCount ? `<span class="note-pill">${noteCount} student note${noteCount > 1 ? 's' : ''}</span>` : '';
+    return `
+    <article class="lab-card" role="listitem" data-id="${lab.id}">
+      <div class="card-top">
+        <div>
+          <strong>${lab.name}</strong>
+          <div class="card-pi">${lab.pi_name} &middot; ${lab.department}</div>
+        </div>
+        ${openTag}
+      </div>
+      <div class="tags">${friendlyTag}${styleTag}${topics}</div>
+      <p class="card-desc">${(lab.openings_notes || lab.primary_topics?.join(', ') || '').slice(0, 160)}</p>
+      <div class="card-meta">
+        <span><strong>Methods:</strong> ${(lab.methods || []).slice(0, 4).join(', ')}</span>
+        <span><strong>Skills welcomed:</strong> ${(lab.skills_preferred || []).join(', ') || 'Open'}</span>
+        ${lab.campus_location ? `<span><strong>Location:</strong> ${lab.campus_location}</span>` : ''}
+      </div>
+      <div class="card-actions">
+        <button class="ghost-btn" data-action="draft" data-id="${lab.id}">Draft outreach</button>
+        ${lab.lab_url ? `<a class="ghost-btn" href="${lab.lab_url}" target="_blank" rel="noopener">Lab page &rarr;</a>` : ''}
+        ${notePill}
+      </div>
+    </article>`;
+  }).join('');
+}
+
+// search
+document.getElementById('searchBtn').addEventListener('click', () => {
+  renderCards(applyFilters(allLabs));
+});
+document.getElementById('qInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') renderCards(applyFilters(allLabs));
+});
+document.getElementById('modeFilter').addEventListener('change', () => {
+  renderCards(applyFilters(allLabs));
+});
+
+// chips
+document.querySelectorAll('.chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const f = btn.dataset.f, v = btn.dataset.v;
+    if (activeFilters[f] === v) {
+      delete activeFilters[f];
+      btn.classList.remove('on');
+    } else {
+      document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(b => b.classList.remove('on'));
+      activeFilters[f] = v;
+      btn.classList.add('on');
+    }
+    renderCards(applyFilters(allLabs));
+  });
+});
+
+// nav views
+const views = { discover: 'viewDiscover', topics: 'viewTopics', developers: 'viewDevelopers' };
+const titles = { discover: 'Discover labs', topics: 'Browse by topic', developers: 'For developers' };
+function showView(name) {
+  Object.entries(views).forEach(([k, id]) => {
+    document.getElementById(id).style.display = k === name ? '' : 'none';
+  });
+  document.getElementById('topbarTitle').textContent = titles[name] || name;
+  document.querySelectorAll('.nav-btn[data-view]').forEach(b => {
+    b.classList.toggle('active', b.dataset.view === name);
+  });
+}
+document.querySelectorAll('.nav-btn[data-view]').forEach(btn => {
+  btn.addEventListener('click', () => showView(btn.dataset.view));
+});
+
+// quick shortcuts
+document.querySelectorAll('.nav-btn[data-quick]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    showView('discover');
+    const q = btn.dataset.quick;
+    if (q === 'beginner') { activeFilters.friendly = 'beginner_ok'; document.querySelector('[data-v="beginner_ok"]').classList.add('on'); }
+    if (q === 'open') { activeFilters.status = 'actively_recruiting'; document.querySelector('[data-v="actively_recruiting"]').classList.add('on'); }
+    if (q === 'comp') { activeFilters.style = 'computational'; document.querySelector('[data-v="computational"]').classList.add('on'); }
+    renderCards(applyFilters(allLabs));
+  });
+});
+
+// topic grid
+const TOPICS = [
+  { name: 'Proteomics', icon: '🔬', keys: ['proteomics', 'mass spectrometry', 'metabolomics'] },
+  { name: 'Cancer Biology', icon: '🧬', keys: ['cancer', 'oncology', 'tumor'] },
+  { name: 'Aging + Longevity', icon: '⏳', keys: ['aging', 'neurodegeneration', 'proteostasis'] },
+  { name: 'Neuroscience', icon: '🧠', keys: ['neuroscience', 'neural', 'synaptic'] },
+  { name: 'Machine Learning', icon: '💻', keys: ['machine learning', 'deep learning', 'computational'] },
+  { name: 'Chemical Biology', icon: '⚗️', keys: ['chemical biology', 'organic chemistry', 'synthesis'] },
+  { name: 'Climate + Ecology', icon: '🌿', keys: ['ecology', 'climate', 'environmental'] },
+  { name: 'Public Health', icon: '🏥', keys: ['public health', 'epidemiology', 'infectious disease'] },
+  { name: 'Structural Biology', icon: '🔩', keys: ['structural biology', 'cryo-em', 'protein structure'] },
+  { name: 'Biosensors + Diagnostics', icon: '📡', keys: ['biosensors', 'diagnostics', 'microfluidics'] },
+  { name: 'Economics + Policy', icon: '📊', keys: ['economics', 'policy', 'inequality'] },
+  { name: 'Developmental Biology', icon: '🌱', keys: ['developmental', 'stem cells', 'cell fate'] },
+];
+
+function buildTopicGrid(labs) {
+  const grid = document.getElementById('topicGrid');
+  grid.innerHTML = TOPICS.map(t => {
+    const count = labs.filter(l => {
+      const h = JSON.stringify(l).toLowerCase();
+      return t.keys.some(k => h.includes(k));
+    }).length;
+    return `<button class="topic-tile" data-topic="${t.keys[0]}">
+      <div class="icon">${t.icon}</div>
+      <div class="t-name">${t.name}</div>
+      <div class="t-count">${count} lab${count !== 1 ? 's' : ''}</div>
+    </button>`;
+  }).join('');
+  grid.querySelectorAll('.topic-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      document.getElementById('qInput').value = tile.dataset.topic;
+      showView('discover');
+      renderCards(applyFilters(allLabs));
+    });
+  });
+}
+
+// drawer
+const overlay = document.getElementById('drawerOverlay');
+document.getElementById('drawerClose').addEventListener('click', () => overlay.classList.remove('open'));
+overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+
+document.getElementById('cardsGrid').addEventListener('click', e => {
+  const btn = e.target.closest('[data-action="draft"]');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const lab = allLabs.find(l => l.id === id);
+  if (!lab) return;
+  currentLabId = id;
+  openDrawer(lab);
+});
+
+function openDrawer(lab) {
+  document.getElementById('drawerLabInfo').textContent = `${lab.name} - ${lab.pi_name}, ${lab.department}`;
+  const topic = (lab.primary_topics || [])[0] || 'your research area';
+  const methods = (lab.methods || []).slice(0, 2).join(' and ');
+  document.getElementById('draftEmail').value =
+`Dear ${lab.pi_name},
+
+I am a Yale undergraduate interested in ${topic}. I came across ${lab.name} and was drawn to your work${
+  lab.openings_notes ? ' on ' + lab.openings_notes.slice(0, 60).toLowerCase() : ''
+}.
+
+My interests align with the methods your group uses${methods ? ', especially ' + methods : ''}. I would welcome the chance to learn whether there is an opportunity for an undergraduate to contribute, particularly in a ${(lab.undergrad_friendly || 'research').replace('_', ' ')} capacity.
+
+I am happy to share more about my background and interests. Thank you for your time.
+
+Best,
+[Your name]`;
+
+  // approved notes
+  const notes = (lab.student_notes || []).filter(n => n.status === 'approved');
+  const notesEl = document.getElementById('drawerNotes');
+  const notesList = document.getElementById('drawerNotesList');
+  if (notes.length) {
+    notesEl.style.display = '';
+    notesList.innerHTML = notes.map(n => `<div style="padding:0.5rem 0.625rem;background:var(--offset);border-radius:var(--r-md)">${n.text}</div>`).join('');
+  } else {
+    notesEl.style.display = 'none';
+  }
+  document.getElementById('annotOk').style.display = 'none';
+  document.getElementById('annotErr').style.display = 'none';
+  document.getElementById('annotText').value = '';
+  overlay.classList.add('open');
+}
+
+// annotation submit
+document.getElementById('annotSubmit').addEventListener('click', () => {
+  const text = document.getElementById('annotText').value.trim();
+  const cat = document.getElementById('annotCat').value;
+  if (!text || !currentLabId) return;
+  fetch(`${API}/labs/${currentLabId}/annotations`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text, category: cat })
+  })
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(() => {
+      document.getElementById('annotOk').style.display = '';
+      document.getElementById('annotText').value = '';
+    })
+    .catch(() => { document.getElementById('annotErr').style.display = ''; });
+});
+
+// theme
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const root = document.documentElement;
+  root.setAttribute('data-theme', root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+</script>
+</body>
+</html>
