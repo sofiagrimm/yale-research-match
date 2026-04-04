@@ -5,7 +5,7 @@
 
 import json
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import requests
@@ -121,7 +121,7 @@ def parse_ysm_az(soup, src):
                 "raw_topics": [],
                 "raw_description": "",
                 "raw_keywords": [],
-                "last_seen": datetime.now(timezone.utc).isoformat(),
+                "last_seen": datetime.now(UTC).isoformat(),
             })
     return labs
 
@@ -142,7 +142,7 @@ def parse_generic_faculty(soup, src):
             "raw_topics": [],
             "raw_description": "",
             "raw_keywords": [],
-            "last_seen": datetime.now(timezone.utc).isoformat(),
+            "last_seen": datetime.now(UTC).isoformat(),
         })
     return labs
 
@@ -162,7 +162,7 @@ def parse_mcdb_opps(soup, src):
                 "raw_topics": [],
                 "raw_description": text[:300],
                 "raw_keywords": [],
-                "last_seen": datetime.now(timezone.utc).isoformat(),
+                "last_seen": datetime.now(UTC).isoformat(),
             })
     return labs
 
@@ -183,7 +183,7 @@ def parse_yura_ylabs(soup, src):
             "raw_topics": [],
             "raw_description": "",
             "raw_keywords": [],
-            "last_seen": datetime.now(timezone.utc).isoformat(),
+            "last_seen": datetime.now(UTC).isoformat(),
         })
     return labs
 
@@ -219,7 +219,7 @@ def run():
             deduped.append(lab)
 
     out = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": datetime.now(UTC).isoformat(),
         "source_descriptions": {
             "yura": "Records from the YURA Research Database.",
             "ysm_lab_index": "Records from Yale School of Medicine lab directories.",
