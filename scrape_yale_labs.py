@@ -1,26 +1,9 @@
-"""
-scrape_yale_labs.py
-
-Fetches lab listings from Yale department pages and the YSM A-Z lab index,
-then writes labs_raw.json for downstream tagging.
-
-Sources:
-  - Yale School of Medicine A-Z lab websites
-  - Yale Chemistry department research groups
-  - Yale MB&B research labs
-  - Yale MCDB research labs
-  - Yale EEB research labs
-  - Yale BME research groups
-  - Yale Pharmacology labs
-  - Yale Immunobiology labs
-  - Yale Neuroscience labs
-
-Usage:
-  python scrape_yale_labs.py
-"""
+# scrape_yale_labs.py
+# Fetches lab listings from Yale directories and writes labs_raw.json.
+# Departments covered: YSM A-Z, Chemistry, MB&B, MCDB, EEB, BME, YSPH.
+# Run: python scrape_yale_labs.py
 
 import json
-import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -28,218 +11,224 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-OUTFILE = Path("labs_raw.json")
-HEADERS = {"User-Agent": "YaleResearchMatch/1.0 (student project; yale.edu)"}
-DELAY = 1.2  # seconds between requests
+OUT = Path("labs_raw.json")
+HEADERS = {"User-Agent": "yale-research-match/2.0 (student project; contact: research-match@yale.edu)"}
+DELAY = 1.2
 
-
-def fetch(url):
-    try:
-        r = requests.get(url, headers=HEADERS, timeout=15)
-        r.raise_for_status()
-        return r.text
-    except Exception as e:
-        print(f"  skip {url}: {e}")
-        return ""
-
-
-def slug(text):
-    return re.sub(r"[^a-z0-9]+", "_", text.lower()).strip("_")
-
-
-# --- scraper: YSM A-Z lab websites ---
-def scrape_ysm_labs():
-    html = fetch("https://medicine.yale.edu/about/a-to-z-index/atoz/lab-websites/")
-    if not html:
-        return []
-    soup = BeautifulSoup(html, "html.parser")
-    labs = []
-    for a in soup.select("a[href]"):
-        text = a.get_text(strip=True)
-        href = a["href"]
-        if not text or len(text) < 4:
-            continue
-        if not re.search(r"lab|group|center|program", text, re.I):
-            continue
-        if not href.startswith("http"):
-            href = "https://medicine.yale.edu" + href
-        labs.append({
-            "id": "ysm_" + slug(text)[:40],
-            "source": "ysm_lab_index",
-            "name": text,
-            "pi_name": "",
-            "department": "Yale School of Medicine",
-            "school": "Yale School of Medicine",
-            "lab_url": href,
-            "raw_topics": [],
-            "raw_description": "",
-            "raw_keywords": [],
-            "raw_skills": [],
-            "accepts_undergrads": None,
-            "last_seen": datetime.now(timezone.utc).isoformat(),
-        })
-    seen = set()
-    deduped = []
-    for lab in labs:
-        if lab["id"] not in seen:
-            seen.add(lab["id"])
-            deduped.append(lab)
-    print(f"  YSM: {len(deduped)} labs")
-    return deduped
-
-
-# --- scraper: generic Yale department page ---
-def scrape_dept(dept_name, school, url, link_pattern=None):
-    html = fetch(url)
-    if not html:
-        return []
-    soup = BeautifulSoup(html, "html.parser")
-    labs = []
-    for a in soup.select("a[href]"):
-        text = a.get_text(strip=True)
-        href = a["href"]
-        if not text or len(text) < 5:
-            continue
-        if link_pattern and not re.search(link_pattern, href):
-            continue
-        if not href.startswith("http"):
-            base = "/".join(url.split("/")[:3])
-            href = base + "/" + href.lstrip("/")
-        labs.append({
-            "id": slug(dept_name)[:12] + "_" + slug(text)[:36],
-            "source": "dept_listing",
-            "name": text,
-            "pi_name": "",
-            "department": dept_name,
-            "school": school,
-            "lab_url": href,
-            "raw_topics": [],
-            "raw_description": "",
-            "raw_keywords": [],
-            "raw_skills": [],
-            "accepts_undergrads": None,
-            "last_seen": datetime.now(timezone.utc).isoformat(),
-        })
-    print(f"  {dept_name}: {len(labs)} entries")
-    return labs
-
-
-DEPT_SOURCES = [
+SOURCES = [
     {
+        "source": "ysm_lab_index",
+        "school": "Yale School of Medicine",
+        "url": "https://medicine.yale.edu/about/a-to-z-index/atoz/lab-websites/",
+        "parser": "ysm_az",
+    },
+    {
+        "source": "dept_listing",
+        "school": "Faculty of Arts and Sciences",
+        "url": "https://chem.yale.edu/research/faculty",
         "dept": "Chemistry",
-        "school": "Faculty of Arts and Sciences",
-        "url": "https://chem.yale.edu/research/research-groups",
-        "pattern": r"chem\.yale\.edu",
+        "parser": "generic_faculty",
     },
     {
+        "source": "dept_listing",
+        "school": "Faculty of Arts and Sciences",
+        "url": "https://mbb.yale.edu/people/faculty",
         "dept": "Molecular Biophysics and Biochemistry",
-        "school": "Faculty of Arts and Sciences",
-        "url": "https://mbb.yale.edu/research/labs",
-        "pattern": r"mbb\.yale\.edu",
+        "parser": "generic_faculty",
     },
     {
-        "dept": "Molecular, Cellular and Developmental Biology",
+        "source": "dept_listing",
         "school": "Faculty of Arts and Sciences",
-        "url": "https://mcdb.yale.edu/research/labs-and-groups",
-        "pattern": r"mcdb\.yale\.edu",
+        "url": "https://mcdb.yale.edu/undergraduate/undergraduate-research-opportunities",
+        "dept": "Molecular, Cellular, and Developmental Biology",
+        "parser": "mcdb_opps",
     },
     {
+        "source": "dept_listing",
+        "school": "Faculty of Arts and Sciences",
+        "url": "https://eeb.yale.edu/academics/undergraduate-program/undergraduate-research-opportunities",
         "dept": "Ecology and Evolutionary Biology",
-        "school": "Faculty of Arts and Sciences",
-        "url": "https://eeb.yale.edu/research/research-labs",
-        "pattern": r"eeb\.yale\.edu",
+        "parser": "generic_faculty",
     },
     {
+        "source": "dept_listing",
+        "school": "Yale School of Engineering and Applied Science",
+        "url": "https://seas.yale.edu/departments/biomedical-engineering/undergraduate-research",
         "dept": "Biomedical Engineering",
-        "school": "School of Engineering and Applied Science",
-        "url": "https://bme.yale.edu/research",
-        "pattern": r"bme\.yale\.edu",
+        "parser": "generic_faculty",
     },
     {
-        "dept": "Pharmacology",
-        "school": "Yale School of Medicine",
-        "url": "https://medicine.yale.edu/lab/",
-        "pattern": r"medicine\.yale\.edu/lab",
-    },
-    {
-        "dept": "Immunobiology",
-        "school": "Yale School of Medicine",
-        "url": "https://medicine.yale.edu/immunobiology/labs/",
-        "pattern": r"medicine\.yale\.edu",
-    },
-    {
-        "dept": "Neuroscience",
-        "school": "Yale School of Medicine",
-        "url": "https://medicine.yale.edu/neuroscience/labs/",
-        "pattern": r"medicine\.yale\.edu",
-    },
-    {
-        "dept": "Cell Biology",
-        "school": "Yale School of Medicine",
-        "url": "https://medicine.yale.edu/cellbio/research/labs/",
-        "pattern": r"medicine\.yale\.edu",
-    },
-    {
-        "dept": "Genetics",
-        "school": "Yale School of Medicine",
-        "url": "https://medicine.yale.edu/genetics/labs/",
-        "pattern": r"medicine\.yale\.edu",
-    },
-    {
-        "dept": "Pathology",
-        "school": "Yale School of Medicine",
-        "url": "https://medicine.yale.edu/pathology/labs/",
-        "pattern": r"medicine\.yale\.edu",
-    },
-    {
-        "dept": "Physics",
+        "source": "dept_listing",
         "school": "Faculty of Arts and Sciences",
-        "url": "https://physics.yale.edu/research/research-groups",
-        "pattern": r"physics\.yale\.edu",
+        "url": "https://physics.yale.edu/research",
+        "dept": "Physics",
+        "parser": "generic_faculty",
     },
     {
-        "dept": "Computer Science",
-        "school": "School of Engineering and Applied Science",
-        "url": "https://cpsc.yale.edu/research/research-groups",
-        "pattern": r"cpsc\.yale\.edu",
+        "source": "dept_listing",
+        "school": "Faculty of Arts and Sciences",
+        "url": "https://geology.yale.edu/people/faculty",
+        "dept": "Earth and Planetary Sciences",
+        "parser": "generic_faculty",
     },
     {
-        "dept": "Environmental Studies",
-        "school": "Yale School of the Environment",
-        "url": "https://environment.yale.edu/research/labs",
-        "pattern": r"environment\.yale\.edu",
+        "source": "dept_listing",
+        "school": "Yale School of Public Health",
+        "url": "https://ysph.yale.edu/epidemiology-of-microbial-diseases/research/",
+        "dept": "Epidemiology of Microbial Diseases",
+        "parser": "generic_faculty",
+    },
+    {
+        "source": "dept_listing",
+        "school": "Faculty of Arts and Sciences",
+        "url": "https://statistics.yale.edu/research",
+        "dept": "Statistics and Data Science",
+        "parser": "generic_faculty",
+    },
+    {
+        "source": "yura",
+        "school": "Yale College",
+        "url": "https://www.yura.yale.edu/ylabs",
+        "dept": None,
+        "parser": "yura_ylabs",
     },
 ]
 
 
+def fetch(url):
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=12)
+        r.raise_for_status()
+        return BeautifulSoup(r.text, "html.parser")
+    except Exception as e:
+        print(f"  [warn] fetch failed {url}: {e}")
+        return None
+
+
+def parse_ysm_az(soup, src):
+    labs = []
+    for a in soup.select("a[href]"):
+        text = a.get_text(strip=True)
+        href = a["href"]
+        if "lab" in text.lower() or "laboratory" in text.lower():
+            labs.append({
+                "id": f"ysm_{len(labs):04d}",
+                "source": src["source"],
+                "school": src["school"],
+                "name": text,
+                "lab_url": href if href.startswith("http") else "https://medicine.yale.edu" + href,
+                "department": "Yale School of Medicine",
+                "raw_topics": [],
+                "raw_description": "",
+                "raw_keywords": [],
+                "last_seen": datetime.now(timezone.utc).isoformat(),
+            })
+    return labs
+
+
+def parse_generic_faculty(soup, src):
+    labs = []
+    for el in soup.select("h2, h3, h4, .faculty-name, .person-name, .views-row"):
+        name = el.get_text(strip=True)
+        if len(name) < 4 or len(name) > 80:
+            continue
+        labs.append({
+            "id": f"{src['source']}_{src.get('dept','')[:8].replace(' ','_').lower()}_{len(labs):04d}",
+            "source": src["source"],
+            "school": src["school"],
+            "name": name + " Lab",
+            "department": src.get("dept", ""),
+            "lab_url": src["url"],
+            "raw_topics": [],
+            "raw_description": "",
+            "raw_keywords": [],
+            "last_seen": datetime.now(timezone.utc).isoformat(),
+        })
+    return labs
+
+
+def parse_mcdb_opps(soup, src):
+    labs = []
+    for p in soup.select("p, li"):
+        text = p.get_text(strip=True)
+        if "lab" in text.lower() and len(text) > 20:
+            labs.append({
+                "id": f"mcdb_{len(labs):04d}",
+                "source": src["source"],
+                "school": src["school"],
+                "name": text[:80],
+                "department": src.get("dept", ""),
+                "lab_url": src["url"],
+                "raw_topics": [],
+                "raw_description": text[:300],
+                "raw_keywords": [],
+                "last_seen": datetime.now(timezone.utc).isoformat(),
+            })
+    return labs
+
+
+def parse_yura_ylabs(soup, src):
+    labs = []
+    for el in soup.select(".lab-title, h2, h3, .title"):
+        name = el.get_text(strip=True)
+        if len(name) < 4 or len(name) > 100:
+            continue
+        labs.append({
+            "id": f"yura_{len(labs):04d}",
+            "source": "yura",
+            "school": "Yale College",
+            "name": name,
+            "department": "",
+            "lab_url": "https://www.yura.yale.edu/ylabs",
+            "raw_topics": [],
+            "raw_description": "",
+            "raw_keywords": [],
+            "last_seen": datetime.now(timezone.utc).isoformat(),
+        })
+    return labs
+
+
+PARSERS = {
+    "ysm_az": parse_ysm_az,
+    "generic_faculty": parse_generic_faculty,
+    "mcdb_opps": parse_mcdb_opps,
+    "yura_ylabs": parse_yura_ylabs,
+}
+
+
 def run():
     all_labs = []
-    print("Scraping YSM lab index...")
-    all_labs.extend(scrape_ysm_labs())
-    time.sleep(DELAY)
-
-    print("Scraping department pages...")
-    for src in DEPT_SOURCES:
-        labs = scrape_dept(src["dept"], src["school"], src["url"], src.get("pattern"))
-        all_labs.extend(labs)
+    for src in SOURCES:
+        print(f"Fetching {src['url']} ...")
+        soup = fetch(src["url"])
+        if not soup:
+            continue
+        fn = PARSERS.get(src["parser"])
+        if fn:
+            batch = fn(soup, src)
+            print(f"  found {len(batch)} entries")
+            all_labs.extend(batch)
         time.sleep(DELAY)
 
-    # deduplicate by lab_url
-    seen_urls = set()
+    seen = set()
     deduped = []
     for lab in all_labs:
-        key = lab["lab_url"].rstrip("/")
-        if key not in seen_urls:
-            seen_urls.add(key)
+        key = lab["id"]
+        if key not in seen:
+            seen.add(key)
             deduped.append(lab)
 
     out = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "total": len(deduped),
+        "source_descriptions": {
+            "yura": "Records from the YURA Research Database.",
+            "ysm_lab_index": "Records from Yale School of Medicine lab directories.",
+            "dept_listing": "Records from Yale departmental research pages.",
+        },
         "labs": deduped,
     }
-    OUTFILE.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"\nWrote {len(deduped)} labs to {OUTFILE}")
+    OUT.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"Done. Wrote {len(deduped)} labs to {OUT}")
 
 
 if __name__ == "__main__":
