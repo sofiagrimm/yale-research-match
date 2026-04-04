@@ -1,1 +1,1 @@
-{output}
+{\n  "generated_at": "2026-04-04T19:00:00Z",\n  "version": "2026.04.04-2",\n  "sources": [\n    "yura",\n    "ysm_lab_index",\n    "dept_listing",\n    "seas_directory",\n    "ysph_directory"\n  ],\n  "total_labs": 310,\n  "curated_labs": 47,\n  "stub_labs": 263,\n  "labs": "PLACEHOLDER"\n}
