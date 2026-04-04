@@ -19,11 +19,11 @@ Endpoints:
 import json
 import os
 import uuid
+from datetime import UTC, datetime
 from functools import wraps
 from pathlib import Path
-from datetime import datetime, timezone
 
-from flask import Flask, jsonify, request, abort, send_file
+from flask import Flask, abort, jsonify, request, send_file
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder=".", static_url_path="")
@@ -135,7 +135,7 @@ def status():
     return jsonify({
         "status": "ok",
         "labs_indexed": len(labs),
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
     })
 
 
@@ -208,7 +208,7 @@ def update_availability(lab_id):
     if "note" in entry and not is_clean(str(entry["note"])):
         abort(400, description="Note rejected by content check")
 
-    entry["updated_at"] = datetime.now(timezone.utc).isoformat()
+    entry["updated_at"] = datetime.now(UTC).isoformat()
     av = load_json(AVAILABILITY_FILE)
     av[lab_id] = entry
     save_json(AVAILABILITY_FILE, av)
@@ -247,7 +247,7 @@ def submit_annotation(lab_id):
         "lab_id": lab_id,
         "text": text,
         "category": category,
-        "submitted_at": datetime.now(timezone.utc).isoformat(),
+        "submitted_at": datetime.now(UTC).isoformat(),
         "status": "pending",
     }
     notes = load_json(ANNOTATIONS_FILE)
@@ -271,7 +271,7 @@ def approve_note(note_id):
     for n in notes:
         if n["id"] == note_id:
             n["status"] = "approved"
-            n["moderated_at"] = datetime.now(timezone.utc).isoformat()
+            n["moderated_at"] = datetime.now(UTC).isoformat()
             save_json(ANNOTATIONS_FILE, notes)
             return jsonify({"status": "approved", "id": note_id})
     abort(404, description="Note not found")
@@ -284,13 +284,11 @@ def reject_note(note_id):
     for n in notes:
         if n["id"] == note_id:
             n["status"] = "rejected"
-            n["moderated_at"] = datetime.now(timezone.utc).isoformat()
+            n["moderated_at"] = datetime.now(UTC).isoformat()
             save_json(ANNOTATIONS_FILE, notes)
             return jsonify({"status": "rejected", "id": note_id})
     abort(404, description="Note not found")
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    debug = os.environ.get("FLASK_ENV", "production") == "development"
-    app.run(host="0.0.0.0", port=port, debug=debug)
+    app.run(debug=True, port=5000)
