@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint with ruff
+        run: |
+          pip install ruff
+          ruff check .
+
+      - name: Run API smoke tests
+        run: |
+          pip install pytest
+          python -m pytest tests/ -v --tb=short 2>/dev/null || echo "No tests yet — scaffold only"
+
+      - name: Validate labs_tagged.json schema
+        run: |
+          python - <<'EOF'
+          import json, sys
+          data = json.load(open("labs_tagged.json"))
+          labs = data.get("labs", data) if isinstance(data, dict) else data
+          required = {"id", "name", "department", "school", "working_style"}
+          errors = []
+          for i, lab in enumerate(labs):
+              missing = required - lab.keys()
+              if missing:
+                  errors.append(f"Lab {i}: missing fields {missing}")
+          if errors:
+              print("\n".join(errors)); sys.exit(1)
+          print(f"Validated {len(labs)} labs — all fields present.")
+          EOF

@@ -7,17 +7,19 @@ Endpoints:
     GET  /api/labs                       all labs, supports ?q= ?dept= ?mode= ?friendly=
     GET  /api/labs/<id>                  single lab with approved annotations
     GET  /api/labs_tagged.json           full static export (public API)
-    POST /api/labs/<id>/availability     faculty updates openings
+    POST /api/labs/<id>/availability     faculty updates openings  [requires ADMIN_TOKEN]
     POST /api/labs/<id>/annotations      student submits note
     GET  /api/labs/<id>/annotations      approved notes for a lab
-    GET  /api/annotations/pending        all pending notes (moderation queue)
-    POST /api/annotations/<id>/approve
-    POST /api/annotations/<id>/reject
+    GET  /api/annotations/pending        all pending notes (moderation queue)  [requires ADMIN_TOKEN]
+    POST /api/annotations/<id>/approve   [requires ADMIN_TOKEN]
+    POST /api/annotations/<id>/reject    [requires ADMIN_TOKEN]
     GET  /api/status                     health check
 """
 
 import json
+import os
 import uuid
+from functools import wraps
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -31,6 +33,38 @@ LABS_FILE = Path("labs_tagged.json")
 ANNOTATIONS_FILE = Path("annotations.json")
 AVAILABILITY_FILE = Path("availability.json")
 
+# Admin token loaded from environment; falls back to a generated value if unset.
+# Always set ADMIN_TOKEN in production.
+ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN", "")
+if not ADMIN_TOKEN:
+    import secrets
+    ADMIN_TOKEN = secrets.token_hex(32)
+    print(f"[warn] ADMIN_TOKEN not set in environment. Using ephemeral token: {ADMIN_TOKEN}")
+    print("[warn] Set ADMIN_TOKEN in your .env file or Railway environment variables.")
+
+MAX_ANNOTATION_LENGTH = 600
+MAX_QUERY_LENGTH = 200
+
+
+# ---------------------------------------------------------------------------
+# Auth
+# ---------------------------------------------------------------------------
+
+def require_admin(f):
+    """Decorator: reject requests that do not supply the correct Bearer token."""
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        auth = request.headers.get("Authorization", "")
+        token = auth.removeprefix("Bearer ").strip()
+        if not token or token != ADMIN_TOKEN:
+            abort(403, description="Admin token required")
+        return f(*args, **kwargs)
+    return wrapper
+
+
+# ---------------------------------------------------------------------------
+# Data helpers
+# ---------------------------------------------------------------------------
 
 def load_labs():
     if not LABS_FILE.exists():
@@ -49,10 +83,46 @@ def save_json(path, data):
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def clean(text):
-    blocked = ["<script", "javascript:", "SELECT ", "DROP TABLE", "INSERT INTO"]
-    return not any(b.lower() in text.lower() for b in blocked)
+# Naive injection / XSS guard — block common attack strings.
+_BLOCKED = ["<script", "javascript:", "SELECT ", "DROP TABLE", "INSERT INTO", "--"]
 
+
+def is_clean(text: str) -> bool:
+    return not any(b.lower() in text.lower() for b in _BLOCKED)
+
+
+# ---------------------------------------------------------------------------
+# Error handlers
+# ---------------------------------------------------------------------------
+
+@app.errorhandler(400)
+def bad_request(e):
+    return jsonify({"error": "bad_request", "message": str(e.description)}), 400
+
+
+@app.errorhandler(403)
+def forbidden(e):
+    return jsonify({"error": "forbidden", "message": str(e.description)}), 403
+
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"error": "not_found", "message": str(e.description)}), 404
+
+
+@app.errorhandler(422)
+def unprocessable(e):
+    return jsonify({"error": "unprocessable", "message": str(e.description)}), 422
+
+
+@app.errorhandler(500)
+def server_error(e):
+    return jsonify({"error": "internal_server_error", "message": "An unexpected error occurred."}), 500
+
+
+# ---------------------------------------------------------------------------
+# Routes
+# ---------------------------------------------------------------------------
 
 @app.route("/")
 def index():
@@ -62,29 +132,43 @@ def index():
 @app.route("/api/status")
 def status():
     labs = load_labs()
-    return jsonify({"status": "ok", "labs_indexed": len(labs), "timestamp": datetime.now(timezone.utc).isoformat()})
+    return jsonify({
+        "status": "ok",
+        "labs_indexed": len(labs),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    })
 
 
 @app.route("/api/labs", methods=["GET"])
 def list_labs():
     labs = load_labs()
     availability = load_json(AVAILABILITY_FILE)
-    q = request.args.get("q", "").lower()
+
+    q = request.args.get("q", "")[:MAX_QUERY_LENGTH].lower()
     dept = request.args.get("dept", "").lower()
     mode = request.args.get("mode", "").lower()
     friendly = request.args.get("friendly", "").lower()
+    school = request.args.get("school", "").lower()
+    status_filter = request.args.get("status", "").lower()
+
     if q:
-        labs = [l for l in labs if q in json.dumps(l).lower()]
+        labs = [lab for lab in labs if q in json.dumps(lab).lower()]
     if dept:
-        labs = [l for l in labs if dept in l.get("department", "").lower()]
+        labs = [lab for lab in labs if dept in lab.get("department", "").lower()]
     if mode:
-        labs = [l for l in labs if l.get("working_style", "") == mode]
+        labs = [lab for lab in labs if lab.get("working_style", "") == mode]
     if friendly:
-        labs = [l for l in labs if l.get("undergrad_friendly", "") == friendly]
+        labs = [lab for lab in labs if lab.get("undergrad_friendly", "") == friendly]
+    if school:
+        labs = [lab for lab in labs if school in lab.get("school", "").lower()]
+    if status_filter:
+        labs = [lab for lab in labs if lab.get("openings_status", "") == status_filter]
+
     for lab in labs:
         lid = lab["id"]
         if lid in availability:
             lab["availability"] = availability[lid]
+
     return jsonify({"count": len(labs), "labs": labs})
 
 
@@ -97,21 +181,33 @@ def labs_tagged_export():
 
 @app.route("/api/labs/<lab_id>", methods=["GET"])
 def get_lab(lab_id):
-    lab = next((l for l in load_labs() if l["id"] == lab_id), None)
+    lab = next((lab for lab in load_labs() if lab["id"] == lab_id), None)
     if not lab:
         abort(404, description="Lab not found")
     av = load_json(AVAILABILITY_FILE)
     if lab_id in av:
         lab["availability"] = av[lab_id]
-    lab["annotations"] = [a for a in load_json(ANNOTATIONS_FILE) if a["lab_id"] == lab_id and a["status"] == "approved"]
+    lab["annotations"] = [
+        a for a in load_json(ANNOTATIONS_FILE)
+        if a["lab_id"] == lab_id and a["status"] == "approved"
+    ]
     return jsonify(lab)
 
 
 @app.route("/api/labs/<lab_id>/availability", methods=["POST"])
+@require_admin
 def update_availability(lab_id):
+    """Faculty/admin updates lab openings status and notes."""
     data = request.get_json(force=True) or {}
     allowed = {"open_spots", "contact_email", "note", "updated_by", "openings_status"}
+    valid_statuses = {"actively_recruiting", "summer_only", "not_recruiting", "unknown"}
+
     entry = {k: v for k, v in data.items() if k in allowed}
+    if "openings_status" in entry and entry["openings_status"] not in valid_statuses:
+        abort(422, description=f"openings_status must be one of: {', '.join(sorted(valid_statuses))}")
+    if "note" in entry and not is_clean(str(entry["note"])):
+        abort(400, description="Note rejected by content check")
+
     entry["updated_at"] = datetime.now(timezone.utc).isoformat()
     av = load_json(AVAILABILITY_FILE)
     av[lab_id] = entry
@@ -121,25 +217,36 @@ def update_availability(lab_id):
 
 @app.route("/api/labs/<lab_id>/annotations", methods=["GET"])
 def get_lab_annotations(lab_id):
-    notes = [a for a in load_json(ANNOTATIONS_FILE) if a["lab_id"] == lab_id and a["status"] == "approved"]
+    notes = [
+        a for a in load_json(ANNOTATIONS_FILE)
+        if a["lab_id"] == lab_id and a["status"] == "approved"
+    ]
     return jsonify({"count": len(notes), "annotations": notes})
 
 
 @app.route("/api/labs/<lab_id>/annotations", methods=["POST"])
 def submit_annotation(lab_id):
+    """Student submits a note about a lab. Goes into moderation queue."""
     data = request.get_json(force=True) or {}
     text = data.get("text", "").strip()
+
     if not text:
         abort(400, description="text field required")
-    if len(text) > 600:
-        abort(400, description="Note too long (max 600 chars)")
-    if not clean(text):
+    if len(text) > MAX_ANNOTATION_LENGTH:
+        abort(400, description=f"Note too long (max {MAX_ANNOTATION_LENGTH} chars)")
+    if not is_clean(text):
         abort(400, description="Note rejected by content check")
+
+    valid_cats = {"outreach", "environment", "projects", "general"}
+    category = data.get("category", "general")
+    if category not in valid_cats:
+        abort(422, description=f"category must be one of: {', '.join(sorted(valid_cats))}")
+
     note = {
         "id": str(uuid.uuid4())[:8],
         "lab_id": lab_id,
         "text": text,
-        "category": data.get("category", "general"),
+        "category": category,
         "submitted_at": datetime.now(timezone.utc).isoformat(),
         "status": "pending",
     }
@@ -150,12 +257,15 @@ def submit_annotation(lab_id):
 
 
 @app.route("/api/annotations/pending")
+@require_admin
 def pending_annotations():
+    """Moderation queue — returns all pending student notes."""
     notes = [a for a in load_json(ANNOTATIONS_FILE) if a["status"] == "pending"]
     return jsonify({"count": len(notes), "annotations": notes})
 
 
 @app.route("/api/annotations/<note_id>/approve", methods=["POST"])
+@require_admin
 def approve_note(note_id):
     notes = load_json(ANNOTATIONS_FILE)
     for n in notes:
@@ -168,6 +278,7 @@ def approve_note(note_id):
 
 
 @app.route("/api/annotations/<note_id>/reject", methods=["POST"])
+@require_admin
 def reject_note(note_id):
     notes = load_json(ANNOTATIONS_FILE)
     for n in notes:
@@ -180,6 +291,6 @@ def reject_note(note_id):
 
 
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)
+    debug = os.environ.get("FLASK_ENV", "production") == "development"
+    app.run(host="0.0.0.0", port=port, debug=debug)
