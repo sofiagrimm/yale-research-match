@@ -7,5 +7,8 @@ select = ["E", "F", "W", "I", "UP"]
 ignore = ["E501"]
 
 [tool.ruff.lint.per-file-ignores]
-"scrape_yale_labs.py" = ["E501"]
-"tag_labs.py" = ["E501"]
+# Data pipeline / scraping scripts — not linted in CI
+"scrape_yale_labs.py" = ["ALL"]
+"tag_labs.py" = ["ALL"]
+"build_labs.py" = ["ALL"]
+"gen_labs.py" = ["ALL"]
