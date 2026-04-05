@@ -26,6 +26,7 @@
       --gray-50:  #f9fafb;
       --gray-100: #f3f4f6;
       --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
       --gray-400: #9ca3af;
       --gray-500: #6b7280;
       --gray-700: #374151;
@@ -50,13 +51,11 @@
     a:hover { text-decoration: underline; }
     button { font-family: inherit; }
 
-    /* ─── TOPBAR ─────────────────────────────── */
+    /* TOPBAR */
     .topbar {
       background: var(--blue-900);
       height: 52px;
-      display: flex;
-      align-items: center;
-      padding: 0 2rem;
+      display: flex; align-items: center; padding: 0 2rem;
       justify-content: space-between;
       position: sticky; top: 0; z-index: 50;
     }
@@ -65,286 +64,238 @@
       color: white; letter-spacing: -0.2px;
       display: flex; align-items: center; gap: 0.5rem;
     }
-    .topbar-brand .dot { color: #63afe6; }
+    .topbar-pill {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.68rem; font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px; letter-spacing: 0.05em;
+    }
     .topbar-links { display: flex; gap: 1.5rem; align-items: center; }
     .topbar-links a {
-      color: rgba(255,255,255,0.75);
-      font-size: 0.83rem; font-weight: 500;
-      transition: color 0.15s;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.83rem; font-weight: 500; transition: color 0.15s;
     }
     .topbar-links a:hover { color: white; text-decoration: none; }
-    .topbar-pill {
-      background: rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.7);
-      font-size: 0.7rem; font-weight: 600;
-      padding: 0.15rem 0.55rem;
-      border-radius: 999px;
-      letter-spacing: 0.03em;
-    }
 
-    /* ─── HERO (compact) ─────────────────────── */
+    /* HERO */
     .hero {
-      background: linear-gradient(160deg, var(--blue-900) 0%, var(--blue-700) 100%);
-      padding: 3rem 2rem 2.5rem;
+      background: linear-gradient(155deg, #002050 0%, #1a5fa8 100%);
+      padding: 3.5rem 2rem 3rem;
       color: white;
     }
-    .hero-inner {
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
-    }
+    .hero-inner { max-width: 680px; margin: 0 auto; text-align: center; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #93c5fd;
-      margin-bottom: 1rem;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #93c5fd; margin-bottom: 1rem;
     }
     .hero h1 {
-      font-size: 2.2rem; font-weight: 800;
-      line-height: 1.18; letter-spacing: -0.5px;
+      font-size: 2.4rem; font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.6px;
     }
     .hero h1 em { font-style: normal; color: #93c5fd; }
     .hero-sub {
-      margin-top: 0.75rem;
-      font-size: 0.98rem;
-      color: rgba(255,255,255,0.75);
-      max-width: 500px; margin-left: auto; margin-right: auto;
+      margin-top: 0.8rem; font-size: 1rem;
+      color: rgba(255,255,255,0.72);
+      max-width: 480px; margin-left: auto; margin-right: auto;
     }
-
-    /* ─── SEARCH BAR (hero-integrated) ──────── */
     .hero-search {
-      margin-top: 1.75rem;
-      background: white;
+      margin-top: 2rem; background: white;
       border-radius: var(--radius-lg);
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       padding: 0.4rem 0.4rem 0.4rem 1.1rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-      gap: 0.5rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25); gap: 0.5rem;
     }
     .hero-search-icon { color: var(--gray-400); font-size: 1rem; flex-shrink: 0; }
     #search-input {
       flex: 1; border: none; outline: none;
       font-size: 0.95rem; font-family: inherit;
-      color: var(--gray-900); background: transparent;
-      padding: 0.35rem 0;
+      color: var(--gray-900); background: transparent; padding: 0.35rem 0;
     }
     #search-input::placeholder { color: var(--gray-400); }
     #clear-btn {
       background: none; border: none; cursor: pointer;
       color: var(--gray-400); font-size: 1rem;
-      padding: 0.25rem; display: none;
-      border-radius: 50%;
+      padding: 0.25rem; display: none; border-radius: 50%;
     }
     #clear-btn:hover { color: var(--gray-700); background: var(--gray-100); }
     .search-go-btn {
-      background: var(--blue-900); color: white;
-      border: none; border-radius: var(--radius);
-      padding: 0.55rem 1.2rem;
-      font-size: 0.88rem; font-weight: 600;
+      background: var(--blue-900); color: white; border: none;
+      border-radius: var(--radius); padding: 0.6rem 1.3rem;
+      font-size: 0.88rem; font-weight: 700;
       cursor: pointer; transition: background 0.15s; flex-shrink: 0;
     }
     .search-go-btn:hover { background: var(--blue-700); }
 
-    /* ─── STAT STRIP ─────────────────────────── */
+    /* STAT STRIP */
     .stat-strip {
-      background: white;
-      border-bottom: 1px solid var(--gray-200);
-      padding: 0.65rem 2rem;
+      background: white; border-bottom: 1px solid var(--gray-200);
+      padding: 0.7rem 2rem;
     }
     .stat-strip-inner {
       max-width: 1200px; margin: 0 auto;
-      display: flex; gap: 2.5rem; flex-wrap: wrap;
-      align-items: center;
+      display: flex; gap: 2.5rem; flex-wrap: wrap; align-items: center;
     }
-    .stat-item {
-      display: flex; align-items: baseline; gap: 0.35rem;
-      font-size: 0.83rem; color: var(--gray-500);
+    .stat-item { display: flex; align-items: baseline; gap: 0.35rem; font-size: 0.83rem; color: var(--gray-500); }
+    .stat-num { font-size: 1.05rem; font-weight: 800; color: var(--blue-900); }
+    .stat-num.loading {
+      display: inline-block; width: 2rem; height: 0.9rem;
+      background: var(--gray-200); border-radius: 4px;
+      animation: pulse 1.2s ease-in-out infinite;
+      vertical-align: middle;
     }
-    .stat-num { font-size: 1rem; font-weight: 700; color: var(--blue-900); }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-    /* ─── APP SHELL ──────────────────────────── */
+    /* APP SHELL */
     .app-shell {
       max-width: 1200px; margin: 0 auto;
-      display: grid;
-      grid-template-columns: 256px 1fr;
-      gap: 0;
-      min-height: calc(100vh - 52px - 120px);
+      display: grid; grid-template-columns: 256px 1fr;
+      gap: 0; min-height: calc(100vh - 52px - 130px);
     }
 
-    /* ─── SIDEBAR ────────────────────────────── */
+    /* SIDEBAR */
     .sidebar {
-      background: white;
-      border-right: 1px solid var(--gray-200);
+      background: white; border-right: 1px solid var(--gray-200);
       padding: 1.5rem 1.25rem;
-      position: sticky;
-      top: 52px;
-      height: calc(100vh - 52px);
-      overflow-y: auto;
+      position: sticky; top: 52px;
+      height: calc(100vh - 52px); overflow-y: auto;
       display: flex; flex-direction: column; gap: 1.75rem;
     }
     .sidebar::-webkit-scrollbar { width: 4px; }
     .sidebar::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 2px; }
-
     .filter-group { display: flex; flex-direction: column; gap: 0.5rem; }
     .filter-group-label {
-      font-size: 0.7rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.07em;
-      color: var(--gray-400);
+      font-size: 0.68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-400);
     }
-
-    /* Pill toggle buttons */
-    .pill-group { display: flex; flex-direction: column; gap: 0.3rem; }
+    .pill-group { display: flex; flex-direction: column; gap: 0.25rem; }
     .pill-btn {
       display: flex; align-items: center; gap: 0.5rem;
-      width: 100%; text-align: left;
-      background: none; border: none; cursor: pointer;
-      padding: 0.45rem 0.65rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.86rem; color: var(--gray-700);
-      font-weight: 500; transition: background 0.12s, color 0.12s;
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      padding: 0.42rem 0.65rem; border-radius: var(--radius-sm);
+      font-size: 0.85rem; color: var(--gray-700); font-weight: 500;
+      transition: background 0.1s, color 0.1s;
     }
     .pill-btn:hover { background: var(--gray-100); }
     .pill-btn.active { background: var(--blue-50); color: var(--blue-900); font-weight: 600; }
-    .pill-btn .pill-icon { font-size: 0.95rem; width: 1.25rem; text-align: center; }
+    .pill-btn .pill-icon { font-size: 0.9rem; width: 1.2rem; text-align: center; flex-shrink: 0; }
     .pill-btn .pill-count {
-      margin-left: auto; font-size: 0.72rem;
-      color: var(--gray-400); font-weight: 400;
+      margin-left: auto; font-size: 0.71rem;
+      background: var(--gray-100); color: var(--gray-500);
+      padding: 0.05rem 0.4rem; border-radius: 999px; font-weight: 500;
     }
-    .pill-btn.active .pill-count { color: var(--blue-500); }
-
-    /* Toggle (beginner-friendly) */
+    .pill-btn.active .pill-count { background: var(--blue-100); color: var(--blue-700); }
     .toggle-row {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0.45rem 0.65rem;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
+      padding: 0.42rem 0.65rem; border-radius: var(--radius-sm); cursor: pointer;
     }
     .toggle-row:hover { background: var(--gray-100); }
-    .toggle-label { font-size: 0.86rem; font-weight: 500; color: var(--gray-700); }
+    .toggle-label { font-size: 0.85rem; font-weight: 500; color: var(--gray-700); }
     .toggle-switch {
-      width: 34px; height: 18px;
-      background: var(--gray-200);
-      border-radius: 999px;
-      position: relative;
-      transition: background 0.2s;
-      flex-shrink: 0;
+      width: 34px; height: 18px; background: var(--gray-200); border-radius: 999px;
+      position: relative; transition: background 0.2s; flex-shrink: 0;
     }
     .toggle-switch::after {
-      content: '';
-      position: absolute;
-      top: 2px; left: 2px;
-      width: 14px; height: 14px;
-      background: white;
-      border-radius: 50%;
-      transition: transform 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      content: ''; position: absolute; top: 2px; left: 2px;
+      width: 14px; height: 14px; background: white; border-radius: 50%;
+      transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }
     .toggle-row.on .toggle-switch { background: var(--blue-500); }
     .toggle-row.on .toggle-switch::after { transform: translateX(16px); }
     .toggle-row.on .toggle-label { color: var(--blue-900); font-weight: 600; }
-
-    .sidebar-divider { border: none; border-top: 1px solid var(--gray-200); }
+    .sidebar-divider { border: none; border-top: 1px solid var(--gray-100); }
     .reset-link {
       background: none; border: none; cursor: pointer;
-      font-size: 0.8rem; color: var(--gray-400);
-      text-align: left; padding: 0;
+      font-size: 0.79rem; color: var(--gray-400); text-align: left; padding: 0;
     }
     .reset-link:hover { color: var(--blue-500); text-decoration: underline; }
 
-    /* ─── MAIN CONTENT ───────────────────────── */
+    /* MAIN */
     .main-content {
       padding: 1.5rem 1.75rem;
       display: flex; flex-direction: column; gap: 1rem;
     }
-
     .results-bar {
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 0.5rem;
     }
-    .results-count { font-size: 0.85rem; color: var(--gray-500); }
+    .results-count { font-size: 0.84rem; color: var(--gray-500); }
     .results-count strong { color: var(--gray-900); }
     .sort-select {
       font-size: 0.82rem; font-family: inherit;
       padding: 0.35rem 1.5rem 0.35rem 0.65rem;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius-sm);
-      background: white; color: var(--gray-700);
-      cursor: pointer; appearance: none;
+      border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+      background: white; color: var(--gray-700); cursor: pointer; appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239ca3af' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.5rem center;
+      background-repeat: no-repeat; background-position: right 0.5rem center;
     }
     .sort-select:focus { outline: none; border-color: var(--blue-500); }
 
-    /* ─── ACTIVE FILTERS ─────────────────────── */
-    .active-filters {
-      display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center;
-    }
+    /* ACTIVE FILTER CHIPS */
+    .active-filters { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; }
     .filter-chip {
       display: inline-flex; align-items: center; gap: 0.3rem;
       background: var(--blue-50); color: var(--blue-900);
       border: 1px solid var(--blue-100);
-      font-size: 0.78rem; font-weight: 500;
+      font-size: 0.77rem; font-weight: 500;
       padding: 0.2rem 0.55rem 0.2rem 0.7rem;
       border-radius: 999px; cursor: pointer;
     }
     .filter-chip:hover { background: var(--blue-100); }
-    .filter-chip-x { font-size: 0.85rem; color: var(--blue-500); line-height: 1; }
+    .filter-chip-x { font-size: 0.85rem; color: var(--blue-500); }
 
-    /* ─── LAB GRID ───────────────────────────── */
+    /* SKELETON CARDS */
+    .skeleton-card {
+      background: white; border: 1px solid var(--gray-100);
+      border-radius: var(--radius); padding: 1.1rem 1.2rem;
+      display: flex; flex-direction: column; gap: 0.7rem;
+    }
+    .skel { background: var(--gray-100); border-radius: 4px; animation: pulse 1.2s ease-in-out infinite; }
+    .skel-title  { height: 0.95rem; width: 70%; }
+    .skel-meta   { height: 0.75rem; width: 45%; }
+    .skel-line   { height: 0.72rem; width: 100%; }
+    .skel-line.short { width: 80%; }
+    .skel-line.xshort { width: 55%; }
+
+    /* LAB GRID */
     .labs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1rem;
     }
-
     .lab-card {
-      background: white;
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius);
-      padding: 1.1rem 1.2rem;
-      display: flex; flex-direction: column; gap: 0.65rem;
+      background: white; border: 1px solid var(--gray-200);
+      border-radius: var(--radius); padding: 1.1rem 1.2rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
       transition: box-shadow 0.15s, border-color 0.15s;
       box-shadow: var(--shadow-sm);
-      cursor: default;
     }
-    .lab-card:hover {
-      border-color: #93c5fd;
-      box-shadow: 0 4px 20px rgba(0,53,107,0.09);
-    }
-
+    .lab-card:hover { border-color: #93c5fd; box-shadow: 0 4px 20px rgba(0,53,107,0.09); }
     .card-header { display: flex; flex-direction: column; gap: 0.1rem; }
-    .card-name {
-      font-size: 0.93rem; font-weight: 700;
-      color: var(--blue-900); line-height: 1.25;
-    }
+    .card-name { font-size: 0.93rem; font-weight: 700; color: var(--blue-900); line-height: 1.25; }
     .card-meta {
-      font-size: 0.78rem; color: var(--gray-500);
+      font-size: 0.77rem; color: var(--gray-500);
       display: flex; align-items: center; gap: 0.3rem; flex-wrap: wrap;
     }
     .card-meta-dot { color: var(--gray-300); }
-
     .card-desc {
-      font-size: 0.83rem; color: var(--gray-700);
-      line-height: 1.55; overflow: hidden;
-      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+      font-size: 0.83rem; color: var(--gray-700); line-height: 1.55;
+      overflow: hidden; display: -webkit-box;
+      -webkit-line-clamp: 3; -webkit-box-orient: vertical;
     }
-    .card-desc.expanded { display: block; -webkit-line-clamp: unset; }
+    .card-desc.expanded { display: block; }
     .expand-btn {
       background: none; border: none; cursor: pointer;
-      font-size: 0.76rem; color: var(--blue-500);
-      padding: 0; margin-top: -0.3rem; text-align: left;
+      font-size: 0.75rem; color: var(--blue-500);
+      padding: 0; margin-top: -0.25rem; text-align: left;
     }
     .expand-btn:hover { text-decoration: underline; }
-
     .card-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
     .tag {
-      font-size: 0.72rem; font-weight: 500;
-      padding: 0.18rem 0.5rem;
-      border-radius: 999px;
-      white-space: nowrap;
+      font-size: 0.71rem; font-weight: 600;
+      padding: 0.17rem 0.5rem;
+      border-radius: 999px; white-space: nowrap;
     }
     .tag-blue   { background: var(--blue-50);    color: var(--blue-700); }
     .tag-green  { background: var(--green-100);  color: var(--green-700); }
@@ -352,159 +303,125 @@
     .tag-red    { background: var(--red-100);    color: var(--red-700); }
     .tag-purple { background: var(--purple-100); color: var(--purple-700); }
     .tag-gray   { background: var(--gray-100);   color: var(--gray-500); }
-
     .card-actions {
-      display: flex; gap: 0.6rem;
-      padding-top: 0.55rem;
-      border-top: 1px solid var(--gray-100);
-      flex-wrap: wrap;
+      display: flex; gap: 0.5rem;
+      padding-top: 0.5rem; border-top: 1px solid var(--gray-100);
+      flex-wrap: wrap; margin-top: auto;
     }
     .card-btn {
-      font-size: 0.78rem; font-weight: 600;
-      padding: 0.35rem 0.8rem;
-      border-radius: var(--radius-sm);
+      font-size: 0.77rem; font-weight: 600;
+      padding: 0.32rem 0.75rem; border-radius: var(--radius-sm);
       cursor: pointer; transition: background 0.12s;
-      border: 1px solid var(--gray-200);
-      background: white; color: var(--gray-700);
+      border: 1px solid var(--gray-200); background: white; color: var(--gray-700);
       display: inline-flex; align-items: center; gap: 0.3rem;
     }
     .card-btn:hover { background: var(--gray-100); border-color: var(--gray-300); }
-    .card-btn.primary {
-      background: var(--blue-900); color: white; border-color: var(--blue-900);
-    }
+    .card-btn.primary { background: var(--blue-900); color: white; border-color: var(--blue-900); }
     .card-btn.primary:hover { background: var(--blue-700); border-color: var(--blue-700); }
 
-    /* ─── EMPTY / LOADING ────────────────────── */
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 4rem 2rem;
-      color: var(--gray-400);
-    }
+    /* EMPTY / LOAD MORE */
+    .empty-state { grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--gray-400); }
     .empty-state h3 { font-size: 1rem; color: var(--gray-700); margin-bottom: 0.4rem; }
     .empty-state p { font-size: 0.88rem; }
-
-    /* ─── LOAD MORE ──────────────────────────── */
-    .load-more-row {
-      text-align: center;
-      padding: 1rem 0 0.5rem;
-    }
+    .load-more-row { text-align: center; padding: 1rem 0 0.5rem; }
     .load-more-btn {
       background: white; color: var(--gray-700);
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius-sm);
-      padding: 0.55rem 1.4rem;
-      font-size: 0.86rem; font-weight: 600;
+      border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+      padding: 0.55rem 1.4rem; font-size: 0.86rem; font-weight: 600;
       cursor: pointer; transition: background 0.12s;
     }
     .load-more-btn:hover { background: var(--gray-100); }
 
-    /* ─── MODAL ──────────────────────────────── */
+    /* MODAL */
     .modal-backdrop {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 200;
-      display: flex; align-items: center; justify-content: center;
-      padding: 1rem;
-      backdrop-filter: blur(2px);
+      position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+      z-index: 200; display: flex; align-items: center; justify-content: center;
+      padding: 1rem; backdrop-filter: blur(3px);
     }
     .modal {
-      background: white;
-      border-radius: var(--radius-lg);
-      width: 100%; max-width: 520px;
-      max-height: 90vh; overflow-y: auto;
+      background: white; border-radius: var(--radius-lg);
+      width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto;
       box-shadow: var(--shadow-lg);
     }
     .modal-top {
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--gray-200);
+      padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--gray-200);
       display: flex; justify-content: space-between; align-items: flex-start;
     }
     .modal-top h3 { font-size: 0.97rem; font-weight: 700; color: var(--blue-900); max-width: 400px; line-height: 1.3; }
-    .modal-top p  { font-size: 0.8rem; color: var(--gray-500); margin-top: 0.15rem; }
+    .modal-top p  { font-size: 0.79rem; color: var(--gray-500); margin-top: 0.15rem; }
     .modal-close-btn {
-      background: none; border: none;
-      width: 28px; height: 28px;
+      background: none; border: none; width: 28px; height: 28px;
       display: flex; align-items: center; justify-content: center;
-      border-radius: 50%; cursor: pointer;
-      color: var(--gray-500); font-size: 1.1rem;
+      border-radius: 50%; cursor: pointer; color: var(--gray-500); font-size: 1.1rem;
       flex-shrink: 0; margin-left: 1rem;
     }
     .modal-close-btn:hover { background: var(--gray-100); color: var(--gray-900); }
     .modal-body { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
     .modal-hint {
       background: var(--blue-50); border-radius: var(--radius-sm);
-      padding: 0.6rem 0.85rem;
-      font-size: 0.8rem; color: var(--blue-700); line-height: 1.5;
+      padding: 0.6rem 0.85rem; font-size: 0.79rem; color: var(--blue-700); line-height: 1.5;
     }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
     .field { display: flex; flex-direction: column; gap: 0.25rem; }
-    .field label { font-size: 0.78rem; font-weight: 600; color: var(--gray-700); }
+    .field label { font-size: 0.77rem; font-weight: 600; color: var(--gray-700); }
     .field input, .field textarea {
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius-sm);
-      padding: 0.5rem 0.65rem;
-      font-size: 0.86rem; font-family: inherit;
-      transition: border-color 0.15s;
-      resize: vertical; color: var(--gray-900);
+      border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+      padding: 0.5rem 0.65rem; font-size: 0.86rem; font-family: inherit;
+      transition: border-color 0.15s; resize: vertical; color: var(--gray-900);
     }
     .field input:focus, .field textarea:focus {
       outline: none; border-color: var(--blue-500);
       box-shadow: 0 0 0 3px rgba(40,109,192,0.1);
     }
-    .field textarea { min-height: 64px; }
+    .field textarea { min-height: 60px; }
     .draft-field textarea {
-      min-height: 200px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.82rem; line-height: 1.65;
-      background: var(--gray-50);
+      min-height: 210px; font-family: 'Courier New', monospace;
+      font-size: 0.82rem; line-height: 1.65; background: var(--gray-50);
     }
-    .modal-actions {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-top: 0.25rem;
-    }
+    .modal-actions { display: flex; align-items: center; justify-content: space-between; padding-top: 0.25rem; }
     .btn-gen {
       background: var(--blue-900); color: white; border: none;
-      border-radius: var(--radius-sm);
-      padding: 0.55rem 1.2rem;
-      font-size: 0.86rem; font-weight: 600;
-      cursor: pointer; transition: background 0.15s;
+      border-radius: var(--radius-sm); padding: 0.55rem 1.2rem;
+      font-size: 0.86rem; font-weight: 600; cursor: pointer; transition: background 0.15s;
     }
     .btn-gen:hover { background: var(--blue-700); }
     .btn-copy {
-      background: none; border: 1px solid var(--gray-200);
-      border-radius: var(--radius-sm);
-      padding: 0.45rem 0.9rem;
-      font-size: 0.82rem; font-weight: 600;
-      color: var(--gray-600); cursor: pointer;
-      transition: background 0.12s;
+      background: none; border: 1px solid var(--gray-200); border-radius: var(--radius-sm);
+      padding: 0.45rem 0.9rem; font-size: 0.82rem; font-weight: 600;
+      color: var(--gray-600); cursor: pointer; transition: background 0.12s;
     }
     .btn-copy:hover { background: var(--gray-100); }
 
-    /* ─── FOOTER ─────────────────────────────── */
+    /* GUIDE / ABOUT */
+    .section-prose { background: white; border-top: 1px solid var(--gray-200); padding: 3rem 2rem; }
+    .section-prose-inner { max-width: 660px; margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--gray-400); margin-bottom: 0.75rem;
+    }
+    .section-prose h2 { font-size: 1.4rem; font-weight: 800; color: var(--blue-900); margin-bottom: 1rem; }
+
+    /* FOOTER */
     footer {
-      background: white;
-      border-top: 1px solid var(--gray-200);
-      text-align: center;
-      padding: 1.25rem;
-      font-size: 0.78rem;
-      color: var(--gray-400);
+      background: white; border-top: 1px solid var(--gray-200);
+      text-align: center; padding: 1.25rem;
+      font-size: 0.78rem; color: var(--gray-400);
     }
     footer a { color: var(--gray-500); }
     footer a:hover { color: var(--blue-500); text-decoration: none; }
 
-    /* ─── RESPONSIVE ─────────────────────────── */
+    /* RESPONSIVE */
     @media (max-width: 860px) {
       .app-shell { grid-template-columns: 1fr; }
       .sidebar {
         position: static; height: auto;
         border-right: none; border-bottom: 1px solid var(--gray-200);
-        flex-direction: row; flex-wrap: wrap;
-        gap: 1rem; padding: 1rem 1.25rem;
+        flex-direction: row; flex-wrap: wrap; gap: 1rem; padding: 1rem 1.25rem;
       }
-      .filter-group { min-width: 140px; }
+      .filter-group { min-width: 130px; }
       .topbar-links { display: none; }
-      .hero h1 { font-size: 1.7rem; }
+      .hero h1 { font-size: 1.75rem; }
+      .hero-search { margin-top: 1.5rem; }
     }
   </style>
 </head>
@@ -517,7 +434,7 @@
     <span class="topbar-pill">BETA</span>
   </div>
   <nav class="topbar-links">
-    <a href="#guide">Guide for beginners</a>
+    <a href="#guide">Beginner guide</a>
     <a href="#about">About</a>
     <a href="https://github.com/sofiagrimm/yale-research-match" target="_blank" rel="noreferrer">GitHub &#8599;</a>
   </nav>
@@ -526,21 +443,14 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <span>&#127974;</span> Yale &middot; Student-built &middot; Open source
-    </div>
+    <div class="hero-eyebrow">&#127974; Yale &middot; Student-built &middot; Open source</div>
     <h1>Find your <em>research lab</em><br>at Yale.</h1>
-    <p class="hero-sub">Search 300+ labs across YSM, FAS, SEAS, and YSPH by topic, working style, and recruiting status.</p>
-
+    <p class="hero-sub">Browse 80+ curated labs across YSM, FAS, SEAS, and YSPH &mdash; filtered by topic, working style, and recruiting status.</p>
     <div class="hero-search">
       <span class="hero-search-icon">&#128269;</span>
-      <input
-        id="search-input"
-        type="text"
-        placeholder='e.g. &ldquo;proteomics&rdquo;, &ldquo;aging&rdquo;, &ldquo;CRISPR&rdquo;, &ldquo;machine learning&rdquo;'
-        autocomplete="off"
-        spellcheck="false"
-      />
+      <input id="search-input" type="text"
+        placeholder='Try &ldquo;proteomics&rdquo;, &ldquo;aging&rdquo;, &ldquo;CRISPR&rdquo;, &ldquo;machine learning&rdquo;&hellip;'
+        autocomplete="off" spellcheck="false" />
       <button id="clear-btn" title="Clear">&times;</button>
       <button class="search-go-btn" onclick="document.getElementById('main-app').scrollIntoView({behavior:'smooth'})">
         Browse labs
@@ -552,10 +462,10 @@
 <!-- STAT STRIP -->
 <div class="stat-strip">
   <div class="stat-strip-inner">
-    <div class="stat-item"><span class="stat-num" id="s-total">&mdash;</span> labs indexed</div>
-    <div class="stat-item"><span class="stat-num" id="s-open">&mdash;</span> likely open</div>
-    <div class="stat-item"><span class="stat-num" id="s-beginner">&mdash;</span> beginner-friendly</div>
-    <div class="stat-item"><span class="stat-num" id="s-email">&mdash;</span> with PI contact</div>
+    <div class="stat-item"><span class="stat-num loading" id="s-total"></span>&nbsp;labs indexed</div>
+    <div class="stat-item"><span class="stat-num loading" id="s-open"></span>&nbsp;likely open</div>
+    <div class="stat-item"><span class="stat-num loading" id="s-beginner"></span>&nbsp;beginner-friendly</div>
+    <div class="stat-item"><span class="stat-num loading" id="s-email"></span>&nbsp;with PI email</div>
   </div>
 </div>
 
@@ -564,59 +474,23 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-
     <div class="filter-group">
       <div class="filter-group-label">Topic</div>
       <div class="pill-group" id="topic-pills">
-        <button class="pill-btn active" data-value="">
-          <span class="pill-icon">&#11088;</span> All topics
-          <span class="pill-count" id="tc-all"></span>
-        </button>
-        <button class="pill-btn" data-value="cancer">
-          <span class="pill-icon">&#128302;</span> Cancer
-          <span class="pill-count" id="tc-cancer"></span>
-        </button>
-        <button class="pill-btn" data-value="neuroscience">
-          <span class="pill-icon">&#129504;</span> Neuroscience
-          <span class="pill-count" id="tc-neuroscience"></span>
-        </button>
-        <button class="pill-btn" data-value="immunology">
-          <span class="pill-icon">&#128737;</span> Immunology
-          <span class="pill-count" id="tc-immunology"></span>
-        </button>
-        <button class="pill-btn" data-value="aging_longevity">
-          <span class="pill-icon">&#9203;</span> Aging &amp; longevity
-          <span class="pill-count" id="tc-aging_longevity"></span>
-        </button>
-        <button class="pill-btn" data-value="genomics_genetics">
-          <span class="pill-icon">&#129516;</span> Genomics
-          <span class="pill-count" id="tc-genomics_genetics"></span>
-        </button>
-        <button class="pill-btn" data-value="chemical_biology">
-          <span class="pill-icon">&#9879;</span> Chemical biology
-          <span class="pill-count" id="tc-chemical_biology"></span>
-        </button>
-        <button class="pill-btn" data-value="structural_biology">
-          <span class="pill-icon">&#129514;</span> Structural biology
-          <span class="pill-count" id="tc-structural_biology"></span>
-        </button>
-        <button class="pill-btn" data-value="computational_ml">
-          <span class="pill-icon">&#128187;</span> Computational / ML
-          <span class="pill-count" id="tc-computational_ml"></span>
-        </button>
-        <button class="pill-btn" data-value="ecology_evolution">
-          <span class="pill-icon">&#127807;</span> Ecology &amp; evolution
-          <span class="pill-count" id="tc-ecology_evolution"></span>
-        </button>
-        <button class="pill-btn" data-value="microbiology">
-          <span class="pill-icon">&#129440;</span> Microbiology
-          <span class="pill-count" id="tc-microbiology"></span>
-        </button>
+        <button class="pill-btn active" data-value=""><span class="pill-icon">&#11088;</span> All topics <span class="pill-count" id="tc-all"></span></button>
+        <button class="pill-btn" data-value="cancer"><span class="pill-icon">&#128302;</span> Cancer <span class="pill-count" id="tc-cancer"></span></button>
+        <button class="pill-btn" data-value="neuroscience"><span class="pill-icon">&#129504;</span> Neuroscience <span class="pill-count" id="tc-neuroscience"></span></button>
+        <button class="pill-btn" data-value="immunology"><span class="pill-icon">&#128737;</span> Immunology <span class="pill-count" id="tc-immunology"></span></button>
+        <button class="pill-btn" data-value="aging_longevity"><span class="pill-icon">&#9203;</span> Aging &amp; longevity <span class="pill-count" id="tc-aging_longevity"></span></button>
+        <button class="pill-btn" data-value="genomics_genetics"><span class="pill-icon">&#129516;</span> Genomics <span class="pill-count" id="tc-genomics_genetics"></span></button>
+        <button class="pill-btn" data-value="chemical_biology"><span class="pill-icon">&#9879;</span> Chemical biology <span class="pill-count" id="tc-chemical_biology"></span></button>
+        <button class="pill-btn" data-value="structural_biology"><span class="pill-icon">&#129514;</span> Structural biology <span class="pill-count" id="tc-structural_biology"></span></button>
+        <button class="pill-btn" data-value="computational_ml"><span class="pill-icon">&#128187;</span> Computational / ML <span class="pill-count" id="tc-computational_ml"></span></button>
+        <button class="pill-btn" data-value="ecology_evolution"><span class="pill-icon">&#127807;</span> Ecology &amp; evolution <span class="pill-count" id="tc-ecology_evolution"></span></button>
+        <button class="pill-btn" data-value="microbiology"><span class="pill-icon">&#129440;</span> Microbiology <span class="pill-count" id="tc-microbiology"></span></button>
       </div>
     </div>
-
     <hr class="sidebar-divider">
-
     <div class="filter-group">
       <div class="filter-group-label">Working style</div>
       <div class="pill-group" id="style-pills">
@@ -626,9 +500,7 @@
         <button class="pill-btn" data-value="mixed"><span class="pill-icon">&#9876;</span> Mixed</button>
       </div>
     </div>
-
     <hr class="sidebar-divider">
-
     <div class="filter-group">
       <div class="filter-group-label">Status</div>
       <div class="pill-group" id="status-pills">
@@ -637,89 +509,77 @@
         <button class="pill-btn" data-value="selective"><span class="pill-icon">&#128993;</span> Selective</button>
       </div>
     </div>
-
     <hr class="sidebar-divider">
-
     <div class="filter-group">
-      <div class="filter-group-label">Experience</div>
+      <div class="filter-group-label">Experience level</div>
       <div class="toggle-row" id="beginner-toggle">
         <span class="toggle-label">&#127807; Beginner-friendly only</span>
         <span class="toggle-switch"></span>
       </div>
     </div>
-
     <hr class="sidebar-divider">
-
-    <button class="reset-link" id="reset-btn">Clear all filters</button>
-
+    <button class="reset-link" id="reset-btn">&#8635; Clear all filters</button>
   </aside>
 
   <!-- MAIN -->
   <main class="main-content">
-
     <div class="results-bar">
-      <span class="results-count" id="results-count">Loading&hellip;</span>
+      <span class="results-count" id="results-count"></span>
       <select class="sort-select" id="sort-by">
         <option value="open_first">Open labs first</option>
         <option value="beginner_first">Beginner-friendly first</option>
         <option value="alpha">A&ndash;Z</option>
       </select>
     </div>
-
     <div class="active-filters" id="active-filters"></div>
-
-    <div class="labs-grid" id="labs-grid">
-      <div class="empty-state"><h3>Loading&hellip;</h3></div>
-    </div>
-
+    <div class="labs-grid" id="labs-grid"></div>
     <div class="load-more-row" id="load-more-row" style="display:none">
       <button class="load-more-btn" id="load-more-btn">Load more</button>
     </div>
-
   </main>
-</div><!-- /app-shell -->
+</div>
 
 <!-- GUIDE -->
-<section id="guide" style="background:white; border-top:1px solid var(--gray-200); padding:3rem 2rem;">
-  <div style="max-width:660px; margin:0 auto;">
-    <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--gray-400);margin-bottom:0.75rem;">Guide</p>
-    <h2 style="font-size:1.4rem;font-weight:800;color:var(--blue-900);margin-bottom:1rem;">New to research? Start here.</h2>
+<section class="section-prose" id="guide">
+  <div class="section-prose-inner">
+    <p class="section-eyebrow">Guide</p>
+    <h2>New to research? Start here.</h2>
     <ol style="list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:0.9rem;">
       <li style="counter-increment:s;padding-left:2.2rem;position:relative;font-size:0.9rem;color:var(--gray-700);">
         <span style="position:absolute;left:0;top:0;background:var(--blue-900);color:white;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;">1</span>
-        <strong>Pick a topic you're curious about</strong> &mdash; use the sidebar to filter by field. Don't overthink it.
+        <strong>Pick a topic you're curious about</strong> &mdash; use the sidebar. Don't overthink it.
       </li>
       <li style="counter-increment:s;padding-left:2.2rem;position:relative;font-size:0.9rem;color:var(--gray-700);">
         <span style="position:absolute;left:0;top:0;background:var(--blue-900);color:white;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;">2</span>
-        <strong>Toggle &ldquo;Beginner-friendly&rdquo;</strong> to narrow to labs known to welcome students with no prior research experience.
+        <strong>Toggle &ldquo;Beginner-friendly&rdquo;</strong> to narrow to labs that welcome students with no prior research experience.
       </li>
       <li style="counter-increment:s;padding-left:2.2rem;position:relative;font-size:0.9rem;color:var(--gray-700);">
         <span style="position:absolute;left:0;top:0;background:var(--blue-900);color:white;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;">3</span>
-        <strong>Open 3&ndash;5 lab cards</strong> that look interesting. Click &ldquo;Lab website&rdquo; and skim one recent paper or the lab's research page.
+        <strong>Open 3&ndash;5 cards</strong> that look interesting. Click &ldquo;Lab website&rdquo; and skim one recent paper.
       </li>
       <li style="counter-increment:s;padding-left:2.2rem;position:relative;font-size:0.9rem;color:var(--gray-700);">
         <span style="position:absolute;left:0;top:0;background:var(--blue-900);color:white;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;">4</span>
-        <strong>Use &ldquo;Draft email&rdquo;</strong> to generate a starting template, then rewrite it entirely in your own voice. Mention a specific paper or finding.
+        <strong>Use &ldquo;Draft email&rdquo;</strong> to generate a starting template &mdash; then rewrite it in your own voice and mention a specific paper.
       </li>
       <li style="counter-increment:s;padding-left:2.2rem;position:relative;font-size:0.9rem;color:var(--gray-700);">
         <span style="position:absolute;left:0;top:0;background:var(--blue-900);color:white;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;">5</span>
-        <strong>Send 3&ndash;5 emails per week.</strong> Follow up once after 10 days. Most responses come within two weeks.
+        <strong>Send 3&ndash;5 emails per week.</strong> Follow up once after 10 days.
       </li>
     </ol>
-    <p style="margin-top:1.25rem;font-size:0.83rem;color:var(--gray-400);font-style:italic;">Tip: the single best thing you can do is mention a specific experiment or finding from the lab. PIs notice this immediately.</p>
+    <p style="margin-top:1.25rem;font-size:0.83rem;color:var(--gray-400);font-style:italic;">Tip: mentioning a specific experiment or result from the lab's recent work is the single best thing you can do. PIs notice immediately.</p>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" style="background:var(--gray-50); border-top:1px solid var(--gray-200); padding:2.5rem 2rem;">
-  <div style="max-width:660px; margin:0 auto; display:flex; flex-direction:column; gap:0.6rem;">
-    <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--gray-400);">About</p>
-    <p style="font-size:0.9rem; color:var(--gray-700);">
-      <strong>Yale Research Match</strong> is a student-built tool that indexes labs from YURA, the YSM Lab Index, and FAS/SEAS/YSPH department directories.
+<section style="background:var(--gray-50);border-top:1px solid var(--gray-200);padding:2.5rem 2rem;" id="about">
+  <div style="max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:0.6rem;">
+    <p class="section-eyebrow">About</p>
+    <p style="font-size:0.9rem;color:var(--gray-700);">
+      <strong>Yale Research Match</strong> indexes labs from YURA, the YSM Lab Index, and FAS/SEAS/YSPH department directories.
       Data is curated for undergrad usability: recruiting status, working style, beginner-friendliness, and direct contact info where available.
     </p>
-    <p style="font-size:0.83rem; color:var(--gray-500);">Lab info may change &mdash; always verify recruiting status directly with the PI or lab manager before reaching out.</p>
-    <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.25rem;">
+    <p style="font-size:0.83rem;color:var(--gray-500);">Lab info may change &mdash; always verify recruiting status directly with the PI before reaching out.</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.25rem;">
       <a href="labs_tagged.json" target="_blank" style="font-size:0.83rem;">labs_tagged.json &#8599;</a>
       <a href="https://github.com/sofiagrimm/yale-research-match" target="_blank" rel="noreferrer" style="font-size:0.83rem;">GitHub &#8599;</a>
       <a href="https://github.com/sofiagrimm/yale-research-match/issues" target="_blank" rel="noreferrer" style="font-size:0.83rem;">Report an error &#8599;</a>
@@ -727,9 +587,7 @@
   </div>
 </section>
 
-<footer>
-  Yale Research Match &bull; Built by <a href="https://github.com/sofiagrimm" target="_blank">sofiagrimm</a> &bull; Open source
-</footer>
+<footer>Yale Research Match &bull; Built by <a href="https://github.com/sofiagrimm" target="_blank">sofiagrimm</a> &bull; Open source</footer>
 
 <!-- MODAL -->
 <div class="modal-backdrop" id="modal" style="display:none">
@@ -742,135 +600,74 @@
       <button class="modal-close-btn" id="modal-close">&times;</button>
     </div>
     <div class="modal-body">
-      <div class="modal-hint">
-        &#9999;&#65039; This generates a starting point only. <strong>Rewrite it in your own voice</strong> and mention something specific from the lab.
-      </div>
+      <div class="modal-hint">&#9999;&#65039; This is a <strong>starting point only</strong> &mdash; rewrite it in your own voice and mention something specific from the lab.</div>
       <div class="form-row">
         <div class="field"><label>Your year</label><input id="m-year" placeholder="e.g. sophomore" /></div>
         <div class="field"><label>Your major</label><input id="m-major" placeholder="e.g. Chemistry" /></div>
       </div>
-      <div class="field"><label>Relevant skills or coursework</label><textarea id="m-skills" placeholder="e.g. cell culture, western blots, CHEM 222L &mdash; anything relevant"></textarea></div>
+      <div class="field"><label>Relevant skills or coursework</label><textarea id="m-skills" placeholder="e.g. cell culture, western blots, CHEM 222L"></textarea></div>
       <div class="field"><label>Something specific about this lab</label><textarea id="m-specific" placeholder="e.g. your 2024 paper on aging proteomics &mdash; I was struck by the LC-MS/MS approach"></textarea></div>
       <div class="modal-actions">
-        <button class="btn-gen" id="gen-btn">Generate draft</button>
+        <button class="btn-gen" id="gen-btn">&#10024; Generate draft</button>
         <button class="btn-copy" id="copy-btn">&#128203; Copy</button>
       </div>
       <div class="field draft-field">
         <label>Your draft &mdash; edit freely</label>
-        <textarea id="m-draft" placeholder="Click 'Generate draft' to create a template&hellip;"></textarea>
+        <textarea id="m-draft" placeholder="Fill in the fields above and click Generate draft&hellip;"></textarea>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-// ─────────────────────────────────────────────────────────────
-// TOPIC CLASSIFICATION
-// Maps each lab's free-form `tags` array onto canonical topic
-// buckets. A lab can belong to multiple topics.
-// ─────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────
+// TOPIC CLASSIFIER
+// ─────────────────────────────────────────────────────
 const TOPIC_RULES = {
-  cancer: [
-    'cancer','tumor','oncology','melanoma','glioma','leukemia','lymphoma',
-    'myeloma','metastasis','carcinoma','sarcoma','neoantigen','checkpoint blockade',
-    'cancer immunotherapy','cancer genomics','cancer vaccine','immunotherapy',
-    'PD-1','PD-L1','CTLA','CAR-T','anti-tumor'
-  ],
-  neuroscience: [
-    'neuroscience','neurology','synapse','neuron','cortex','hippocampus','brain',
-    'axon','dendrite','electrophysiology','optogenetics','fMRI','EEG',
-    'schizophrenia','bipolar','autism','ADHD','Alzheimer','Parkinson','epilepsy',
-    'neurodegeneration','neural circuit','neuroimmunology','microglia',
-    'neuroinflammation','prefrontal','amygdala','striatum','dopamine','serotonin',
-    'vagus','gut-brain','consciousness','cognitive','behavior'
-  ],
-  immunology: [
-    'immunology','immunity','immune','T cell','B cell','antibody','innate immunity',
-    'adaptive immunity','inflammation','cytokine','macrophage','dendritic cell',
-    'NK cell','neutrophil','autoimmunity','autoimmune','lupus','rheumatoid',
-    'allergy','inflammasome','NLRP3','toll-like','TLR','complement','thymus',
-    'germinal center','regulatory T','Treg','MHC','antigen presentation',
-    'immunopeptidomics','immunometabolism','mucosal immunity','vaccine'
-  ],
-  aging_longevity: [
-    'aging','longevity','healthspan','lifespan','senescence','inflammaging',
-    'immunosenescence','caloric restriction','mTOR','AMPK','sirtuins','NAD',
-    'telomere','stem cell aging','epigenetic clock','age-related','rapamycin'
-  ],
-  genomics_genetics: [
-    'genomics','genetics','genome','CRISPR','epigenomics','transcriptomics',
-    'RNA-seq','scRNA-seq','single-cell','ChIP-seq','ATAC-seq','WGS',
-    'RAD-seq','phylogenomics','population genetics','ancient DNA','comparative genomics',
-    'gene regulation','gene expression','transcription factor','epigenetics',
-    'chromatin','histone','methylation','SNP','GWAS','sequencing','genotype'
-  ],
-  chemical_biology: [
-    'chemical biology','organic synthesis','total synthesis','natural products',
-    'catalysis','drug discovery','small molecules','medicinal chemistry',
-    'glycobiology','glycoproteomics','proteolysis','bioorthogonal','probe',
-    'NMR','synthesis','asymmetric','riboswitch','RNA chemistry','chemical ecology',
-    'pharmacology','antibody-drug','bifunctional','microproteins'
-  ],
-  structural_biology: [
-    'structural biology','cryo-EM','X-ray crystallography','protein structure',
-    'electron microscopy','NMR structure','molecular dynamics','ribosome',
-    'ion channel','GPCR','membrane protein','protein folding','cryo-electron'
-  ],
-  computational_ml: [
-    'machine learning','deep learning','computational','bioinformatics','data science',
-    'Python','R','algorithm','modeling','manifold','single-cell analysis',
-    'phylogenetic','statistics','simulation','neural network','AI','graph',
-    'fMRI analysis','genomic analysis','mathematical modeling','image analysis'
-  ],
-  ecology_evolution: [
-    'ecology','evolution','evolutionary','phylogenetics','biodiversity','conservation',
-    'population ecology','ecosystem','biogeography','macroecology','speciation',
-    'adaptation','natural selection','evo-devo','life history','field ecology',
-    'aquatic','marine','savanna','fire','plant evolution','Drosophila','zebrafish',
-    'fish','bird','insect','amphibian','lizard','turtle','coral','Galapagos','mosquito'
-  ],
-  microbiology: [
-    'microbiology','microbiome','bacteria','bacteriophage','phage','virus','virology',
-    'pathogen','infection','antimicrobial','antibiotic','gut bacteria','gnotobiotic',
-    'metagenomics','16S','microbial','fungal','endophyte','Lyme','dengue','HIV',
-    'SARS-CoV-2','COVID','influenza','hepatitis','flavivirus','arbovirus','Zika'
-  ]
+  cancer: ['cancer','tumor','oncology','melanoma','glioma','leukemia','lymphoma','myeloma','metastasis','carcinoma','sarcoma','neoantigen','checkpoint blockade','cancer immunotherapy','cancer genomics','cancer vaccine','immunotherapy','PD-1','PD-L1','CTLA','CAR-T','anti-tumor'],
+  neuroscience: ['neuroscience','neurology','synapse','neuron','cortex','hippocampus','brain','axon','dendrite','electrophysiology','optogenetics','fMRI','EEG','schizophrenia','bipolar','autism','ADHD','Alzheimer','Parkinson','epilepsy','neurodegeneration','neural circuit','neuroimmunology','microglia','neuroinflammation','prefrontal','amygdala','striatum','dopamine','serotonin','vagus','gut-brain','consciousness','cognitive','behavior'],
+  immunology: ['immunology','immunity','immune','T cell','B cell','antibody','innate immunity','adaptive immunity','inflammation','cytokine','macrophage','dendritic cell','NK cell','neutrophil','autoimmunity','autoimmune','lupus','rheumatoid','allergy','inflammasome','NLRP3','toll-like','TLR','complement','thymus','germinal center','regulatory T','Treg','MHC','antigen presentation','immunopeptidomics','immunometabolism','mucosal immunity','vaccine'],
+  aging_longevity: ['aging','longevity','healthspan','lifespan','senescence','inflammaging','immunosenescence','caloric restriction','mTOR','AMPK','sirtuins','NAD','telomere','stem cell aging','epigenetic clock','age-related','rapamycin'],
+  genomics_genetics: ['genomics','genetics','genome','CRISPR','epigenomics','transcriptomics','RNA-seq','scRNA-seq','single-cell','ChIP-seq','ATAC-seq','WGS','RAD-seq','phylogenomics','population genetics','ancient DNA','comparative genomics','gene regulation','gene expression','transcription factor','epigenetics','chromatin','histone','methylation','SNP','GWAS','sequencing','genotype'],
+  chemical_biology: ['chemical biology','organic synthesis','total synthesis','natural products','catalysis','drug discovery','small molecules','medicinal chemistry','glycobiology','glycoproteomics','proteolysis','bioorthogonal','probe','NMR','asymmetric','riboswitch','RNA chemistry','chemical ecology','pharmacology','antibody-drug','bifunctional','microproteins'],
+  structural_biology: ['structural biology','cryo-EM','X-ray crystallography','protein structure','electron microscopy','NMR structure','molecular dynamics','ribosome','ion channel','GPCR','membrane protein','protein folding','cryo-electron'],
+  computational_ml: ['machine learning','deep learning','computational','bioinformatics','data science','Python','R','algorithm','modeling','manifold','single-cell analysis','phylogenetic','statistics','simulation','neural network','AI','graph','fMRI analysis','genomic analysis','mathematical modeling','image analysis'],
+  ecology_evolution: ['ecology','evolution','evolutionary','phylogenetics','biodiversity','conservation','population ecology','ecosystem','biogeography','macroecology','speciation','adaptation','natural selection','evo-devo','life history','field ecology','aquatic','marine','savanna','fire','plant evolution','Drosophila','zebrafish','fish','bird','insect','amphibian','lizard','turtle','coral','Galapagos','mosquito'],
+  microbiology: ['microbiology','microbiome','bacteria','bacteriophage','phage','virus','virology','pathogen','infection','antimicrobial','antibiotic','gut bacteria','gnotobiotic','metagenomics','16S','microbial','fungal','endophyte','Lyme','dengue','HIV','SARS-CoV-2','COVID','influenza','hepatitis','flavivirus','arbovirus','Zika']
+};
+
+const TOPIC_LABELS = {
+  cancer:'Cancer', neuroscience:'Neuroscience', immunology:'Immunology',
+  aging_longevity:'Aging', genomics_genetics:'Genomics',
+  chemical_biology:'Chem bio', structural_biology:'Structural',
+  computational_ml:'Computational', ecology_evolution:'Eco/Evo', microbiology:'Micro'
 };
 
 function classifyLab(lab) {
-  const text = [
-    lab.name || '',
-    lab.raw_description || '',
-    (lab.tags || []).join(' '),
-    lab.department || ''
-  ].join(' ').toLowerCase();
-
-  const topics = [];
-  for (const [topic, keywords] of Object.entries(TOPIC_RULES)) {
-    if (keywords.some(kw => text.includes(kw.toLowerCase()))) {
-      topics.push(topic);
-    }
-  }
-  return topics;
+  const text = [lab.name||'', lab.raw_description||'', (lab.tags||[]).join(' '), lab.department||''].join(' ').toLowerCase();
+  return Object.entries(TOPIC_RULES)
+    .filter(([, kws]) => kws.some(kw => text.includes(kw.toLowerCase())))
+    .map(([t]) => t);
 }
 
-// ─ State ───────────────────────────────────────────────
-let LABS = [];
-let filtered = [];
-let visible = 24;
+// ─────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────
+let LABS = [], filtered = [], visible = 24;
 const PAGE = 24;
 let currentLab = null;
+let state = { query:'', topic:'', style:'', status:'', beginner:false, sort:'open_first' };
 
-let state = { query: '', topic: '', style: '', status: '', beginner: false, sort: 'open_first' };
-
-// ─ Boot ──────────────────────────────────────────────
+// ─────────────────────────────────────────────────────
+// BOOT
+// ─────────────────────────────────────────────────────
 async function boot() {
+  paintSkeletons(8);
   try {
     const r = await fetch('labs_tagged.json');
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const d = await r.json();
     LABS = Array.isArray(d) ? d : (d.labs || []);
-    // Stamp primary_topics onto every lab
     LABS.forEach(lab => {
       if (!lab.primary_topics || !lab.primary_topics.length) {
         lab.primary_topics = classifyLab(lab);
@@ -884,13 +681,26 @@ async function boot() {
   }
 }
 
-function grid()  { return document.getElementById('labs-grid'); }
+function grid() { return document.getElementById('labs-grid'); }
 function $id(id) { return document.getElementById(id); }
+
+function paintSkeletons(n) {
+  grid().innerHTML = Array.from({length:n}).map(() => `
+    <div class="skeleton-card">
+      <div class="skel skel-title"></div>
+      <div class="skel skel-meta"></div>
+      <div class="skel skel-line"></div>
+      <div class="skel skel-line short"></div>
+      <div class="skel skel-line xshort"></div>
+    </div>`).join('');
+  $id('results-count').textContent = '';
+}
 
 function initStats() {
   const open = LABS.filter(l => l.openings_status === 'likely_open').length;
   const beg  = LABS.filter(l => l.undergrad_friendly === 'yes').length;
   const em   = LABS.filter(l => l.contact_email && l.contact_email.trim()).length;
+  ['s-total','s-open','s-beginner','s-email'].forEach(id => $id(id).classList.remove('loading'));
   $id('s-total').textContent    = LABS.length;
   $id('s-open').textContent     = open;
   $id('s-beginner').textContent = beg;
@@ -898,27 +708,23 @@ function initStats() {
 }
 
 function initTopicCounts() {
-  const topics = ['cancer','neuroscience','immunology','aging_longevity',
-    'genomics_genetics','chemical_biology','structural_biology',
-    'computational_ml','ecology_evolution','microbiology'];
+  const topics = Object.keys(TOPIC_RULES);
   topics.forEach(t => {
-    const n = LABS.filter(l => (l.primary_topics || []).includes(t)).length;
+    const n = LABS.filter(l => (l.primary_topics||[]).includes(t)).length;
     const el = $id('tc-' + t);
     if (el) el.textContent = n;
   });
   $id('tc-all').textContent = LABS.length;
 }
 
-// ─ Filter + sort ───────────────────────────────────────
+// ─────────────────────────────────────────────────────
+// FILTER + SORT
+// ─────────────────────────────────────────────────────
 function matches(lab, q) {
   if (!q) return true;
-  const h = [
-    lab.name || '', lab.pi || '', lab.department || '',
-    lab.raw_description || '',
-    (lab.tags || []).join(' '),
-    (lab.skills || []).join(' '),
-    (lab.primary_topics || []).join(' '),
-  ].join(' ').toLowerCase();
+  const h = [lab.name||'', lab.pi||'', lab.department||'', lab.raw_description||'',
+    (lab.tags||[]).join(' '), (lab.skills||[]).join(' '), (lab.primary_topics||[]).join(' ')]
+    .join(' ').toLowerCase();
   return q.toLowerCase().split(/\s+/).filter(Boolean).every(t => h.includes(t));
 }
 
@@ -932,18 +738,16 @@ function compute() {
     if (s.beginner && l.undergrad_friendly !== 'yes') return false;
     return true;
   });
-  if (s.sort === 'open_first') {
-    r.sort((a,b) => (b.openings_status==='likely_open'?2:b.openings_status==='selective'?1:0)
-                  - (a.openings_status==='likely_open'?2:a.openings_status==='selective'?1:0));
-  } else if (s.sort === 'beginner_first') {
-    r.sort((a,b) => (b.undergrad_friendly==='yes'?1:0)-(a.undergrad_friendly==='yes'?1:0));
-  } else {
-    r.sort((a,b) => (a.name||'').localeCompare(b.name||''));
-  }
+  const rank = l => (l.openings_status==='likely_open'?2:l.openings_status==='selective'?1:0);
+  if (s.sort === 'open_first')      r.sort((a,b) => rank(b) - rank(a));
+  else if (s.sort === 'beginner_first') r.sort((a,b) => (b.undergrad_friendly==='yes'?1:0)-(a.undergrad_friendly==='yes'?1:0));
+  else r.sort((a,b) => (a.name||'').localeCompare(b.name||''));
   return r;
 }
 
-// ─ Render ─────────────────────────────────────────────
+// ─────────────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────────────
 function apply(resetPage) {
   if (resetPage !== false) visible = PAGE;
   filtered = compute();
@@ -954,27 +758,24 @@ function apply(resetPage) {
 function paint() {
   const slice = filtered.slice(0, visible);
   const g = grid();
-
   const countEl = $id('results-count');
+
   if (filtered.length === 0) {
     countEl.innerHTML = 'No labs match &mdash; try adjusting your filters';
     g.innerHTML = `<div class="empty-state"><h3>No results</h3><p>Try broadening your search or <button class="reset-link" onclick="resetAll()">clearing all filters</button>.</p></div>`;
     $id('load-more-row').style.display = 'none';
     return;
   }
-  countEl.innerHTML = `<strong>${filtered.length}</strong> lab${filtered.length!==1?'s':''}`
-    + (filtered.length < LABS.length ? ` &mdash; ${LABS.length - filtered.length} hidden by filters` : '');
+  countEl.innerHTML = `Showing <strong>${Math.min(visible, filtered.length)}</strong> of <strong>${filtered.length}</strong> lab${filtered.length!==1?'s':''}`
+    + (filtered.length < LABS.length ? ` <span style="color:var(--gray-400)">(&thinsp;${LABS.length - filtered.length} hidden by filters&thinsp;)</span>` : '');
 
   g.innerHTML = slice.map(cardHTML).join('');
 
-  const lmr = $id('load-more-row');
-  const lmb = $id('load-more-btn');
+  const lmr = $id('load-more-row'), lmb = $id('load-more-btn');
   if (visible < filtered.length) {
     lmr.style.display = 'block';
     lmb.textContent = `Load ${Math.min(PAGE, filtered.length - visible)} more`;
-  } else {
-    lmr.style.display = 'none';
-  }
+  } else { lmr.style.display = 'none'; }
 }
 
 function esc(s) {
@@ -982,150 +783,106 @@ function esc(s) {
 }
 
 function cardHTML(lab) {
-  const pi    = lab.pi || '';
-  const dept  = lab.department || '';
-  const desc  = lab.raw_description || 'No description available.';
-  const url   = lab.lab_url || '';
-  const email = lab.contact_email || '';
+  const pi = lab.pi||'', dept = lab.department||'';
+  const desc = lab.raw_description || 'No description available.';
+  const url = lab.lab_url||'', email = lab.contact_email||'';
 
   let statusTag = '';
-  if (lab.openings_status === 'likely_open') statusTag = '<span class="tag tag-green">Likely open</span>';
-  else if (lab.openings_status === 'selective') statusTag = '<span class="tag tag-amber">Selective</span>';
+  if (lab.openings_status === 'likely_open')  statusTag = '<span class="tag tag-green">&#128994; Likely open</span>';
+  else if (lab.openings_status === 'selective') statusTag = '<span class="tag tag-amber">&#128993; Selective</span>';
 
   let friendlyTag = '';
-  if (lab.undergrad_friendly === 'yes') friendlyTag = '<span class="tag tag-green">Beginner-friendly</span>';
+  if (lab.undergrad_friendly === 'yes')      friendlyTag = '<span class="tag tag-green">&#127807; Beginner-friendly</span>';
   else if (lab.undergrad_friendly === 'unlikely') friendlyTag = '<span class="tag tag-red">Exp. preferred</span>';
 
-  const styleMap = {
-    wet:   '<span class="tag tag-blue">&#129514; Wet lab</span>',
-    dry:   '<span class="tag tag-purple">&#128187; Computational</span>',
-    mixed: '<span class="tag tag-gray">&#9876; Mixed</span>'
-  };
-  const styleTag = styleMap[lab.working_style] || '';
+  const styleMap = { wet:'<span class="tag tag-blue">&#129514; Wet lab</span>', dry:'<span class="tag tag-purple">&#128187; Computational</span>', mixed:'<span class="tag tag-gray">&#9876; Mixed</span>' };
+  const styleTag = styleMap[lab.working_style]||'';
 
-  // Show top 2 topic tags on the card
-  const topicLabels = {
-    cancer: 'Cancer', neuroscience: 'Neuroscience', immunology: 'Immunology',
-    aging_longevity: 'Aging', genomics_genetics: 'Genomics',
-    chemical_biology: 'Chem bio', structural_biology: 'Structural',
-    computational_ml: 'Computational', ecology_evolution: 'Eco/Evo',
-    microbiology: 'Micro'
-  };
-  const topicTags = (lab.primary_topics || []).slice(0, 2)
-    .map(t => `<span class="tag tag-blue">${esc(topicLabels[t] || t.replace(/_/g,' '))}</span>`).join('');
-
-  const labEnc = esc(JSON.stringify(lab));
+  const topicTags = (lab.primary_topics||[]).slice(0,2)
+    .map(t=>`<span class="tag tag-blue">${esc(TOPIC_LABELS[t]||t.replace(/_/g,' '))}</span>`).join('');
 
   return `<article class="lab-card">
   <div class="card-header">
-    <div class="card-name">${esc(lab.name || 'Unnamed Lab')}</div>
-    ${pi||dept ? `<div class="card-meta">${pi ? esc(pi) : ''}${pi&&dept ? '<span class="card-meta-dot">&middot;</span>' : ''}${dept ? esc(dept) : ''}</div>` : ''}
+    <div class="card-name">${esc(lab.name||'Unnamed Lab')}</div>
+    ${pi||dept?`<div class="card-meta">${pi?esc(pi):''}${pi&&dept?'<span class="card-meta-dot">&middot;</span>':''}${dept?`<span style="text-transform:capitalize">${esc(dept)}</span>`:''}</div>`:''}
   </div>
   <p class="card-desc">${esc(desc)}</p>
   <button class="expand-btn" onclick="toggleDesc(this)">Show more</button>
   <div class="card-tags">${topicTags}${statusTag}${friendlyTag}${styleTag}</div>
   <div class="card-actions">
-    <button class="card-btn primary" onclick='openModal(${JSON.stringify(JSON.stringify(lab))})'>Draft email</button>
-    ${url   ? `<a class="card-btn" href="${esc(url)}" target="_blank" rel="noreferrer">Lab website &#8599;</a>` : ''}
-    ${email ? `<a class="card-btn" href="mailto:${esc(email)}">Email PI</a>` : ''}
+    <button class="card-btn primary" onclick='openModal(${JSON.stringify(JSON.stringify(lab))})'>&#9993; Draft email</button>
+    ${url  ?`<a class="card-btn" href="${esc(url)}" target="_blank" rel="noreferrer">Lab site &#8599;</a>`:''}
+    ${email?`<a class="card-btn" href="mailto:${esc(email)}">Email PI</a>`:''}
   </div>
 </article>`;
 }
 
 function toggleDesc(btn) {
   const p = btn.previousElementSibling;
-  const exp = p.classList.toggle('expanded');
-  btn.textContent = exp ? 'Show less' : 'Show more';
+  btn.textContent = p.classList.toggle('expanded') ? 'Show less' : 'Show more';
 }
 
-// ─ Active filter chips ────────────────────────────────
+// ─────────────────────────────────────────────────────
+// CHIPS
+// ─────────────────────────────────────────────────────
 const LABELS = {
-  topic:  { '':'', cancer:'Cancer', neuroscience:'Neuroscience', immunology:'Immunology', aging_longevity:'Aging & longevity', genomics_genetics:'Genomics', chemical_biology:'Chemical biology', structural_biology:'Structural biology', computational_ml:'Computational / ML', ecology_evolution:'Ecology & evolution', microbiology:'Microbiology' },
-  style:  { '':'', wet:'Wet lab', dry:'Computational', mixed:'Mixed' },
-  status: { '':'', likely_open:'Likely open', selective:'Selective' },
+  topic:  {'':'',cancer:'Cancer',neuroscience:'Neuroscience',immunology:'Immunology',aging_longevity:'Aging & longevity',genomics_genetics:'Genomics',chemical_biology:'Chemical biology',structural_biology:'Structural biology',computational_ml:'Computational / ML',ecology_evolution:'Ecology & evolution',microbiology:'Microbiology'},
+  style:  {'':'',wet:'Wet lab',dry:'Computational',mixed:'Mixed'},
+  status: {'':'',likely_open:'Likely open',selective:'Selective'},
 };
 
 function paintChips() {
   const af = $id('active-filters');
   const chips = [];
-  if (state.query)    chips.push({ label: `"${state.query}"`,                        clear: () => { state.query=''; $id('search-input').value=''; $id('clear-btn').style.display='none'; } });
-  if (state.topic)    chips.push({ label: LABELS.topic[state.topic]  || state.topic,  clear: () => { state.topic='';   setPill('topic-pills',''); } });
-  if (state.style)    chips.push({ label: LABELS.style[state.style]  || state.style,  clear: () => { state.style='';   setPill('style-pills',''); } });
-  if (state.status)   chips.push({ label: LABELS.status[state.status]|| state.status, clear: () => { state.status='';  setPill('status-pills',''); } });
-  if (state.beginner) chips.push({ label: 'Beginner-friendly',                        clear: () => { state.beginner=false; setToggle(false); } });
-
-  if (!chips.length) { af.innerHTML = ''; return; }
-  af.innerHTML = chips.map((c,i) =>
-    `<button class="filter-chip" data-chip="${i}">${esc(c.label)} <span class="filter-chip-x">&times;</span></button>`
-  ).join('');
-  af.querySelectorAll('.filter-chip').forEach((el,i) => {
-    el.addEventListener('click', () => { chips[i].clear(); apply(); });
-  });
+  if (state.query)    chips.push({ label:`"${state.query}"`,                         clear:()=>{state.query='';$id('search-input').value='';$id('clear-btn').style.display='none';} });
+  if (state.topic)    chips.push({ label:LABELS.topic[state.topic]||state.topic,      clear:()=>{state.topic='';   setPill('topic-pills','');} });
+  if (state.style)    chips.push({ label:LABELS.style[state.style]||state.style,      clear:()=>{state.style='';   setPill('style-pills','');} });
+  if (state.status)   chips.push({ label:LABELS.status[state.status]||state.status,  clear:()=>{state.status='';  setPill('status-pills','');} });
+  if (state.beginner) chips.push({ label:'Beginner-friendly',                         clear:()=>{state.beginner=false;setToggle(false);} });
+  if (!chips.length) { af.innerHTML=''; return; }
+  af.innerHTML = chips.map((c,i)=>`<button class="filter-chip" data-chip="${i}">${esc(c.label)} <span class="filter-chip-x">&times;</span></button>`).join('');
+  af.querySelectorAll('.filter-chip').forEach((el,i)=>{ el.addEventListener('click',()=>{ chips[i].clear(); apply(); }); });
 }
 
-// ─ Sidebar helpers ────────────────────────────────────
+// ─────────────────────────────────────────────────────
+// SIDEBAR HELPERS
+// ─────────────────────────────────────────────────────
 function setPill(groupId, value) {
-  document.querySelectorAll(`#${groupId} .pill-btn`).forEach(b => {
-    b.classList.toggle('active', b.dataset.value === value);
-  });
+  document.querySelectorAll(`#${groupId} .pill-btn`).forEach(b=>b.classList.toggle('active', b.dataset.value===value));
 }
+function setToggle(on) { $id('beginner-toggle').classList.toggle('on', on); }
 
-function setToggle(on) {
-  $id('beginner-toggle').classList.toggle('on', on);
-}
-
-// ─ Event wiring ──────────────────────────────────────
+// ─────────────────────────────────────────────────────
+// EVENT WIRING
+// ─────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-
-  const si = $id('search-input');
-  const cb = $id('clear-btn');
+  const si = $id('search-input'), cb = $id('clear-btn');
   si.addEventListener('input', () => {
     state.query = si.value.trim();
     cb.style.display = si.value ? 'block' : 'none';
     apply();
   });
-  cb.addEventListener('click', () => {
-    si.value = ''; state.query = ''; cb.style.display = 'none'; si.focus(); apply();
-  });
+  cb.addEventListener('click', () => { si.value=''; state.query=''; cb.style.display='none'; si.focus(); apply(); });
 
-  $id('sort-by').addEventListener('change', e => { state.sort = e.target.value; apply(false); });
+  $id('sort-by').addEventListener('change', e => { state.sort=e.target.value; apply(false); });
 
-  document.querySelectorAll('#topic-pills .pill-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      state.topic = btn.dataset.value;
-      setPill('topic-pills', state.topic);
-      apply();
+  ['topic-pills','style-pills','status-pills'].forEach(groupId => {
+    const key = groupId.replace('-pills','').replace('topic','topic').replace('style','style').replace('status','status');
+    document.querySelectorAll(`#${groupId} .pill-btn`).forEach(btn => {
+      btn.addEventListener('click', () => {
+        state[key] = btn.dataset.value;
+        setPill(groupId, state[key]);
+        apply();
+      });
     });
   });
 
-  document.querySelectorAll('#style-pills .pill-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      state.style = btn.dataset.value;
-      setPill('style-pills', state.style);
-      apply();
-    });
-  });
-
-  document.querySelectorAll('#status-pills .pill-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      state.status = btn.dataset.value;
-      setPill('status-pills', state.status);
-      apply();
-    });
-  });
-
-  $id('beginner-toggle').addEventListener('click', () => {
-    state.beginner = !state.beginner;
-    setToggle(state.beginner);
-    apply();
-  });
-
+  $id('beginner-toggle').addEventListener('click', () => { state.beginner=!state.beginner; setToggle(state.beginner); apply(); });
   $id('reset-btn').addEventListener('click', resetAll);
-  $id('load-more-btn').addEventListener('click', () => { visible += PAGE; paint(); });
-
+  $id('load-more-btn').addEventListener('click', () => { visible+=PAGE; paint(); });
   $id('modal-close').addEventListener('click', closeModal);
-  $id('modal').addEventListener('click', e => { if (e.target === $id('modal')) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  $id('modal').addEventListener('click', e => { if(e.target===$id('modal')) closeModal(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
   $id('gen-btn').addEventListener('click', generateDraft);
   $id('copy-btn').addEventListener('click', copyDraft);
 
@@ -1133,25 +890,32 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function resetAll() {
-  state = { query:'', topic:'', style:'', status:'', beginner:false, sort:'open_first' };
-  $id('search-input').value = '';
-  $id('clear-btn').style.display = 'none';
-  $id('sort-by').value = 'open_first';
-  ['topic-pills','style-pills','status-pills'].forEach(g => setPill(g, ''));
-  setToggle(false);
-  apply();
+  state = {query:'',topic:'',style:'',status:'',beginner:false,sort:'open_first'};
+  $id('search-input').value=''; $id('clear-btn').style.display='none';
+  $id('sort-by').value='open_first';
+  ['topic-pills','style-pills','status-pills'].forEach(g=>setPill(g,''));
+  setToggle(false); apply();
 }
 
-// ─ Modal ───────────────────────────────────────────────
+// ─────────────────────────────────────────────────────
+// MODAL
+// ─────────────────────────────────────────────────────
 function openModal(labJsonStr) {
   try { currentLab = JSON.parse(labJsonStr); } catch(_) { return; }
   const lab = currentLab;
-  $id('modal-title').textContent = lab.pi ? `Email to ${lab.pi}` : `Email \u2014 ${lab.name||'this lab'}`;
+  $id('modal-title').textContent = lab.pi ? `Draft email \u2014 ${lab.pi}` : `Draft email \u2014 ${lab.name||'this lab'}`;
   $id('modal-sub').textContent   = [lab.name, lab.department].filter(Boolean).join(' \u00b7 ');
-  ['m-year','m-major','m-skills','m-specific','m-draft'].forEach(id => $id(id).value = '');
+  // Pre-fill year/major for demo convenience
+  $id('m-year').value    = $id('m-year').value    || '';
+  $id('m-major').value   = $id('m-major').value   || '';
+  $id('m-skills').value  = $id('m-skills').value  || '';
+  $id('m-specific').value = '';
+  $id('m-draft').value   = '';
   $id('copy-btn').textContent = '\u{1F4CB} Copy';
   $id('modal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  // Auto-generate if major/year already filled
+  if ($id('m-year').value && $id('m-major').value) generateDraft();
 }
 
 function closeModal() {
@@ -1160,42 +924,29 @@ function closeModal() {
 }
 
 function generateDraft() {
-  const lab      = currentLab; if (!lab) return;
+  const lab = currentLab; if (!lab) return;
   const year     = $id('m-year').value    || '[your year]';
   const major    = $id('m-major').value   || '[your major]';
   const skills   = $id('m-skills').value  || '[your relevant skills or coursework]';
   const specific = $id('m-specific').value;
-  const piLast   = (lab.pi || 'Professor').split(' ').pop();
-  const topics   = (lab.primary_topics || lab.tags || []).slice(0,2)
-    .map(t => t.replace(/_/g,' ')).join(' and ') || 'your research area';
-  const line     = specific
-    ? `I was particularly drawn to ${specific}.`
-    : `I was especially interested in your work on ${topics}.`;
-
+  const piLast   = (lab.pi||'Professor').split(' ').pop();
+  const topics   = (lab.primary_topics||lab.tags||[]).slice(0,2).map(t=>t.replace(/_/g,' ')).join(' and ')||'your research area';
+  const line     = specific ? `I was particularly drawn to ${specific}.` : `I was especially interested in your work on ${topics}.`;
   $id('m-draft').value = [
-    `Dear Professor ${piLast},`,
-    ``,
-    `My name is [Your Name], and I am a ${year} at Yale studying ${major}. I came across the ${lab.name||'lab'} through Yale Research Match and was excited to learn about your work.`,
-    ``,
-    line,
-    ``,
-    `I have ${skills}. I am eager to apply and grow these skills in a research context, and I would love to explore whether there are opportunities to contribute to your lab.`,
-    ``,
-    `If you are currently considering undergraduate researchers, I would be grateful for the chance to speak briefly or share my CV. I am flexible regarding schedule and time commitment.`,
-    ``,
-    `Thank you very much for your time.`,
-    ``,
-    `Best,`,
-    `[Your Name]`,
-    `[email] | Yale, Class of [year]`,
+    `Dear Professor ${piLast},`,``,
+    `My name is [Your Name], and I am a ${year} at Yale studying ${major}. I came across ${lab.name||'your lab'} through Yale Research Match and was excited to learn about your work.`,``,
+    line,``,
+    `I have ${skills}. I am eager to apply and grow these skills in a research context, and I would love to explore whether there are opportunities to contribute to your lab.`,``,
+    `If you are currently considering undergraduate researchers, I would be grateful for the chance to speak briefly or share my CV. I am flexible regarding schedule and time commitment.`,``,
+    `Thank you very much for your time.`,``,`Best,`,`[Your Name]`,`[email] | Yale, Class of [year]`,
   ].join('\n');
 }
 
 function copyDraft() {
   const btn = $id('copy-btn');
-  navigator.clipboard.writeText($id('m-draft').value).then(() => {
-    btn.textContent = '\u2705 Copied!';
-    setTimeout(() => { btn.textContent = '\u{1F4CB} Copy'; }, 2000);
+  navigator.clipboard.writeText($id('m-draft').value).then(()=>{
+    btn.textContent='\u2705 Copied!';
+    setTimeout(()=>{ btn.textContent='\u{1F4CB} Copy'; }, 2000);
   });
 }
 </script>
