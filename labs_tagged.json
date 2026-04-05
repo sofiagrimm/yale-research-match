@@ -9,8 +9,10 @@
     "tags": ["innate immunity", "antiviral", "COVID-19", "mucosal immunity", "sex differences", "vaccine"],
     "skills": ["flow cytometry", "mouse models", "viral assays", "single-cell RNA-seq"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Medzhitov Lab",
@@ -22,8 +24,10 @@
     "tags": ["innate immunity", "TLR", "inflammation", "allergy", "tissue homeostasis"],
     "skills": ["mouse models", "cell culture", "biochemistry", "flow cytometry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "unlikely",
+    "openings_status": "selective",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Flavell Lab",
@@ -35,8 +39,10 @@
     "tags": ["T cell", "immune tolerance", "microbiome", "inflammation", "autoimmunity", "TGF-beta"],
     "skills": ["mouse models", "flow cytometry", "CRISPR", "genomics"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "unlikely",
+    "openings_status": "selective",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Craft Lab",
@@ -48,8 +54,10 @@
     "tags": ["T follicular helper", "germinal center", "lupus", "autoimmunity", "B cell"],
     "skills": ["flow cytometry", "mouse models", "ELISA", "confocal microscopy"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Palm Lab",
@@ -61,8 +69,10 @@
     "tags": ["microbiome", "immunity", "inflammation", "germ-free", "gut bacteria", "IBD"],
     "skills": ["germ-free mouse models", "metagenomics", "flow cytometry", "16S sequencing"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Shlomchik Lab",
@@ -74,8 +84,10 @@
     "tags": ["B cell", "germinal center", "autoimmunity", "lupus", "self-tolerance"],
     "skills": ["mouse models", "flow cytometry", "ELISPOT", "immunofluorescence"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Kaech Lab",
@@ -87,8 +99,10 @@
     "tags": ["CD8 T cell", "T cell exhaustion", "cancer immunotherapy", "chronic infection"],
     "skills": ["flow cytometry", "mouse models", "single-cell sequencing", "ATAC-seq"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Dhodapkar Lab",
@@ -100,8 +114,10 @@
     "tags": ["tumor immunology", "myeloma", "cancer vaccine", "dendritic cells", "immunotherapy"],
     "skills": ["flow cytometry", "patient samples", "single-cell RNA-seq", "mouse models"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "unlikely",
+    "openings_status": "selective",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Foxman Lab",
@@ -113,8 +129,10 @@
     "tags": ["antiviral", "respiratory immunity", "innate immunity", "COVID-19", "viral interference"],
     "skills": ["human airway epithelial cells", "viral assays", "RNA-seq", "flow cytometry"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Herold Lab",
@@ -126,8 +144,10 @@
     "tags": ["Type 1 diabetes", "autoimmunity", "T cell", "beta cell", "clinical trials", "translational"],
     "skills": ["flow cytometry", "patient samples", "mouse models", "clinical immunology"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "unlikely",
+    "openings_status": "selective",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Lucas Lab",
@@ -139,8 +159,10 @@
     "tags": ["primary immunodeficiency", "human genetics", "immune dysregulation", "mouse models", "T cell"],
     "skills": ["CRISPR", "patient samples", "mouse models", "flow cytometry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Lieping Chen Lab",
@@ -152,8 +174,10 @@
     "tags": ["PD-L1", "PD-1", "cancer immunotherapy", "checkpoint blockade", "T cell", "immune evasion"],
     "skills": ["flow cytometry", "patient samples", "mouse models", "antibody engineering"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "unlikely",
+    "openings_status": "selective",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Dixit Lab",
@@ -165,8 +189,10 @@
     "tags": ["aging", "immunometabolism", "NLRP3", "inflammasome", "caloric restriction", "healthspan", "longevity"],
     "skills": ["mouse models", "metabolomics", "flow cytometry", "RNA-seq"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Fikrig Lab",
@@ -178,8 +204,10 @@
     "tags": ["Lyme disease", "vector-borne disease", "flavivirus", "malaria", "tick immunity"],
     "skills": ["mouse models", "tick biology", "viral assays", "molecular biology"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Bosenberg Lab",
@@ -192,7 +220,9 @@
     "skills": ["mouse models", "flow cytometry", "IHC", "CRISPR"],
     "working_style": "wet",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Sidi Chen Lab",
@@ -204,8 +234,10 @@
     "tags": ["CRISPR", "cancer genomics", "immunotherapy", "gene therapy", "functional genomics"],
     "skills": ["CRISPR screens", "in vivo mouse models", "lentiviral library", "single-cell sequencing"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Caron Lab",
@@ -217,8 +249,10 @@
     "tags": ["immunopeptidomics", "mass spectrometry", "MHC", "neoantigen", "cancer immunotherapy", "vaccine"],
     "skills": ["mass spectrometry", "proteomics", "immunology", "bioinformatics"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Goodman Lab",
@@ -230,8 +264,10 @@
     "tags": ["microbiome", "gut bacteria", "microbial genetics", "gnotobiotics", "drug metabolism"],
     "skills": ["germ-free mouse models", "mass spectrometry", "microbial genetics", "metagenomics"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Hafler Lab",
@@ -243,8 +279,10 @@
     "tags": ["multiple sclerosis", "autoimmunity", "T cell", "neuroinflammation", "neuroimmunology", "GWAS"],
     "skills": ["flow cytometry", "patient samples", "GWAS", "single-cell RNA-seq"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "unlikely",
+    "openings_status": "selective",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Goldman-Israelow Lab",
@@ -256,8 +294,10 @@
     "tags": ["SARS-CoV-2", "mucosal immunity", "vaccine", "respiratory pathogens", "COVID-19"],
     "skills": ["mouse models", "viral assays", "flow cytometry", "patient samples"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Favuzzi Lab",
@@ -269,8 +309,10 @@
     "tags": ["microglia", "synapse", "neuroimmunology", "inhibitory circuits", "brain wiring", "neurodevelopment"],
     "skills": ["mouse models", "two-photon microscopy", "single-cell RNA-seq", "immunofluorescence"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Krishnaswamy Lab",
@@ -283,7 +325,9 @@
     "skills": ["Python", "PyTorch", "scRNA-seq", "deep learning"],
     "working_style": "dry",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Giraldez Lab",
@@ -296,7 +340,9 @@
     "skills": ["zebrafish genetics", "RNA-seq", "CRISPR", "live imaging"],
     "working_style": "wet",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Noonan Lab",
@@ -308,8 +354,10 @@
     "tags": ["human evolution", "brain development", "epigenomics", "comparative genomics", "neurodevelopment"],
     "skills": ["ATAC-seq", "ChIP-seq", "comparative genomics", "cell culture"],
     "working_style": "dry",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "De Camilli Lab",
@@ -321,8 +369,10 @@
     "tags": ["synapse", "endocytosis", "vesicle trafficking", "phosphoinositide", "neuroscience"],
     "skills": ["electron microscopy", "biochemistry", "cell culture", "mouse models"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "unlikely",
+    "openings_status": "selective",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Crawford Lab",
@@ -334,8 +384,10 @@
     "tags": ["chemical biology", "microbiome", "natural products", "host-microbe", "small molecules", "immunology"],
     "skills": ["organic synthesis", "mass spectrometry", "microbiology", "biochemistry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Dietrich Lab",
@@ -347,8 +399,10 @@
     "tags": ["feeding behavior", "metabolism", "hypothalamus", "neural circuit", "energy balance", "neuroendocrine"],
     "skills": ["mouse models", "optogenetics", "fiber photometry", "in vivo imaging"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Breaker Lab",
@@ -360,8 +414,10 @@
     "tags": ["riboswitch", "non-coding RNA", "RNA biology", "gene regulation", "bacteria", "structural biology"],
     "skills": ["RNA biochemistry", "structural probing", "bioinformatics", "molecular biology"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Strobel Lab",
@@ -374,7 +430,9 @@
     "skills": ["RNA chemistry", "organic synthesis", "mass spectrometry", "biochemistry"],
     "working_style": "wet",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Xiong Lab",
@@ -386,8 +444,10 @@
     "tags": ["structural biology", "cryo-EM", "X-ray crystallography", "HIV", "innate immunity", "DNA repair"],
     "skills": ["cryo-EM", "X-ray crystallography", "protein purification", "biochemistry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Bleichert Lab",
@@ -399,8 +459,10 @@
     "tags": ["DNA replication", "structural biology", "cryo-EM", "replicative helicase", "origin recognition"],
     "skills": ["cryo-EM", "biochemistry", "protein purification", "molecular biology"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Baserga Lab",
@@ -412,8 +474,10 @@
     "tags": ["ribosome biogenesis", "rRNA processing", "RNA biology", "ribosomopathies", "cell growth"],
     "skills": ["yeast genetics", "RNA biochemistry", "cryo-EM", "cell culture"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Ellman Lab",
@@ -425,8 +489,10 @@
     "tags": ["organic synthesis", "catalysis", "chemical biology", "C-H functionalization", "drug discovery"],
     "skills": ["organic synthesis", "catalysis", "NMR", "high-throughput screening"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Miller Lab",
@@ -438,8 +504,10 @@
     "tags": ["asymmetric catalysis", "peptide catalysis", "organic synthesis", "natural products", "chemical biology"],
     "skills": ["organic synthesis", "peptide chemistry", "NMR", "HPLC"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Herzon Lab",
@@ -451,8 +519,10 @@
     "tags": ["total synthesis", "natural products", "anticancer", "microbiome", "chemical biology", "organic chemistry"],
     "skills": ["organic synthesis", "total synthesis", "mass spectrometry", "NMR"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Spiegel Lab",
@@ -464,8 +534,10 @@
     "tags": ["cancer immunotherapy", "antibody recruiting", "glycobiology", "chemical biology", "drug discovery"],
     "skills": ["organic synthesis", "cell culture", "flow cytometry", "biochemistry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Newhouse Lab",
@@ -477,8 +549,10 @@
     "tags": ["total synthesis", "terpenoids", "alkaloids", "organic synthesis", "catalysis", "natural products"],
     "skills": ["organic synthesis", "NMR", "HPLC", "computational chemistry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Slavoff Lab",
@@ -490,8 +564,10 @@
     "tags": ["microproteins", "proteomics", "mass spectrometry", "non-canonical ORFs", "chemical biology", "translation"],
     "skills": ["mass spectrometry", "biochemistry", "cell culture", "chemical biology"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Malaker Lab",
@@ -503,8 +579,10 @@
     "tags": ["glycoproteomics", "mass spectrometry", "mucins", "cancer", "proteomics", "chemical biology"],
     "skills": ["mass spectrometry", "glycoproteomics", "cell culture", "biochemistry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Bhattacharyya Lab",
@@ -516,8 +594,10 @@
     "tags": ["kinase signaling", "CaMKII", "learning", "memory", "structural biology", "single-molecule"],
     "skills": ["single-molecule microscopy", "cryo-EM", "native mass spectrometry", "biochemistry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Arnsten Lab",
@@ -529,8 +609,10 @@
     "tags": ["prefrontal cortex", "cognition", "ADHD", "Alzheimer's", "aging", "schizophrenia", "PTSD"],
     "skills": ["mouse models", "non-human primates", "electrophysiology", "neuroimaging"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "unlikely",
+    "openings_status": "selective",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Chang Lab (Vagus)",
@@ -542,8 +624,10 @@
     "tags": ["vagus nerve", "gut-brain axis", "organ-to-brain", "optogenetics", "autonomic nervous system"],
     "skills": ["optogenetics", "chemogenetics", "single-cell RNA-seq", "virus-based mapping"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Steve Chang Lab",
@@ -555,8 +639,10 @@
     "tags": ["social cognition", "decision-making", "prefrontal cortex", "amygdala", "neural circuits", "psychiatry"],
     "skills": ["electrophysiology", "primate behavior", "neural data analysis", "MATLAB"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Cardin Lab",
@@ -568,8 +654,10 @@
     "tags": ["cortical circuits", "interneurons", "oscillations", "autism", "schizophrenia", "sensory processing"],
     "skills": ["in vivo electrophysiology", "two-photon imaging", "optogenetics", "mouse models"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Carlson Lab",
@@ -581,8 +669,10 @@
     "tags": ["olfaction", "taste", "Drosophila", "mosquito", "chemosensory", "receptors", "neuroscience"],
     "skills": ["Drosophila genetics", "electrophysiology", "behavioral assays", "molecular biology"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Chandra Lab",
@@ -594,8 +684,10 @@
     "tags": ["Parkinson's disease", "synapse", "neurodegeneration", "lysosome", "presynaptic", "neurology"],
     "skills": ["mouse models", "electron microscopy", "biochemistry", "cell culture"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Bhattacharjee Lab (CS)",
@@ -607,8 +699,10 @@
     "tags": ["computer architecture", "brain-computer interface", "GPU", "systems software", "neuromorphic computing"],
     "skills": ["computer architecture", "VLSI", "systems programming", "C++"],
     "working_style": "dry",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Butterwick Lab",
@@ -620,8 +714,10 @@
     "tags": ["olfaction", "taste", "cryo-EM", "receptor structure", "ion channels", "pharmacology"],
     "skills": ["cryo-EM", "protein purification", "electrophysiology", "biochemistry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Bagriantsev Lab",
@@ -633,8 +729,10 @@
     "tags": ["ion channels", "mechanoreception", "thermoreception", "biophysics", "sensory neurons", "TRP channels"],
     "skills": ["electrophysiology", "patch clamp", "Xenopus oocytes", "mouse models"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Brennand Lab",
@@ -646,8 +744,10 @@
     "tags": ["iPSC", "stem cells", "schizophrenia", "bipolar disorder", "psychiatric genetics", "neurodevelopment"],
     "skills": ["iPSC culture", "CRISPR", "single-cell RNA-seq", "neuronal differentiation"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Blumberg Lab",
@@ -659,8 +759,10 @@
     "tags": ["bipolar disorder", "depression", "neuroimaging", "fMRI", "suicide", "adolescent psychiatry"],
     "skills": ["fMRI", "diffusion tensor imaging", "MATLAB", "R"],
     "working_style": "dry",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Blumenfeld Lab",
@@ -672,8 +774,10 @@
     "tags": ["epilepsy", "consciousness", "EEG", "fMRI", "neuroimaging", "cognition"],
     "skills": ["EEG", "fMRI", "intracranial recording", "human neuroscience"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Stearns Lab",
@@ -686,7 +790,9 @@
     "skills": ["quantitative genetics", "field ecology", "mathematical modeling", "R"],
     "working_style": "dry",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Jetz Lab",
@@ -699,7 +805,9 @@
     "skills": ["R", "Python", "GIS", "remote sensing", "species distribution modeling"],
     "working_style": "dry",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Vasseur Lab",
@@ -712,7 +820,9 @@
     "skills": ["mathematical modeling", "R", "statistical analysis", "field ecology"],
     "working_style": "dry",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Post Lab",
@@ -725,7 +835,9 @@
     "skills": ["stable isotope analysis", "field ecology", "R", "statistical modeling"],
     "working_style": "mixed",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Prum Lab",
@@ -737,8 +849,10 @@
     "tags": ["bird evolution", "structural color", "sexual selection", "phylogenetics", "feathers", "biophotonics"],
     "skills": ["electron microscopy", "spectrophotometry", "phylogenetic methods", "field work"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Turner Lab",
@@ -751,7 +865,9 @@
     "skills": ["phage biology", "bacterial genetics", "evolutionary experiments", "molecular biology"],
     "working_style": "wet",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Donoghue Lab",
@@ -763,8 +879,10 @@
     "tags": ["plant evolution", "phylogenetics", "biogeography", "diversification", "systematics"],
     "skills": ["phylogenetic methods", "bioinformatics", "R", "field work"],
     "working_style": "dry",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Near Lab",
@@ -777,7 +895,9 @@
     "skills": ["phylogenomics", "genome sequencing", "comparative anatomy", "R"],
     "working_style": "dry",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Edwards Lab",
@@ -789,8 +909,10 @@
     "tags": ["plant evolution", "C4 photosynthesis", "drought adaptation", "climate", "phylogenetics", "ecology"],
     "skills": ["phylogenetics", "physiological measurements", "R", "field work"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Caccone Lab",
@@ -803,7 +925,9 @@
     "skills": ["RAD-seq", "whole-genome sequencing", "population genetics", "R"],
     "working_style": "mixed",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Grubaugh Lab",
@@ -815,8 +939,10 @@
     "tags": ["genomic epidemiology", "arbovirus", "Zika", "dengue", "West Nile", "COVID-19", "phylodynamics"],
     "skills": ["whole-genome sequencing", "phylogenetics", "bioinformatics", "virology"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Staver Lab",
@@ -829,7 +955,9 @@
     "skills": ["R", "remote sensing", "mathematical modeling", "field ecology"],
     "working_style": "mixed",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Munoz Lab",
@@ -842,7 +970,9 @@
     "skills": ["field work", "thermal physiology", "genomics", "R"],
     "working_style": "mixed",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Dunn Lab",
@@ -855,7 +985,9 @@
     "skills": ["phylogenomics", "Python", "R", "bioinformatics"],
     "working_style": "dry",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Irish Lab",
@@ -868,7 +1000,9 @@
     "skills": ["Arabidopsis genetics", "confocal microscopy", "ChIP-seq", "molecular biology"],
     "working_style": "wet",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Toomre Lab",
@@ -880,8 +1014,10 @@
     "tags": ["live-cell imaging", "TIRF microscopy", "membrane trafficking", "exocytosis", "organelle", "cell biology"],
     "skills": ["TIRF microscopy", "light-sheet microscopy", "Python", "image analysis"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Gupta Lab",
@@ -893,8 +1029,10 @@
     "tags": ["cryo-EM", "GPCR", "ion channels", "membrane proteins", "structural biology", "drug discovery"],
     "skills": ["cryo-EM", "protein purification", "lipid nanodiscs", "structural analysis"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Townsend Lab",
@@ -906,8 +1044,10 @@
     "tags": ["phylogenomics", "cancer evolution", "biostatistics", "evolutionary biology", "computational biology"],
     "skills": ["Python", "R", "phylogenetics", "bioinformatics"],
     "working_style": "dry",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Lindenbach Lab",
@@ -919,8 +1059,10 @@
     "tags": ["virology", "hepatitis C", "flavivirus", "RNA virus", "antiviral", "virus replication"],
     "skills": ["cell culture", "viral assays", "molecular biology", "biochemistry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Wagner Lab",
@@ -932,8 +1074,10 @@
     "tags": ["evo-devo", "evolutionary novelty", "cell type evolution", "uterus", "transcription factors", "mammalian evolution"],
     "skills": ["comparative genomics", "single-cell RNA-seq", "bioinformatics", "mouse models"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "high",
+    "metadata_estimated": true
   },
   {
     "name": "Powell Lab",
@@ -945,8 +1089,10 @@
     "tags": ["population genetics", "mosquito", "Aedes aegypti", "Drosophila", "vector control", "evolutionary genetics"],
     "skills": ["population genetics", "molecular biology", "field ecology", "sequencing"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Brodersen Lab",
@@ -959,7 +1105,9 @@
     "skills": ["micro-CT", "synchrotron imaging", "plant physiology", "R"],
     "working_style": "mixed",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Skelly Lab",
@@ -972,7 +1120,9 @@
     "skills": ["field ecology", "population genetics", "R", "mark-recapture"],
     "working_style": "mixed",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Schmitz Lab",
@@ -985,7 +1135,9 @@
     "skills": ["field experiments", "stable isotopes", "R", "ecosystem modeling"],
     "working_style": "mixed",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Tucci Lab",
@@ -997,8 +1149,10 @@
     "tags": ["human evolution", "ancient DNA", "Neanderthal", "population genetics", "archaic introgression"],
     "skills": ["ancient DNA", "whole-genome sequencing", "bioinformatics", "population genetics"],
     "working_style": "dry",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Decker Lab",
@@ -1010,8 +1164,10 @@
     "tags": ["marine ecology", "jellyfish", "food web", "hypoxia", "pelagic ecology", "climate change"],
     "skills": ["field ecology", "stable isotopes", "R", "ocean sampling"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Addy Lab",
@@ -1023,8 +1179,10 @@
     "tags": ["addiction", "dopamine", "cholinergic", "substance use", "nicotine", "mood disorders"],
     "skills": ["electrochemistry", "in vivo microdialysis", "rodent behavior", "pharmacology"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Allsop Lab",
@@ -1036,8 +1194,10 @@
     "tags": ["psychedelics", "social cognition", "music", "mindfulness", "psychiatry", "mental health"],
     "skills": ["fMRI", "behavioral experiments", "EEG", "qualitative methods"],
     "working_style": "mixed",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Bordey Lab",
@@ -1049,8 +1209,10 @@
     "tags": ["mTOR", "tuberous sclerosis", "epilepsy", "autism", "cortical malformation", "stem cells"],
     "skills": ["mouse models", "electrophysiology", "molecular biology", "confocal microscopy"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Biederer Lab",
@@ -1062,8 +1224,10 @@
     "tags": ["synapse formation", "trans-synaptic", "cognition", "schizophrenia", "Parkinson's", "neurodevelopment"],
     "skills": ["mouse models", "confocal microscopy", "electrophysiology", "biochemistry"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Cafferty Lab",
@@ -1075,8 +1239,10 @@
     "tags": ["spinal cord injury", "axon regeneration", "neural plasticity", "demyelination", "pain", "CNS repair"],
     "skills": ["mouse models", "behavioral testing", "molecular biology", "confocal microscopy"],
     "working_style": "wet",
-    "undergrad_friendly": "unknown",
-    "openings_status": "unknown"
+    "undergrad_friendly": "yes",
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Dal Bello Lab",
@@ -1089,7 +1255,9 @@
     "skills": ["microbiology", "flow cytometry", "mathematical modeling", "Python"],
     "working_style": "mixed",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   },
   {
     "name": "Eaton Lab",
@@ -1102,6 +1270,8 @@
     "skills": ["RAD-seq", "Python", "phylogenetics", "bioinformatics"],
     "working_style": "dry",
     "undergrad_friendly": "yes",
-    "openings_status": "unknown"
+    "openings_status": "likely_open",
+    "funding_level": "medium",
+    "metadata_estimated": true
   }
 ]
