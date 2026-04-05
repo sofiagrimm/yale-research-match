@@ -519,7 +519,7 @@
   <nav class="topbar-links">
     <a href="#guide">Guide for beginners</a>
     <a href="#about">About</a>
-    <a href="https://github.com/sofiagrimm/yale-research-match" target="_blank" rel="noreferrer">GitHub ↗</a>
+    <a href="https://github.com/sofiagrimm/yale-research-match" target="_blank" rel="noreferrer">GitHub &#8599;</a>
   </nav>
 </header>
 
@@ -527,13 +527,13 @@
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">
-      <span>🏦</span> Yale · Student-built · Open source
+      <span>&#127974;</span> Yale &middot; Student-built &middot; Open source
     </div>
     <h1>Find your <em>research lab</em><br>at Yale.</h1>
     <p class="hero-sub">Search 300+ labs across YSM, FAS, SEAS, and YSPH by topic, working style, and recruiting status.</p>
 
     <div class="hero-search">
-      <span class="hero-search-icon">🔍</span>
+      <span class="hero-search-icon">&#128269;</span>
       <input
         id="search-input"
         type="text"
@@ -541,7 +541,7 @@
         autocomplete="off"
         spellcheck="false"
       />
-      <button id="clear-btn" title="Clear">✕</button>
+      <button id="clear-btn" title="Clear">&times;</button>
       <button class="search-go-btn" onclick="document.getElementById('main-app').scrollIntoView({behavior:'smooth'})">
         Browse labs
       </button>
@@ -552,10 +552,10 @@
 <!-- STAT STRIP -->
 <div class="stat-strip">
   <div class="stat-strip-inner">
-    <div class="stat-item"><span class="stat-num" id="s-total">—</span> labs indexed</div>
-    <div class="stat-item"><span class="stat-num" id="s-open">—</span> likely open</div>
-    <div class="stat-item"><span class="stat-num" id="s-beginner">—</span> beginner-friendly</div>
-    <div class="stat-item"><span class="stat-num" id="s-email">—</span> with PI contact</div>
+    <div class="stat-item"><span class="stat-num" id="s-total">&mdash;</span> labs indexed</div>
+    <div class="stat-item"><span class="stat-num" id="s-open">&mdash;</span> likely open</div>
+    <div class="stat-item"><span class="stat-num" id="s-beginner">&mdash;</span> beginner-friendly</div>
+    <div class="stat-item"><span class="stat-num" id="s-email">&mdash;</span> with PI contact</div>
   </div>
 </div>
 
@@ -569,47 +569,47 @@
       <div class="filter-group-label">Topic</div>
       <div class="pill-group" id="topic-pills">
         <button class="pill-btn active" data-value="">
-          <span class="pill-icon">⭐</span> All topics
+          <span class="pill-icon">&#11088;</span> All topics
           <span class="pill-count" id="tc-all"></span>
         </button>
         <button class="pill-btn" data-value="cancer">
-          <span class="pill-icon">🔬</span> Cancer
+          <span class="pill-icon">&#128302;</span> Cancer
           <span class="pill-count" id="tc-cancer"></span>
         </button>
         <button class="pill-btn" data-value="neuroscience">
-          <span class="pill-icon">🧠</span> Neuroscience
+          <span class="pill-icon">&#129504;</span> Neuroscience
           <span class="pill-count" id="tc-neuroscience"></span>
         </button>
         <button class="pill-btn" data-value="immunology">
-          <span class="pill-icon">🛡️</span> Immunology
+          <span class="pill-icon">&#128737;</span> Immunology
           <span class="pill-count" id="tc-immunology"></span>
         </button>
         <button class="pill-btn" data-value="aging_longevity">
-          <span class="pill-icon">⏳</span> Aging &amp; longevity
+          <span class="pill-icon">&#9203;</span> Aging &amp; longevity
           <span class="pill-count" id="tc-aging_longevity"></span>
         </button>
         <button class="pill-btn" data-value="genomics_genetics">
-          <span class="pill-icon">🧬</span> Genomics
+          <span class="pill-icon">&#129516;</span> Genomics
           <span class="pill-count" id="tc-genomics_genetics"></span>
         </button>
         <button class="pill-btn" data-value="chemical_biology">
-          <span class="pill-icon">⚗️</span> Chemical biology
+          <span class="pill-icon">&#9879;</span> Chemical biology
           <span class="pill-count" id="tc-chemical_biology"></span>
         </button>
         <button class="pill-btn" data-value="structural_biology">
-          <span class="pill-icon">🧫</span> Structural biology
+          <span class="pill-icon">&#129514;</span> Structural biology
           <span class="pill-count" id="tc-structural_biology"></span>
         </button>
         <button class="pill-btn" data-value="computational_ml">
-          <span class="pill-icon">💻</span> Computational / ML
+          <span class="pill-icon">&#128187;</span> Computational / ML
           <span class="pill-count" id="tc-computational_ml"></span>
         </button>
         <button class="pill-btn" data-value="ecology_evolution">
-          <span class="pill-icon">🌿</span> Ecology &amp; evolution
+          <span class="pill-icon">&#127807;</span> Ecology &amp; evolution
           <span class="pill-count" id="tc-ecology_evolution"></span>
         </button>
         <button class="pill-btn" data-value="microbiology">
-          <span class="pill-icon">🦠</span> Microbiology
+          <span class="pill-icon">&#129440;</span> Microbiology
           <span class="pill-count" id="tc-microbiology"></span>
         </button>
       </div>
@@ -620,10 +620,10 @@
     <div class="filter-group">
       <div class="filter-group-label">Working style</div>
       <div class="pill-group" id="style-pills">
-        <button class="pill-btn active" data-value=""><span class="pill-icon">🔀</span> Any</button>
-        <button class="pill-btn" data-value="wet"><span class="pill-icon">🧪</span> Wet lab</button>
-        <button class="pill-btn" data-value="dry"><span class="pill-icon">💻</span> Computational</button>
-        <button class="pill-btn" data-value="mixed"><span class="pill-icon">⚔️</span> Mixed</button>
+        <button class="pill-btn active" data-value=""><span class="pill-icon">&#128256;</span> Any</button>
+        <button class="pill-btn" data-value="wet"><span class="pill-icon">&#129514;</span> Wet lab</button>
+        <button class="pill-btn" data-value="dry"><span class="pill-icon">&#128187;</span> Computational</button>
+        <button class="pill-btn" data-value="mixed"><span class="pill-icon">&#9876;</span> Mixed</button>
       </div>
     </div>
 
@@ -632,9 +632,9 @@
     <div class="filter-group">
       <div class="filter-group-label">Status</div>
       <div class="pill-group" id="status-pills">
-        <button class="pill-btn active" data-value=""><span class="pill-icon">🔀</span> Any</button>
-        <button class="pill-btn" data-value="likely_open"><span class="pill-icon">🟢</span> Likely open</button>
-        <button class="pill-btn" data-value="selective"><span class="pill-icon">🟡</span> Selective</button>
+        <button class="pill-btn active" data-value=""><span class="pill-icon">&#128256;</span> Any</button>
+        <button class="pill-btn" data-value="likely_open"><span class="pill-icon">&#128994;</span> Likely open</button>
+        <button class="pill-btn" data-value="selective"><span class="pill-icon">&#128993;</span> Selective</button>
       </div>
     </div>
 
@@ -643,7 +643,7 @@
     <div class="filter-group">
       <div class="filter-group-label">Experience</div>
       <div class="toggle-row" id="beginner-toggle">
-        <span class="toggle-label">🌱 Beginner-friendly only</span>
+        <span class="toggle-label">&#127807; Beginner-friendly only</span>
         <span class="toggle-switch"></span>
       </div>
     </div>
@@ -658,18 +658,18 @@
   <main class="main-content">
 
     <div class="results-bar">
-      <span class="results-count" id="results-count">Loading…</span>
+      <span class="results-count" id="results-count">Loading&hellip;</span>
       <select class="sort-select" id="sort-by">
         <option value="open_first">Open labs first</option>
         <option value="beginner_first">Beginner-friendly first</option>
-        <option value="alpha">A–Z</option>
+        <option value="alpha">A&ndash;Z</option>
       </select>
     </div>
 
     <div class="active-filters" id="active-filters"></div>
 
     <div class="labs-grid" id="labs-grid">
-      <div class="empty-state"><h3>Loading…</h3></div>
+      <div class="empty-state"><h3>Loading&hellip;</h3></div>
     </div>
 
     <div class="load-more-row" id="load-more-row" style="display:none">
@@ -687,23 +687,23 @@
     <ol style="list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:0.9rem;">
       <li style="counter-increment:s;padding-left:2.2rem;position:relative;font-size:0.9rem;color:var(--gray-700);">
         <span style="position:absolute;left:0;top:0;background:var(--blue-900);color:white;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;">1</span>
-        <strong>Pick a topic you’re curious about</strong> — use the sidebar to filter by field. Don’t overthink it.
+        <strong>Pick a topic you're curious about</strong> &mdash; use the sidebar to filter by field. Don't overthink it.
       </li>
       <li style="counter-increment:s;padding-left:2.2rem;position:relative;font-size:0.9rem;color:var(--gray-700);">
         <span style="position:absolute;left:0;top:0;background:var(--blue-900);color:white;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;">2</span>
-        <strong>Toggle “Beginner-friendly”</strong> to narrow to labs known to welcome students with no prior research experience.
+        <strong>Toggle &ldquo;Beginner-friendly&rdquo;</strong> to narrow to labs known to welcome students with no prior research experience.
       </li>
       <li style="counter-increment:s;padding-left:2.2rem;position:relative;font-size:0.9rem;color:var(--gray-700);">
         <span style="position:absolute;left:0;top:0;background:var(--blue-900);color:white;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;">3</span>
-        <strong>Open 3–5 lab cards</strong> that look interesting. Click “Lab website” and skim one recent paper or the lab’s research page.
+        <strong>Open 3&ndash;5 lab cards</strong> that look interesting. Click &ldquo;Lab website&rdquo; and skim one recent paper or the lab's research page.
       </li>
       <li style="counter-increment:s;padding-left:2.2rem;position:relative;font-size:0.9rem;color:var(--gray-700);">
         <span style="position:absolute;left:0;top:0;background:var(--blue-900);color:white;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;">4</span>
-        <strong>Use “Draft email”</strong> to generate a starting template, then rewrite it entirely in your own voice. Mention a specific paper or finding.
+        <strong>Use &ldquo;Draft email&rdquo;</strong> to generate a starting template, then rewrite it entirely in your own voice. Mention a specific paper or finding.
       </li>
       <li style="counter-increment:s;padding-left:2.2rem;position:relative;font-size:0.9rem;color:var(--gray-700);">
         <span style="position:absolute;left:0;top:0;background:var(--blue-900);color:white;width:1.5rem;height:1.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;">5</span>
-        <strong>Send 3–5 emails per week.</strong> Follow up once after 10 days. Most responses come within two weeks.
+        <strong>Send 3&ndash;5 emails per week.</strong> Follow up once after 10 days. Most responses come within two weeks.
       </li>
     </ol>
     <p style="margin-top:1.25rem;font-size:0.83rem;color:var(--gray-400);font-style:italic;">Tip: the single best thing you can do is mention a specific experiment or finding from the lab. PIs notice this immediately.</p>
@@ -718,11 +718,11 @@
       <strong>Yale Research Match</strong> is a student-built tool that indexes labs from YURA, the YSM Lab Index, and FAS/SEAS/YSPH department directories.
       Data is curated for undergrad usability: recruiting status, working style, beginner-friendliness, and direct contact info where available.
     </p>
-    <p style="font-size:0.83rem; color:var(--gray-500);">Lab info may change — always verify recruiting status directly with the PI or lab manager before reaching out.</p>
+    <p style="font-size:0.83rem; color:var(--gray-500);">Lab info may change &mdash; always verify recruiting status directly with the PI or lab manager before reaching out.</p>
     <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.25rem;">
-      <a href="labs_tagged.json" target="_blank" style="font-size:0.83rem;">labs_tagged.json ↗</a>
-      <a href="https://github.com/sofiagrimm/yale-research-match" target="_blank" rel="noreferrer" style="font-size:0.83rem;">GitHub ↗</a>
-      <a href="https://github.com/sofiagrimm/yale-research-match/issues" target="_blank" rel="noreferrer" style="font-size:0.83rem;">Report an error ↗</a>
+      <a href="labs_tagged.json" target="_blank" style="font-size:0.83rem;">labs_tagged.json &#8599;</a>
+      <a href="https://github.com/sofiagrimm/yale-research-match" target="_blank" rel="noreferrer" style="font-size:0.83rem;">GitHub &#8599;</a>
+      <a href="https://github.com/sofiagrimm/yale-research-match/issues" target="_blank" rel="noreferrer" style="font-size:0.83rem;">Report an error &#8599;</a>
     </div>
   </div>
 </section>
@@ -743,27 +743,117 @@
     </div>
     <div class="modal-body">
       <div class="modal-hint">
-        ✏️ This generates a starting point only. <strong>Rewrite it in your own voice</strong> and mention something specific from the lab.
+        &#9999;&#65039; This generates a starting point only. <strong>Rewrite it in your own voice</strong> and mention something specific from the lab.
       </div>
       <div class="form-row">
         <div class="field"><label>Your year</label><input id="m-year" placeholder="e.g. sophomore" /></div>
         <div class="field"><label>Your major</label><input id="m-major" placeholder="e.g. Chemistry" /></div>
       </div>
-      <div class="field"><label>Relevant skills or coursework</label><textarea id="m-skills" placeholder="e.g. cell culture, western blots, CHEM 222L — anything relevant"></textarea></div>
-      <div class="field"><label>Something specific about this lab</label><textarea id="m-specific" placeholder="e.g. your 2024 paper on aging proteomics — I was struck by the LC-MS/MS approach"></textarea></div>
+      <div class="field"><label>Relevant skills or coursework</label><textarea id="m-skills" placeholder="e.g. cell culture, western blots, CHEM 222L &mdash; anything relevant"></textarea></div>
+      <div class="field"><label>Something specific about this lab</label><textarea id="m-specific" placeholder="e.g. your 2024 paper on aging proteomics &mdash; I was struck by the LC-MS/MS approach"></textarea></div>
       <div class="modal-actions">
         <button class="btn-gen" id="gen-btn">Generate draft</button>
-        <button class="btn-copy" id="copy-btn">📋 Copy</button>
+        <button class="btn-copy" id="copy-btn">&#128203; Copy</button>
       </div>
       <div class="field draft-field">
-        <label>Your draft — edit freely</label>
-        <textarea id="m-draft" placeholder="Click ‘Generate draft’ to create a template…"></textarea>
+        <label>Your draft &mdash; edit freely</label>
+        <textarea id="m-draft" placeholder="Click 'Generate draft' to create a template&hellip;"></textarea>
       </div>
     </div>
   </div>
 </div>
 
 <script>
+// ─────────────────────────────────────────────────────────────
+// TOPIC CLASSIFICATION
+// Maps each lab's free-form `tags` array onto canonical topic
+// buckets. A lab can belong to multiple topics.
+// ─────────────────────────────────────────────────────────────
+const TOPIC_RULES = {
+  cancer: [
+    'cancer','tumor','oncology','melanoma','glioma','leukemia','lymphoma',
+    'myeloma','metastasis','carcinoma','sarcoma','neoantigen','checkpoint blockade',
+    'cancer immunotherapy','cancer genomics','cancer vaccine','immunotherapy',
+    'PD-1','PD-L1','CTLA','CAR-T','anti-tumor'
+  ],
+  neuroscience: [
+    'neuroscience','neurology','synapse','neuron','cortex','hippocampus','brain',
+    'axon','dendrite','electrophysiology','optogenetics','fMRI','EEG',
+    'schizophrenia','bipolar','autism','ADHD','Alzheimer','Parkinson','epilepsy',
+    'neurodegeneration','neural circuit','neuroimmunology','microglia',
+    'neuroinflammation','prefrontal','amygdala','striatum','dopamine','serotonin',
+    'vagus','gut-brain','consciousness','cognitive','behavior'
+  ],
+  immunology: [
+    'immunology','immunity','immune','T cell','B cell','antibody','innate immunity',
+    'adaptive immunity','inflammation','cytokine','macrophage','dendritic cell',
+    'NK cell','neutrophil','autoimmunity','autoimmune','lupus','rheumatoid',
+    'allergy','inflammasome','NLRP3','toll-like','TLR','complement','thymus',
+    'germinal center','regulatory T','Treg','MHC','antigen presentation',
+    'immunopeptidomics','immunometabolism','mucosal immunity','vaccine'
+  ],
+  aging_longevity: [
+    'aging','longevity','healthspan','lifespan','senescence','inflammaging',
+    'immunosenescence','caloric restriction','mTOR','AMPK','sirtuins','NAD',
+    'telomere','stem cell aging','epigenetic clock','age-related','rapamycin'
+  ],
+  genomics_genetics: [
+    'genomics','genetics','genome','CRISPR','epigenomics','transcriptomics',
+    'RNA-seq','scRNA-seq','single-cell','ChIP-seq','ATAC-seq','WGS',
+    'RAD-seq','phylogenomics','population genetics','ancient DNA','comparative genomics',
+    'gene regulation','gene expression','transcription factor','epigenetics',
+    'chromatin','histone','methylation','SNP','GWAS','sequencing','genotype'
+  ],
+  chemical_biology: [
+    'chemical biology','organic synthesis','total synthesis','natural products',
+    'catalysis','drug discovery','small molecules','medicinal chemistry',
+    'glycobiology','glycoproteomics','proteolysis','bioorthogonal','probe',
+    'NMR','synthesis','asymmetric','riboswitch','RNA chemistry','chemical ecology',
+    'pharmacology','antibody-drug','bifunctional','microproteins'
+  ],
+  structural_biology: [
+    'structural biology','cryo-EM','X-ray crystallography','protein structure',
+    'electron microscopy','NMR structure','molecular dynamics','ribosome',
+    'ion channel','GPCR','membrane protein','protein folding','cryo-electron'
+  ],
+  computational_ml: [
+    'machine learning','deep learning','computational','bioinformatics','data science',
+    'Python','R','algorithm','modeling','manifold','single-cell analysis',
+    'phylogenetic','statistics','simulation','neural network','AI','graph',
+    'fMRI analysis','genomic analysis','mathematical modeling','image analysis'
+  ],
+  ecology_evolution: [
+    'ecology','evolution','evolutionary','phylogenetics','biodiversity','conservation',
+    'population ecology','ecosystem','biogeography','macroecology','speciation',
+    'adaptation','natural selection','evo-devo','life history','field ecology',
+    'aquatic','marine','savanna','fire','plant evolution','Drosophila','zebrafish',
+    'fish','bird','insect','amphibian','lizard','turtle','coral','Galapagos','mosquito'
+  ],
+  microbiology: [
+    'microbiology','microbiome','bacteria','bacteriophage','phage','virus','virology',
+    'pathogen','infection','antimicrobial','antibiotic','gut bacteria','gnotobiotic',
+    'metagenomics','16S','microbial','fungal','endophyte','Lyme','dengue','HIV',
+    'SARS-CoV-2','COVID','influenza','hepatitis','flavivirus','arbovirus','Zika'
+  ]
+};
+
+function classifyLab(lab) {
+  const text = [
+    lab.name || '',
+    lab.raw_description || '',
+    (lab.tags || []).join(' '),
+    lab.department || ''
+  ].join(' ').toLowerCase();
+
+  const topics = [];
+  for (const [topic, keywords] of Object.entries(TOPIC_RULES)) {
+    if (keywords.some(kw => text.includes(kw.toLowerCase()))) {
+      topics.push(topic);
+    }
+  }
+  return topics;
+}
+
 // ─ State ───────────────────────────────────────────────
 let LABS = [];
 let filtered = [];
@@ -780,6 +870,12 @@ async function boot() {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const d = await r.json();
     LABS = Array.isArray(d) ? d : (d.labs || []);
+    // Stamp primary_topics onto every lab
+    LABS.forEach(lab => {
+      if (!lab.primary_topics || !lab.primary_topics.length) {
+        lab.primary_topics = classifyLab(lab);
+      }
+    });
     initStats();
     initTopicCounts();
     apply();
@@ -795,10 +891,10 @@ function initStats() {
   const open = LABS.filter(l => l.openings_status === 'likely_open').length;
   const beg  = LABS.filter(l => l.undergrad_friendly === 'yes').length;
   const em   = LABS.filter(l => l.contact_email && l.contact_email.trim()).length;
-  $id('s-total').textContent   = LABS.length;
-  $id('s-open').textContent    = open;
+  $id('s-total').textContent    = LABS.length;
+  $id('s-open').textContent     = open;
   $id('s-beginner').textContent = beg;
-  $id('s-email').textContent   = em;
+  $id('s-email').textContent    = em;
 }
 
 function initTopicCounts() {
@@ -806,7 +902,7 @@ function initTopicCounts() {
     'genomics_genetics','chemical_biology','structural_biology',
     'computational_ml','ecology_evolution','microbiology'];
   topics.forEach(t => {
-    const n = LABS.filter(l => (l.primary_topics||[]).includes(t)).length;
+    const n = LABS.filter(l => (l.primary_topics || []).includes(t)).length;
     const el = $id('tc-' + t);
     if (el) el.textContent = n;
   });
@@ -842,7 +938,7 @@ function compute() {
   } else if (s.sort === 'beginner_first') {
     r.sort((a,b) => (b.undergrad_friendly==='yes'?1:0)-(a.undergrad_friendly==='yes'?1:0));
   } else {
-    r.sort((a,b)=>(a.name||'').localeCompare(b.name||''));
+    r.sort((a,b) => (a.name||'').localeCompare(b.name||''));
   }
   return r;
 }
@@ -859,7 +955,6 @@ function paint() {
   const slice = filtered.slice(0, visible);
   const g = grid();
 
-  // Count
   const countEl = $id('results-count');
   if (filtered.length === 0) {
     countEl.innerHTML = 'No labs match &mdash; try adjusting your filters';
@@ -887,45 +982,52 @@ function esc(s) {
 }
 
 function cardHTML(lab) {
-  const pi   = lab.pi || '';
-  const dept = lab.department || '';
-  const desc = lab.raw_description || 'No description available.';
-  const url  = lab.lab_url || '';
+  const pi    = lab.pi || '';
+  const dept  = lab.department || '';
+  const desc  = lab.raw_description || 'No description available.';
+  const url   = lab.lab_url || '';
   const email = lab.contact_email || '';
 
-  // Status tag
   let statusTag = '';
   if (lab.openings_status === 'likely_open') statusTag = '<span class="tag tag-green">Likely open</span>';
   else if (lab.openings_status === 'selective') statusTag = '<span class="tag tag-amber">Selective</span>';
 
-  // Friendly tag
   let friendlyTag = '';
   if (lab.undergrad_friendly === 'yes') friendlyTag = '<span class="tag tag-green">Beginner-friendly</span>';
   else if (lab.undergrad_friendly === 'unlikely') friendlyTag = '<span class="tag tag-red">Exp. preferred</span>';
 
-  // Style tag
-  const styleMap = { wet:'<span class="tag tag-blue">🧪 Wet lab</span>', dry:'<span class="tag tag-purple">💻 Computational</span>', mixed:'<span class="tag tag-gray">⚔️ Mixed</span>' };
+  const styleMap = {
+    wet:   '<span class="tag tag-blue">&#129514; Wet lab</span>',
+    dry:   '<span class="tag tag-purple">&#128187; Computational</span>',
+    mixed: '<span class="tag tag-gray">&#9876; Mixed</span>'
+  };
   const styleTag = styleMap[lab.working_style] || '';
 
-  // Topic tags (max 2)
-  const topicTags = (lab.primary_topics||lab.tags||[]).slice(0,2)
-    .map(t=>`<span class="tag tag-gray">${esc(t.replace(/_/g,' '))}</span>`).join('');
+  // Show top 2 topic tags on the card
+  const topicLabels = {
+    cancer: 'Cancer', neuroscience: 'Neuroscience', immunology: 'Immunology',
+    aging_longevity: 'Aging', genomics_genetics: 'Genomics',
+    chemical_biology: 'Chem bio', structural_biology: 'Structural',
+    computational_ml: 'Computational', ecology_evolution: 'Eco/Evo',
+    microbiology: 'Micro'
+  };
+  const topicTags = (lab.primary_topics || []).slice(0, 2)
+    .map(t => `<span class="tag tag-blue">${esc(topicLabels[t] || t.replace(/_/g,' '))}</span>`).join('');
 
-  // Encode lab for modal
   const labEnc = esc(JSON.stringify(lab));
 
   return `<article class="lab-card">
   <div class="card-header">
-    <div class="card-name">${esc(lab.name||'Unnamed Lab')}</div>
-    ${pi||dept ? `<div class="card-meta">${pi?esc(pi):''}${pi&&dept?'<span class="card-meta-dot">&middot;</span>':''}${dept?esc(dept):''}</div>` : ''}
+    <div class="card-name">${esc(lab.name || 'Unnamed Lab')}</div>
+    ${pi||dept ? `<div class="card-meta">${pi ? esc(pi) : ''}${pi&&dept ? '<span class="card-meta-dot">&middot;</span>' : ''}${dept ? esc(dept) : ''}</div>` : ''}
   </div>
-  <p class="card-desc" id="d${labEnc.length%99991}">${esc(desc)}</p>
+  <p class="card-desc">${esc(desc)}</p>
   <button class="expand-btn" onclick="toggleDesc(this)">Show more</button>
   <div class="card-tags">${topicTags}${statusTag}${friendlyTag}${styleTag}</div>
   <div class="card-actions">
-    <button class="card-btn primary" onclick="openModal('${labEnc}')">Draft email</button>
-    ${url  ? `<a class="card-btn" href="${esc(url)}" target="_blank" rel="noreferrer">Lab website ↗</a>` : ''}
-    ${email? `<a class="card-btn" href="mailto:${esc(email)}">Email PI</a>` : ''}
+    <button class="card-btn primary" onclick='openModal(${JSON.stringify(JSON.stringify(lab))})'>Draft email</button>
+    ${url   ? `<a class="card-btn" href="${esc(url)}" target="_blank" rel="noreferrer">Lab website &#8599;</a>` : ''}
+    ${email ? `<a class="card-btn" href="mailto:${esc(email)}">Email PI</a>` : ''}
   </div>
 </article>`;
 }
@@ -938,19 +1040,19 @@ function toggleDesc(btn) {
 
 // ─ Active filter chips ────────────────────────────────
 const LABELS = {
-  topic:   { '':'', cancer:'Cancer', neuroscience:'Neuroscience', immunology:'Immunology', aging_longevity:'Aging & longevity', genomics_genetics:'Genomics', chemical_biology:'Chemical biology', structural_biology:'Structural biology', computational_ml:'Computational / ML', ecology_evolution:'Ecology & evolution', microbiology:'Microbiology' },
-  style:   { '':'', wet:'Wet lab', dry:'Computational', mixed:'Mixed' },
-  status:  { '':'', likely_open:'Likely open', selective:'Selective' },
+  topic:  { '':'', cancer:'Cancer', neuroscience:'Neuroscience', immunology:'Immunology', aging_longevity:'Aging & longevity', genomics_genetics:'Genomics', chemical_biology:'Chemical biology', structural_biology:'Structural biology', computational_ml:'Computational / ML', ecology_evolution:'Ecology & evolution', microbiology:'Microbiology' },
+  style:  { '':'', wet:'Wet lab', dry:'Computational', mixed:'Mixed' },
+  status: { '':'', likely_open:'Likely open', selective:'Selective' },
 };
 
 function paintChips() {
   const af = $id('active-filters');
   const chips = [];
-  if (state.query)   chips.push({ label: `“${state.query}”`, clear: ()=>{ state.query=''; $id('search-input').value=''; $id('clear-btn').style.display='none'; } });
-  if (state.topic)   chips.push({ label: LABELS.topic[state.topic]||state.topic,   clear: ()=>{ state.topic='';   setPill('topic-pills',''); } });
-  if (state.style)   chips.push({ label: LABELS.style[state.style]||state.style,   clear: ()=>{ state.style='';   setPill('style-pills',''); } });
-  if (state.status)  chips.push({ label: LABELS.status[state.status]||state.status, clear: ()=>{ state.status='';  setPill('status-pills',''); } });
-  if (state.beginner) chips.push({ label: 'Beginner-friendly', clear: ()=>{ state.beginner=false; setToggle(false); } });
+  if (state.query)    chips.push({ label: `"${state.query}"`,                        clear: () => { state.query=''; $id('search-input').value=''; $id('clear-btn').style.display='none'; } });
+  if (state.topic)    chips.push({ label: LABELS.topic[state.topic]  || state.topic,  clear: () => { state.topic='';   setPill('topic-pills',''); } });
+  if (state.style)    chips.push({ label: LABELS.style[state.style]  || state.style,  clear: () => { state.style='';   setPill('style-pills',''); } });
+  if (state.status)   chips.push({ label: LABELS.status[state.status]|| state.status, clear: () => { state.status='';  setPill('status-pills',''); } });
+  if (state.beginner) chips.push({ label: 'Beginner-friendly',                        clear: () => { state.beginner=false; setToggle(false); } });
 
   if (!chips.length) { af.innerHTML = ''; return; }
   af.innerHTML = chips.map((c,i) =>
@@ -975,7 +1077,6 @@ function setToggle(on) {
 // ─ Event wiring ──────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Search
   const si = $id('search-input');
   const cb = $id('clear-btn');
   si.addEventListener('input', () => {
@@ -987,10 +1088,8 @@ document.addEventListener('DOMContentLoaded', () => {
     si.value = ''; state.query = ''; cb.style.display = 'none'; si.focus(); apply();
   });
 
-  // Sort
   $id('sort-by').addEventListener('change', e => { state.sort = e.target.value; apply(false); });
 
-  // Topic pills
   document.querySelectorAll('#topic-pills .pill-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       state.topic = btn.dataset.value;
@@ -999,7 +1098,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Style pills
   document.querySelectorAll('#style-pills .pill-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       state.style = btn.dataset.value;
@@ -1008,7 +1106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Status pills
   document.querySelectorAll('#status-pills .pill-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       state.status = btn.dataset.value;
@@ -1017,20 +1114,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Beginner toggle
   $id('beginner-toggle').addEventListener('click', () => {
     state.beginner = !state.beginner;
     setToggle(state.beginner);
     apply();
   });
 
-  // Reset
   $id('reset-btn').addEventListener('click', resetAll);
-
-  // Load more
   $id('load-more-btn').addEventListener('click', () => { visible += PAGE; paint(); });
 
-  // Modal
   $id('modal-close').addEventListener('click', closeModal);
   $id('modal').addEventListener('click', e => { if (e.target === $id('modal')) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
@@ -1051,20 +1143,13 @@ function resetAll() {
 }
 
 // ─ Modal ───────────────────────────────────────────────
-function openModal(labEncStr) {
-  try {
-    const div = document.createElement('div');
-    div.innerHTML = labEncStr.replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
-    currentLab = JSON.parse(div.innerHTML);
-  } catch(e) {
-    try { currentLab = JSON.parse(labEncStr); } catch(_) { return; }
-  }
+function openModal(labJsonStr) {
+  try { currentLab = JSON.parse(labJsonStr); } catch(_) { return; }
   const lab = currentLab;
-  $id('modal-title').textContent = lab.pi
-    ? `Email to ${lab.pi}` : `Email — ${lab.name||'this lab'}`;
-  $id('modal-sub').textContent = [lab.name, lab.department].filter(Boolean).join(' · ');
+  $id('modal-title').textContent = lab.pi ? `Email to ${lab.pi}` : `Email \u2014 ${lab.name||'this lab'}`;
+  $id('modal-sub').textContent   = [lab.name, lab.department].filter(Boolean).join(' \u00b7 ');
   ['m-year','m-major','m-skills','m-specific','m-draft'].forEach(id => $id(id).value = '');
-  $id('copy-btn').textContent = '📋 Copy';
+  $id('copy-btn').textContent = '\u{1F4CB} Copy';
   $id('modal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
@@ -1080,9 +1165,12 @@ function generateDraft() {
   const major    = $id('m-major').value   || '[your major]';
   const skills   = $id('m-skills').value  || '[your relevant skills or coursework]';
   const specific = $id('m-specific').value;
-  const piLast   = (lab.pi||'Professor').split(' ').pop();
-  const topics   = (lab.primary_topics||lab.tags||[]).slice(0,2).map(t=>t.replace(/_/g,' ')).join(' and ') || 'your research area';
-  const line     = specific ? `I was particularly drawn to ${specific}.` : `I was especially interested in your work on ${topics}.`;
+  const piLast   = (lab.pi || 'Professor').split(' ').pop();
+  const topics   = (lab.primary_topics || lab.tags || []).slice(0,2)
+    .map(t => t.replace(/_/g,' ')).join(' and ') || 'your research area';
+  const line     = specific
+    ? `I was particularly drawn to ${specific}.`
+    : `I was especially interested in your work on ${topics}.`;
 
   $id('m-draft').value = [
     `Dear Professor ${piLast},`,
@@ -1106,8 +1194,8 @@ function generateDraft() {
 function copyDraft() {
   const btn = $id('copy-btn');
   navigator.clipboard.writeText($id('m-draft').value).then(() => {
-    btn.textContent = '✅ Copied!';
-    setTimeout(() => btn.textContent = '📋 Copy', 2000);
+    btn.textContent = '\u2705 Copied!';
+    setTimeout(() => { btn.textContent = '\u{1F4CB} Copy'; }, 2000);
   });
 }
 </script>
