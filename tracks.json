@@ -1,0 +1,66 @@
+[
+  {
+    "id": "neuroscience",
+    "name": "Neuroscience",
+    "description": "Synaptic biology, neural circuits, brain imaging, and neurodegeneration. Labs span basic science to translational work.",
+    "methods": ["electrophysiology", "two-photon imaging", "mouse models", "patch clamp", "optogenetics"],
+    "background": "Biology, neuroscience, or biochemistry. Some computational labs also welcome CS/stats students.",
+    "what_students_do": "Mouse surgeries, cell culture, imaging analysis, behavioral experiments, or computational modeling."
+  },
+  {
+    "id": "oncology_cancer_biology",
+    "name": "Oncology & Cancer Biology",
+    "description": "Tumor biology, cancer immunotherapy, and cancer genomics. Strong presence in Yale's Smilow Cancer Hospital and YCCC.",
+    "methods": ["CRISPR", "flow cytometry", "scRNA-seq", "immunohistochemistry", "xenograft models"],
+    "background": "Biology, biochemistry, or chemistry. Premed students often start here.",
+    "what_students_do": "Cell culture, IHC staining, assay development, data analysis, or literature reviews."
+  },
+  {
+    "id": "chemical_biology",
+    "name": "Chemical Biology",
+    "description": "Small molecule design, drug discovery, and chemical tools for biological questions.",
+    "methods": ["organic synthesis", "NMR", "mass spectrometry", "protein biochemistry", "medicinal chemistry"],
+    "background": "Chemistry or biochemistry. Organic chemistry coursework is helpful.",
+    "what_students_do": "Synthesis on the bench, running NMR or MS, purification, or structure-activity relationship studies."
+  },
+  {
+    "id": "ml_quant_bio",
+    "name": "Machine Learning & Quant Bio",
+    "description": "Computational methods, deep learning, and data science applied to biological questions.",
+    "methods": ["Python", "deep learning", "statistical modeling", "genomics pipelines", "bioinformatics"],
+    "background": "CS, statistics, math, or anyone comfortable with Python.",
+    "what_students_do": "Write and run analysis pipelines, train models, process sequencing or imaging data."
+  },
+  {
+    "id": "public_health_epidemiology",
+    "name": "Public Health & Epidemiology",
+    "description": "Infectious disease, global health, and population-level health science.",
+    "methods": ["epidemiological surveys", "statistical modeling", "cohort studies", "field data collection"],
+    "background": "Any major. Public health, sociology, or global affairs students common here.",
+    "what_students_do": "Data cleaning, literature synthesis, survey work, or statistical analysis."
+  },
+  {
+    "id": "aging_longevity",
+    "name": "Aging & Longevity",
+    "description": "Proteostasis, cellular senescence, neurodegeneration, and lifespan biology.",
+    "methods": ["proteomics", "mass spectrometry", "C. elegans models", "mouse aging models", "flow cytometry"],
+    "background": "Biology, biochemistry, or chemistry.",
+    "what_students_do": "Run assays, process proteomics data, maintain model organisms, or analyze aging phenotypes."
+  },
+  {
+    "id": "ecology_climate",
+    "name": "Ecology & Climate",
+    "description": "Conservation biology, ecology, and atmospheric and environmental chemistry.",
+    "methods": ["field sampling", "atmospheric measurement", "GIS", "ecological modeling", "isotope analysis"],
+    "background": "Environmental science, ecology, chemistry, or earth science.",
+    "what_students_do": "Field work, sample processing, data analysis, or literature reviews."
+  },
+  {
+    "id": "structural_biology_biophysics",
+    "name": "Structural Biology & Biophysics",
+    "description": "Protein structure determination, molecular mechanics, and biophysical measurements.",
+    "methods": ["cryo-EM", "X-ray crystallography", "NMR", "MD simulation", "SPR"],
+    "background": "Chemistry, biochemistry, or physics.",
+    "what_students_do": "Sample preparation, structure determination, or molecular dynamics analysis."
+  }
+]
