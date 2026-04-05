@@ -1,5 +1,6 @@
 """app.py — Flask server for Yale Research Match."""
 import json
+import os
 from pathlib import Path
 from flask import Flask, send_file, jsonify, abort
 
@@ -11,8 +12,8 @@ def index():
     return send_file('index.html')
 
 
-@app.route('/labs_tagged.json')
-def labs():
+@app.route('/api/labs')
+def api_labs():
     path = Path('labs_tagged.json')
     if not path.exists():
         abort(404)
@@ -22,10 +23,17 @@ def labs():
     )
 
 
+@app.route('/labs_tagged.json')
+def labs_json():
+    """Legacy direct-file route — kept for backwards compat."""
+    return api_labs()
+
+
 @app.route('/healthz')
 def health():
     return jsonify({'status': 'ok'})
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
