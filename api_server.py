@@ -18,6 +18,7 @@ Endpoints:
 
 import json
 import os
+import re
 import uuid
 from datetime import UTC, datetime
 from functools import wraps
@@ -47,6 +48,27 @@ MAX_QUERY_LENGTH = 200
 
 
 # ---------------------------------------------------------------------------
+# ID helpers
+# ---------------------------------------------------------------------------
+
+def slugify(text: str) -> str:
+    """Convert lab name to a stable URL-safe id slug."""
+    text = text.lower()
+    text = re.sub(r"[^\w\s-]", "", text)   # remove punctuation except hyphens
+    text = re.sub(r"[\s_]+", "-", text)     # spaces/underscores -> hyphens
+    text = re.sub(r"-+", "-", text)          # collapse repeated hyphens
+    return text.strip("-")
+
+
+def ensure_id(lab: dict) -> dict:
+    """Return the lab dict with a guaranteed 'id' field derived from its name."""
+    if "id" not in lab:
+        lab = dict(lab)  # shallow copy — don't mutate the cached object
+        lab["id"] = slugify(lab.get("name", str(uuid.uuid4())[:8]))
+    return lab
+
+
+# ---------------------------------------------------------------------------
 # Auth
 # ---------------------------------------------------------------------------
 
@@ -70,7 +92,8 @@ def load_labs():
     if not LABS_FILE.exists():
         return []
     data = json.loads(LABS_FILE.read_text(encoding="utf-8"))
-    return data.get("labs", data) if isinstance(data, dict) else data
+    raw = data.get("labs", data) if isinstance(data, dict) else data
+    return [ensure_id(lab) for lab in raw]
 
 
 def load_json(path):
