@@ -319,6 +319,27 @@
     .copy-row { display: flex; gap: 0.5rem; align-items: center; }
     .copy-ok { font-size: 0.75rem; color: var(--success); display: none; }
 
+    /* fit signals grid in drawer */
+    .fit-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;
+    }
+    .fit-cell {
+      background: var(--offset); border-radius: var(--r-lg);
+      padding: 0.55rem 0.7rem;
+      border: 1px solid color-mix(in oklab, var(--text) 7%, transparent);
+    }
+    .fit-cell-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--faint); font-weight: 600; margin-bottom: 0.2rem; }
+    .fit-cell-val { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .fit-cell-val.green { color: var(--success); }
+    .fit-cell-val.warn { color: var(--warn); }
+    .fit-cell-val.blue { color: var(--blue); }
+    .estimated-note {
+      font-size: 0.68rem; color: var(--faint);
+      padding: 0.35rem 0.5rem; border-radius: var(--r-sm);
+      background: color-mix(in oklab, var(--warn) 6%, var(--surface));
+      border: 1px solid color-mix(in oklab, var(--warn) 10%, transparent);
+    }
+
     /* dev section */
     .dev-panel {
       padding: 1.5rem; border-radius: var(--r-xl);
@@ -431,6 +452,7 @@
       .topbar { padding: 0.625rem 1rem; }
       .cards-grid { grid-template-columns: 1fr; }
       .tracks-row { grid-template-columns: repeat(2, 1fr); }
+      .fit-grid { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
   </style>
@@ -545,7 +567,7 @@
             <div class="stat-divider"></div>
             <div class="stat-grid">
               <div class="stat-cell"><strong id="statOpen">...</strong><span>Recruiting</span></div>
-              <div class="stat-cell"><strong id="statBeg">...</strong><span>Beginner-ok</span></div>
+              <div class="stat-cell"><strong id="statBeg">...</strong><span>Undergrad-friendly</span></div>
               <div class="stat-cell"><strong id="statDepts">...</strong><span>Departments</span></div>
               <div class="stat-cell"><strong id="statSchools">...</strong><span>Schools</span></div>
             </div>
@@ -578,7 +600,9 @@
         <!-- filter bar -->
         <div class="filter-bar" role="group" aria-label="Active filters">
           <span class="filter-label">Filter:</span>
+          <button class="chip" data-f="friendly" data-v="yes">Undergrad-friendly</button>
           <button class="chip" data-f="friendly" data-v="beginner_ok">Beginner-friendly</button>
+          <button class="chip" data-f="status" data-v="likely_open">Likely open</button>
           <button class="chip" data-f="status" data-v="actively_recruiting">Actively recruiting</button>
           <button class="chip" data-f="style" data-v="wet_lab">Wet lab</button>
           <button class="chip" data-f="style" data-v="computational">Computational</button>
@@ -625,7 +649,7 @@
             <div class="dev-grid">
               <div class="dev-card"><h4>Identity</h4><p>id, name, pi_name, pi_title, department, school, lab_url, contact_email</p></div>
               <div class="dev-card"><h4>Discovery</h4><p>primary_topics, secondary_topics, tags, methods, skills_preferred, skills_optional</p></div>
-              <div class="dev-card"><h4>Fit signals</h4><p>working_style, undergrad_friendly, openings_status, openings_notes, min_commitment_weeks, recommended_years</p></div>
+              <div class="dev-card"><h4>Fit signals</h4><p>working_style, undergrad_friendly, openings_status, funding_level, openings_notes, min_commitment_weeks, recommended_years</p></div>
               <div class="dev-card"><h4>Annotations</h4><p>student_notes[ ] with id, text, category, status (approved only shown)</p></div>
               <div class="dev-card"><h4>Provenance</h4><p>source_flags: yura_listed, ysm_listed, dept_listed. match_metadata: topic_tokens, last_indexed</p></div>
             </div>
@@ -646,6 +670,13 @@
     <div>
       <h2 style="font-size:1.05rem;font-weight:700">Lab details</h2>
       <p id="drawerLabInfo" style="font-size:0.82rem;color:var(--muted);margin-top:0.25rem"></p>
+    </div>
+
+    <!-- fit signals -->
+    <div class="drawer-section" id="drawerFitSection">
+      <div class="drawer-section-title">Fit signals</div>
+      <div class="fit-grid" id="drawerFitGrid"></div>
+      <p class="estimated-note" id="drawerEstNote" style="display:none">⚠ These signals are estimated from public lab data and may not reflect current lab policy. Verify before reaching out.</p>
     </div>
 
     <!-- next steps checklist -->
@@ -743,8 +774,13 @@ function boot() {
 
 function updateStats(labs) {
   document.getElementById('statTotal').textContent = labs.length;
-  document.getElementById('statOpen').textContent = labs.filter(l => l.openings_status === 'actively_recruiting').length;
-  document.getElementById('statBeg').textContent = labs.filter(l => l.undergrad_friendly === 'beginner_ok').length;
+  document.getElementById('statOpen').textContent = labs.filter(l =>
+    l.openings_status === 'actively_recruiting' || l.openings_status === 'likely_open'
+  ).length;
+  // count both legacy beginner_ok and new "yes" value
+  document.getElementById('statBeg').textContent = labs.filter(l =>
+    l.undergrad_friendly === 'beginner_ok' || l.undergrad_friendly === 'yes'
+  ).length;
   const depts = new Set(labs.map(l => l.department).filter(Boolean));
   const schools = new Set(labs.map(l => l.school).filter(Boolean));
   document.getElementById('statDepts').textContent = depts.size;
@@ -772,22 +808,43 @@ function applyFilters(labs) {
 }
 
 function fitHint(lab) {
-  const isBeginner = lab.undergrad_friendly === 'beginner_ok';
+  const friendly = lab.undergrad_friendly;
+  const isBeginner = friendly === 'beginner_ok';
+  const isUndergrad = friendly === 'yes' || isBeginner;
   const isComp = lab.working_style === 'computational';
   const isWet = lab.working_style === 'wet_lab';
   const isHybrid = lab.working_style === 'hybrid';
   const methods = (lab.methods || []).map(m => m.toLowerCase());
-  const recruiting = lab.openings_status === 'actively_recruiting';
+  const recruiting = lab.openings_status === 'actively_recruiting' || lab.openings_status === 'likely_open';
   if (isBeginner && isWet) return 'Great first wet lab — welcomes students with no prior research experience.';
   if (isBeginner && isComp) return 'Beginner-friendly computational lab — good entry point if you know Python or R.';
   if (isBeginner && isHybrid) return 'Hybrid lab open to beginners — you can start wet or computational depending on fit.';
-  if (isComp && methods.some(m => m.includes('deep learning') || m.includes('pytorch') || m.includes('machine'))) return 'ML-heavy lab — strong fit if you want to apply deep learning to biological data.';
-  if (isComp && methods.some(m => m.includes('python') || m.includes('r ') || m.includes('statistical'))) return 'Quantitative lab — good for students with stats or programming coursework.';
+  if (isUndergrad && isComp && methods.some(m => m.includes('deep learning') || m.includes('pytorch') || m.includes('machine'))) return 'ML-heavy lab — strong fit if you want to apply deep learning to biological data.';
+  if (isUndergrad && isComp && methods.some(m => m.includes('python') || m.includes('r ') || m.includes('statistical'))) return 'Quantitative lab — good for students with stats or programming coursework.';
   if (isWet && methods.some(m => m.includes('cell culture') || m.includes('microscopy'))) return 'Hands-on bench work — expect cell culture, imaging, and molecular techniques.';
   if (isWet && methods.some(m => m.includes('mass spec') || m.includes('proteomics') || m.includes('lc-ms'))) return 'Proteomics or mass spec focus — ideal if you want analytical chemistry bench skills.';
-  if (recruiting && isBeginner) return 'Currently recruiting and open to beginners — high chance of a response.';
-  if (recruiting) return 'Actively recruiting — now is a good time to reach out.';
+  if (recruiting && isUndergrad) return 'Likely open and undergrad-friendly — a good time to reach out.';
+  if (recruiting) return 'Likely open — now is a good time to reach out.';
   return null;
+}
+
+// helper: friendly label for undergrad_friendly field
+function friendlyLabel(val) {
+  if (val === 'yes') return { text: 'Undergrad-friendly', cls: 'green' };
+  if (val === 'beginner_ok') return { text: 'Beginner-ok', cls: 'green' };
+  if (val === 'unlikely') return { text: 'Selective entry', cls: 'warn' };
+  if (val === 'experience_preferred') return { text: 'Exp. preferred', cls: 'warn' };
+  return { text: 'Unknown', cls: '' };
+}
+
+// helper: opening status label
+function openingsLabel(val) {
+  if (val === 'likely_open') return { text: 'Likely open', cls: 'green' };
+  if (val === 'actively_recruiting') return { text: 'Actively recruiting', cls: 'green' };
+  if (val === 'selective') return { text: 'Selective', cls: 'warn' };
+  if (val === 'summer_only') return { text: 'Summer only', cls: 'warn' };
+  if (val === 'not_recruiting') return { text: 'Not recruiting', cls: '' };
+  return { text: 'Status unknown', cls: '' };
 }
 
 function renderCards(labs) {
@@ -798,19 +855,21 @@ function renderCards(labs) {
     return;
   }
   grid.innerHTML = labs.map(lab => {
-    const friendly = lab.undergrad_friendly === 'beginner_ok'
-      ? '<span class="tag ok">Beginner-friendly</span>'
-      : lab.undergrad_friendly === 'experience_preferred'
-      ? '<span class="tag warn">Experience preferred</span>'
-      : '<span class="tag">Level unknown</span>';
+    const fl = friendlyLabel(lab.undergrad_friendly);
+    const friendly = `<span class="tag ${fl.cls === 'green' ? 'ok' : fl.cls === 'warn' ? 'warn' : ''}">${fl.text}</span>`;
+
+    const ol = openingsLabel(lab.openings_status);
+    const open = `<span class="tag ${ol.cls === 'green' ? 'ok' : ol.cls === 'warn' ? 'warn' : ''}">${ol.text}</span>`;
+
     const style = lab.working_style === 'computational' ? '<span class="tag hyb">Computational</span>'
       : lab.working_style === 'hybrid' ? '<span class="tag hyb">Hybrid</span>'
       : lab.working_style === 'field' ? '<span class="tag">Field</span>'
       : '<span class="tag">Wet lab</span>';
-    const open = lab.openings_status === 'actively_recruiting' ? '<span class="tag ok">Actively recruiting</span>'
-      : lab.openings_status === 'summer_only' ? '<span class="tag warn">Summer only</span>'
-      : lab.openings_status === 'not_recruiting' ? '<span class="tag">Closed</span>'
-      : '<span class="tag">Status unknown</span>';
+
+    const funding = lab.funding_level === 'high'
+      ? '<span class="tag ok">Well-funded</span>'
+      : '';
+
     const topics = (lab.primary_topics || []).slice(0, 3).map(t => `<span class="tag pri">${t}</span>`).join('');
     const noteCount = (lab.student_notes || []).filter(n => n.status === 'approved').length;
     const notePill = noteCount ? `<span class="note-pill">💬 ${noteCount} note${noteCount > 1 ? 's' : ''}</span>` : '';
@@ -824,7 +883,7 @@ function renderCards(labs) {
         </div>
         ${open}
       </div>
-      <div class="tags">${friendly}${style}${topics}</div>
+      <div class="tags">${friendly}${style}${funding}${topics}</div>
       ${hint ? `<div class="card-fit">${hint}</div>` : ''}
       <p class="card-desc">${(lab.openings_notes || (lab.primary_topics || []).join(', ') || '').slice(0, 150)}</p>
       <div class="card-meta">
@@ -868,7 +927,6 @@ document.querySelectorAll('.intent-btn').forEach(btn => {
     const intent = btn.dataset.intent;
     if (intent === 'quiz') { openQuiz(); return; }
     showView('discover');
-    // reset filters first
     activeFilters = {};
     document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
     document.getElementById('qInput').value = '';
@@ -903,8 +961,8 @@ document.querySelectorAll('.nav-btn[data-quick]').forEach(btn => {
     document.getElementById('qInput').value = '';
     document.getElementById('modeFilter').value = '';
     const q = btn.dataset.quick;
-    if (q === 'first' || q === 'beginner') { activeFilters.friendly = 'beginner_ok'; const c = document.querySelector('.chip[data-v="beginner_ok"]'); if (c) c.classList.add('on'); }
-    if (q === 'open') { activeFilters.status = 'actively_recruiting'; const c = document.querySelector('.chip[data-v="actively_recruiting"]'); if (c) c.classList.add('on'); }
+    if (q === 'first' || q === 'beginner') { activeFilters.friendly = 'yes'; const c = document.querySelector('.chip[data-v="yes"]'); if (c) c.classList.add('on'); }
+    if (q === 'open') { activeFilters.status = 'likely_open'; const c = document.querySelector('.chip[data-v="likely_open"]'); if (c) c.classList.add('on'); }
     if (q === 'comp') { document.getElementById('modeFilter').value = 'computational'; }
     renderCards(applyFilters(allLabs));
   });
@@ -998,6 +1056,41 @@ document.getElementById('cardsGrid').addEventListener('click', e => {
 function openDrawer(lab) {
   const pi = lab.pi_name ? ` · ${lab.pi_name}` : '';
   document.getElementById('drawerLabInfo').textContent = `${lab.name}${pi} · ${lab.department}`;
+
+  // build fit signals grid
+  const fl = friendlyLabel(lab.undergrad_friendly);
+  const ol = openingsLabel(lab.openings_status);
+  const fundingText = lab.funding_level === 'high' ? 'Well-funded' : lab.funding_level === 'medium' ? 'Medium' : 'Unknown';
+  const fundingCls = lab.funding_level === 'high' ? 'green' : '';
+  const styleName = { wet_lab: 'Wet lab', computational: 'Computational', hybrid: 'Hybrid', field: 'Field' }[lab.working_style] || 'Unknown';
+
+  document.getElementById('drawerFitGrid').innerHTML = `
+    <div class="fit-cell">
+      <div class="fit-cell-label">Undergrad access</div>
+      <div class="fit-cell-val ${fl.cls}">${fl.text}</div>
+    </div>
+    <div class="fit-cell">
+      <div class="fit-cell-label">Openings</div>
+      <div class="fit-cell-val ${ol.cls}">${ol.text}</div>
+    </div>
+    <div class="fit-cell">
+      <div class="fit-cell-label">Funding level</div>
+      <div class="fit-cell-val ${fundingCls}">${fundingText}</div>
+    </div>
+    <div class="fit-cell">
+      <div class="fit-cell-label">Work style</div>
+      <div class="fit-cell-val">${styleName}</div>
+    </div>
+    ${lab.recommended_years ? `<div class="fit-cell" style="grid-column:span 2">
+      <div class="fit-cell-label">Recommended years</div>
+      <div class="fit-cell-val">${Array.isArray(lab.recommended_years) ? lab.recommended_years.join(', ') : lab.recommended_years}</div>
+    </div>` : ''}
+  `;
+
+  // show estimated disclaimer if any field is estimated
+  const estNote = document.getElementById('drawerEstNote');
+  estNote.style.display = lab.metadata_estimated ? '' : 'none';
+
   const topic = (lab.primary_topics || [])[0] || 'your research area';
   const methods = (lab.methods || []).slice(0, 2).join(' and ');
   document.getElementById('draftEmail').value =
@@ -1083,7 +1176,7 @@ const QUIZ = [
     opts: [
       { label: '🌱 Zero — this would be my first lab', val: 'beginner_ok' },
       { label: '📚 Some coursework, no lab yet', val: 'beginner_ok' },
-      { label: '🧪 I have done some research before', val: 'experience_preferred' },
+      { label: '🧪 I have done some research before', val: 'yes' },
       { label: '🎓 I have significant research experience', val: null },
     ]
   },
@@ -1130,7 +1223,6 @@ function renderQuizStep() {
 document.getElementById('quizNext').addEventListener('click', () => {
   if (quizStep < QUIZ.length - 1) { quizStep++; renderQuizStep(); }
   else {
-    // apply quiz results
     document.getElementById('quizOverlay').classList.remove('open');
     showView('discover');
     activeFilters = {};
