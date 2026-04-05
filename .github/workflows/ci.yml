@@ -45,14 +45,5 @@ jobs:
       - name: Validate labs_tagged.json schema
         run: python validate_schema.py
 
-      - name: Validate index.html is well-formed
-        run: |
-          python -c "
-import re, sys
-html = open('index.html').read()
-if '<script' not in html:
-    print('ERROR: no <script> tag found'); sys.exit(1)
-if '</html>' not in html:
-    print('ERROR: missing </html>'); sys.exit(1)
-print('index.html basic checks passed.')
-"
+      - name: Check index.html is well-formed
+        run: python check_html.py
