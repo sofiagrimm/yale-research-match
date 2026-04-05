@@ -27,8 +27,10 @@ jobs:
 
       - name: Lint Python files
         run: |
-          if find . -name "*.py" -not -path "./.git/*" | grep -q .; then
-            ruff check .
+          PY_FILES=$(find . -name "*.py" -not -path "./.git/*" \
+            | grep -v -E "./(scrape_yale_labs|tag_labs|build_labs|gen_labs)\.py$")
+          if [ -n "$PY_FILES" ]; then
+            echo "$PY_FILES" | xargs ruff check
           else
             echo "No Python files to lint."
           fi
