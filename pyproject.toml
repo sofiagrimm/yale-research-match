@@ -1,14 +1,13 @@
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+exclude = [
+    "scrape_yale_labs.py",
+    "tag_labs.py",
+    "build_labs.py",
+    "gen_labs.py",
+]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP"]
 ignore = ["E501"]
-
-[tool.ruff.lint.per-file-ignores]
-# Data pipeline / scraping scripts — not linted in CI
-"scrape_yale_labs.py" = ["ALL"]
-"tag_labs.py" = ["ALL"]
-"build_labs.py" = ["ALL"]
-"gen_labs.py" = ["ALL"]
