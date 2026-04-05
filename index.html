@@ -109,17 +109,16 @@
     .pill-btn:hover { background: var(--dynamic); border-color: color-mix(in oklab, var(--text) 14%, transparent); }
     .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
 
-    /* hero */
-    .hero {
-      padding: 2rem 2.25rem;
+    /* ─── EXPLORE HERO ─────────────────────────────────── */
+    .explore-hero {
+      padding: 2rem 2.25rem 1.75rem;
       border-radius: calc(var(--r-xl) + 4px);
       background:
-        radial-gradient(ellipse at 90% -10%, color-mix(in oklab, var(--primary) 14%, transparent) 0%, transparent 55%),
-        radial-gradient(ellipse at 10% 110%, color-mix(in oklab, var(--blue) 7%, transparent) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% -15%, color-mix(in oklab, var(--primary) 13%, transparent) 0%, transparent 52%),
+        radial-gradient(ellipse at 8% 110%, color-mix(in oklab, var(--blue) 7%, transparent) 0%, transparent 48%),
         var(--surface);
       border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
       box-shadow: var(--sh-sm);
-      display: grid; grid-template-columns: 1fr 320px; gap: 2rem; align-items: start;
     }
     .eyebrow {
       display: inline-flex; align-items: center; gap: 0.4rem;
@@ -128,9 +127,117 @@
       font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em;
       border: 1px solid color-mix(in oklab, var(--primary) 15%, transparent);
     }
-    .hero-h { font-size: clamp(1.45rem, 1.1rem + 1.4vw, 2.1rem); line-height: 1.08; margin: 0.875rem 0 0.65rem; font-weight: 700; }
+    .hero-h { font-size: clamp(1.45rem, 1.1rem + 1.4vw, 2.1rem); line-height: 1.08; margin: 0.875rem 0 0.55rem; font-weight: 700; }
     .hero-h em { font-style: normal; color: var(--primary); }
-    .hero-sub { color: var(--muted); max-width: 56ch; line-height: 1.7; margin-bottom: 1.25rem; font-size: 0.9rem; }
+    .hero-sub { color: var(--muted); max-width: 60ch; line-height: 1.7; font-size: 0.88rem; margin-bottom: 1.5rem; }
+
+    /* stats row inside hero */
+    .hero-stats-row {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      padding-top: 1.25rem;
+      border-top: 1px solid color-mix(in oklab, var(--text) 8%, transparent);
+      margin-top: 0.25rem;
+    }
+    .hstat { display: flex; align-items: baseline; gap: 0.4rem; }
+    .hstat-num { font-size: 1.15rem; font-weight: 700; color: var(--primary); line-height: 1; }
+    .hstat-label { font-size: 0.72rem; color: var(--muted); }
+
+    /* ─── EXPLORE GRID ──────────────────────────────────── */
+    .explore-section { display: grid; gap: 0.875rem; }
+    .explore-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+    }
+    .explore-head h2 { font-size: 0.88rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--faint); }
+    .explore-head span { font-size: 0.76rem; color: var(--muted); }
+
+    /* 2-column asymmetric grid: large card + 4 smaller cards */
+    .explore-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 0.75rem;
+    }
+    .explore-card {
+      display: flex; flex-direction: column; gap: 0.5rem;
+      padding: 1.25rem 1.4rem; border-radius: var(--r-xl);
+      border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
+      background: var(--surface); cursor: pointer; text-align: left;
+      transition: background var(--ease-slow), transform var(--ease-slow), box-shadow var(--ease-slow), border-color var(--ease);
+    }
+    .explore-card:hover {
+      background: var(--surface2); transform: translateY(-2px);
+      box-shadow: var(--sh-md); border-color: color-mix(in oklab, var(--primary) 20%, transparent);
+    }
+    .explore-card:hover .ec-arrow { transform: translateX(3px); }
+    /* first card spans both columns and is taller — the "primary" CTA */
+    .explore-card.primary {
+      grid-column: span 2;
+      flex-direction: row; align-items: center; gap: 1.25rem;
+      padding: 1.5rem 1.75rem;
+      background:
+        radial-gradient(ellipse at 95% 50%, color-mix(in oklab, var(--primary) 10%, transparent) 0%, transparent 60%),
+        var(--surface);
+    }
+    .explore-card.primary:hover {
+      background:
+        radial-gradient(ellipse at 95% 50%, color-mix(in oklab, var(--primary) 14%, transparent) 0%, transparent 60%),
+        var(--surface2);
+    }
+    .ec-icon {
+      font-size: 1.6rem; line-height: 1; flex: none;
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border-radius: var(--r-lg);
+      background: color-mix(in oklab, var(--primary) 10%, var(--surface));
+    }
+    .explore-card.primary .ec-icon {
+      width: 52px; height: 52px; font-size: 1.75rem;
+      background: color-mix(in oklab, var(--primary) 14%, var(--surface));
+    }
+    .ec-body { flex: 1; }
+    .ec-title { font-size: 0.9rem; font-weight: 700; line-height: 1.2; color: var(--text); }
+    .explore-card.primary .ec-title { font-size: 1rem; }
+    .ec-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.5; margin-top: 0.2rem; }
+    .ec-arrow {
+      font-size: 0.8rem; color: var(--primary); font-weight: 700;
+      transition: transform var(--ease);
+      margin-top: 0.4rem; display: inline-block;
+    }
+    .explore-card.primary .ec-arrow { margin-top: 0; font-size: 1rem; align-self: center; flex: none; }
+
+    /* school picker modal */
+    .school-overlay {
+      position: fixed; inset: 0; z-index: 50;
+      background: color-mix(in oklab, black 50%, transparent);
+      display: none; align-items: center; justify-content: center;
+      backdrop-filter: blur(4px); padding: 1.5rem;
+    }
+    .school-overlay.open { display: flex; }
+    .school-modal {
+      background: var(--surface); border-radius: calc(var(--r-xl) + 4px);
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      box-shadow: var(--sh-lg); width: min(480px, 100%);
+      padding: 1.75rem; display: grid; gap: 1.25rem;
+    }
+    .school-modal-head { display: flex; justify-content: space-between; align-items: center; }
+    .school-modal-head h3 { font-size: 0.95rem; font-weight: 700; }
+    .school-grid { display: grid; gap: 0.5rem; }
+    .school-btn {
+      display: flex; align-items: center; gap: 0.875rem;
+      padding: 0.875rem 1rem; border-radius: var(--r-lg);
+      border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+      background: var(--surface2); text-align: left;
+      transition: background var(--ease), border-color var(--ease), transform var(--ease);
+    }
+    .school-btn:hover { background: var(--primary-hi); border-color: color-mix(in oklab, var(--primary) 22%, transparent); transform: translateX(3px); }
+    .school-btn-icon { font-size: 1.25rem; flex: none; }
+    .school-btn-body {}
+    .school-btn-name { font-size: 0.85rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+    .school-btn-abbr { font-size: 0.72rem; color: var(--muted); }
+    .school-btn-count { margin-left: auto; font-size: 0.72rem; font-weight: 600; color: var(--primary); }
+
+    /* ─── SEARCH + FILTER ───────────────────────────────── */
+    .search-section { display: grid; gap: 0.75rem; }
+    .search-section-head { font-size: 0.78rem; font-weight: 600; color: var(--muted); }
     .search-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .input, .select {
       height: 42px; border-radius: var(--r-lg);
@@ -149,32 +256,6 @@
     }
     .primary-btn:hover { background: var(--primary-h); transform: translateY(-1px); box-shadow: 0 4px 14px color-mix(in oklab, var(--primary) 40%, transparent); }
     .primary-btn:active { transform: translateY(0); }
-
-    /* intent buttons */
-    .intent-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-    .intent-btn {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      height: 36px; padding: 0 1rem; border-radius: var(--r-full);
-      border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
-      background: var(--surface2); font-size: 0.8rem; font-weight: 500;
-      transition: background var(--ease), border-color var(--ease), transform var(--ease), box-shadow var(--ease);
-    }
-    .intent-btn:hover { background: var(--primary-hi); border-color: color-mix(in oklab, var(--primary) 22%, transparent); color: var(--primary); transform: translateY(-1px); box-shadow: var(--sh-sm); }
-
-    /* hero stats */
-    .hero-stats {
-      background: var(--surface2);
-      border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
-      border-radius: var(--r-xl); padding: 1.25rem; display: grid; gap: 0.875rem;
-    }
-    .hero-stats-title { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); margin-bottom: 0.25rem; }
-    .stat-big { font-size: 2rem; font-weight: 700; line-height: 1; color: var(--primary); }
-    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
-    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.625rem; }
-    .stat-cell { background: var(--surface); border-radius: var(--r-lg); padding: 0.625rem; }
-    .stat-cell strong { font-size: 1.1rem; display: block; }
-    .stat-cell span { font-size: 0.72rem; color: var(--muted); }
-    .stat-divider { height: 1px; background: color-mix(in oklab, var(--text) 8%, transparent); }
 
     /* tracks section */
     .tracks-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; }
@@ -320,9 +401,7 @@
     .copy-ok { font-size: 0.75rem; color: var(--success); display: none; }
 
     /* fit signals grid in drawer */
-    .fit-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;
-    }
+    .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
     .fit-cell {
       background: var(--offset); border-radius: var(--r-lg);
       padding: 0.55rem 0.7rem;
@@ -361,17 +440,6 @@
     .dev-card h4 { font-size: 0.83rem; margin-bottom: 0.25rem; }
     .dev-card p { font-size: 0.76rem; color: var(--muted); }
 
-    /* prize strip */
-    .prize-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
-    .prize-card {
-      padding: 1rem 1.1rem; border-radius: var(--r-xl);
-      border: 1px solid color-mix(in oklab, var(--text) 9%, transparent);
-      background: var(--surface);
-    }
-    .prize-card .p-num { font-size: 0.65rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem; }
-    .prize-card h4 { font-size: 0.85rem; margin-bottom: 0.3rem; font-weight: 700; }
-    .prize-card p { font-size: 0.76rem; color: var(--muted); line-height: 1.55; }
-
     /* section heads */
     .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
     .section-head h2 { font-size: 1.05rem; font-weight: 700; }
@@ -408,8 +476,7 @@
       position: fixed; inset: 0; z-index: 50;
       background: color-mix(in oklab, black 55%, transparent);
       display: none; align-items: center; justify-content: center;
-      backdrop-filter: blur(4px);
-      padding: 1.5rem;
+      backdrop-filter: blur(4px); padding: 1.5rem;
     }
     .quiz-overlay.open { display: flex; }
     .quiz-modal {
@@ -441,9 +508,7 @@
       .brand-text, .nav-btn span:not(.dot):not(.nav-count), .nav-label, .sidebar-footer { display: none; }
       .sidebar { padding-inline: 0.625rem; align-items: center; }
       .nav-btn { justify-content: center; padding: 0.6rem; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-stats { display: none; }
-      .prize-strip { grid-template-columns: 1fr; }
+      .explore-card.primary { flex-direction: column; gap: 0.75rem; }
     }
     @media (max-width: 768px) {
       .shell { display: block; }
@@ -453,6 +518,9 @@
       .cards-grid { grid-template-columns: 1fr; }
       .tracks-row { grid-template-columns: repeat(2, 1fr); }
       .fit-grid { grid-template-columns: 1fr; }
+      .explore-grid { grid-template-columns: 1fr; }
+      .explore-card.primary { grid-column: span 1; }
+      .hero-stats-row { gap: 1rem; }
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
   </style>
@@ -531,88 +599,113 @@
       <!-- VIEW: discover -->
       <div id="viewDiscover">
 
-        <!-- hero -->
-        <section class="hero" aria-label="Search">
-          <div>
-            <span class="eyebrow">YCC Tech Developer Prize &middot; Open to all Yale students</span>
-            <h2 class="hero-h">Find the right lab <em>before</em> cold-emailing&nbsp;everyone.</h2>
-            <p class="hero-sub">
-              Yale Research Match layers on top of YURA, Yale School of Medicine directories, and departmental pages to make research discovery actually searchable. Type a topic, pick a style, and see which labs fit you.
-            </p>
-            <div class="search-row">
-              <input class="input" id="qInput" placeholder="Topic: proteomics, aging, CRISPR, ML…" aria-label="Research topic" />
-              <select class="select" id="modeFilter" aria-label="Working style">
-                <option value="">Any style</option>
-                <option value="wet_lab">Wet lab</option>
-                <option value="computational">Computational</option>
-                <option value="hybrid">Hybrid</option>
-                <option value="field">Field</option>
-              </select>
-              <button class="primary-btn" id="searchBtn">Search</button>
-            </div>
-            <!-- intent buttons -->
-            <div class="intent-row" role="group" aria-label="Quick entry points">
-              <button class="intent-btn" data-intent="first">🌱 Find my first lab</button>
-              <button class="intent-btn" data-intent="comp">💻 Computational work</button>
-              <button class="intent-btn" data-intent="beginner">✅ Beginner-friendly</button>
-              <button class="intent-btn" data-intent="quiz">🎯 Help me match</button>
-            </div>
-          </div>
-          <div class="hero-stats" aria-label="Live statistics">
-            <div>
-              <div class="hero-stats-title">Labs indexed</div>
-              <div class="stat-big" id="statTotal">...</div>
-              <div class="stat-label">across Yale College, YSM, SEAS, YSPH</div>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-grid">
-              <div class="stat-cell"><strong id="statOpen">...</strong><span>Recruiting</span></div>
-              <div class="stat-cell"><strong id="statBeg">...</strong><span>Undergrad-friendly</span></div>
-              <div class="stat-cell"><strong id="statDepts">...</strong><span>Departments</span></div>
-              <div class="stat-cell"><strong id="statSchools">...</strong><span>Schools</span></div>
-            </div>
-            <div style="font-size:0.68rem;color:var(--faint)">Sourced from YURA &middot; YSM &middot; FAS &middot; SEAS &middot; YSPH</div>
+        <!-- ── EXPLORE HERO ── -->
+        <section class="explore-hero" aria-label="Welcome">
+          <span class="eyebrow">YCC Tech Developer Prize &middot; Open to all Yale students</span>
+          <h2 class="hero-h">Find the right lab <em>before</em> cold-emailing&nbsp;everyone.</h2>
+          <p class="hero-sub">
+            Yale Research Match makes research discovery searchable — across YURA, YSM, FAS, SEAS, and YSPH. No departmental insider knowledge required.
+          </p>
+          <!-- live stats strip -->
+          <div class="hero-stats-row" aria-label="Live statistics">
+            <div class="hstat"><span class="hstat-num" id="statTotal">…</span><span class="hstat-label">labs indexed</span></div>
+            <div class="hstat"><span class="hstat-num" id="statOpen">…</span><span class="hstat-label">actively recruiting</span></div>
+            <div class="hstat"><span class="hstat-num" id="statBeg">…</span><span class="hstat-label">beginner-friendly</span></div>
+            <div class="hstat"><span class="hstat-num" id="statDepts">…</span><span class="hstat-label">departments</span></div>
+            <div class="hstat"><span class="hstat-num" id="statSchools">…</span><span class="hstat-label">schools</span></div>
           </div>
         </section>
 
-        <!-- match quiz prompt -->
-        <div class="quiz-card">
-          <div>
-            <h3>Not sure where to start?</h3>
-            <p>Answer 4 quick questions and we'll surface labs that actually match your interests, experience level, and working style.</p>
-            <div class="quiz-steps">
-              <span class="quiz-step">Topic</span>
-              <span class="quiz-step">Work style</span>
-              <span class="quiz-step">Experience</span>
-              <span class="quiz-step">Time</span>
-            </div>
+        <!-- ── EXPLORE ENTRY POINTS ── -->
+        <section class="explore-section" aria-label="How would you like to start?">
+          <div class="explore-head">
+            <h2>Where would you like to start?</h2>
+            <span>Pick what fits you — or search below</span>
           </div>
-          <button class="primary-btn" id="quizStartBtn" style="white-space:nowrap;min-width:120px">Start quiz &rarr;</button>
-        </div>
 
-        <!-- prize strip -->
-        <div class="prize-strip">
-          <div class="prize-card"><div class="p-num">01 Highest weight</div><h4>Community impact</h4><p>Yale undergrads across all years and majors struggle to find labs without inside connections. This tool fixes that directly.</p></div>
-          <div class="prize-card"><div class="p-num">02 High weight</div><h4>Usable today</h4><p>Shipped with real Yale lab data, live search, and an outreach helper. Students can use this the day after judging.</p></div>
-          <div class="prize-card"><div class="p-num">03 Medium weight</div><h4>Open for builders</h4><p>labs_tagged.json is a public JSON API other Yale developers can build visualizations and integrations on top of.</p></div>
-        </div>
+          <div class="explore-grid" role="group" aria-label="Entry point options">
 
-        <!-- filter bar -->
-        <div class="filter-bar" role="group" aria-label="Active filters">
-          <span class="filter-label">Filter:</span>
-          <button class="chip" data-f="friendly" data-v="yes">Undergrad-friendly</button>
-          <button class="chip" data-f="friendly" data-v="beginner_ok">Beginner-friendly</button>
-          <button class="chip" data-f="status" data-v="likely_open">Likely open</button>
-          <button class="chip" data-f="status" data-v="actively_recruiting">Actively recruiting</button>
-          <button class="chip" data-f="style" data-v="wet_lab">Wet lab</button>
-          <button class="chip" data-f="style" data-v="computational">Computational</button>
-          <button class="chip" data-f="style" data-v="hybrid">Hybrid</button>
-          <button class="chip" data-f="school" data-v="Faculty of Arts and Sciences">FAS</button>
-          <button class="chip" data-f="school" data-v="Yale School of Medicine">YSM</button>
-          <button class="chip" data-f="school" data-v="Yale School of Engineering and Applied Science">SEAS</button>
-          <button class="chip" data-f="school" data-v="Yale School of Public Health">YSPH</button>
-          <span class="result-count" id="resultCount"></span>
-        </div>
+            <!-- PRIMARY: guided match quiz -->
+            <button class="explore-card primary" data-explore="quiz">
+              <div class="ec-icon">🎯</div>
+              <div class="ec-body">
+                <div class="ec-title">Help me find a lab that fits</div>
+                <div class="ec-desc">Answer 4 quick questions — topic, work style, experience, and time — and we'll surface labs that actually match you. Best for students who aren't sure where to start.</div>
+              </div>
+              <span class="ec-arrow">→</span>
+            </button>
+
+            <!-- 2×2 smaller cards -->
+            <button class="explore-card" data-explore="first">
+              <div class="ec-icon">🌱</div>
+              <div class="ec-body">
+                <div class="ec-title">Find my first lab</div>
+                <div class="ec-desc">Labs that welcome students with zero prior research experience.</div>
+              </div>
+              <span class="ec-arrow">→</span>
+            </button>
+
+            <button class="explore-card" data-explore="comp">
+              <div class="ec-icon">💻</div>
+              <div class="ec-body">
+                <div class="ec-title">Find computational work</div>
+                <div class="ec-desc">Code, data, and ML — no bench required. Good if you know Python or R.</div>
+              </div>
+              <span class="ec-arrow">→</span>
+            </button>
+
+            <button class="explore-card" data-explore="topics">
+              <div class="ec-icon">🔭</div>
+              <div class="ec-body">
+                <div class="ec-title">Browse by topic</div>
+                <div class="ec-desc">Proteomics, neuroscience, aging, ML, ecology — explore by what interests you.</div>
+              </div>
+              <span class="ec-arrow">→</span>
+            </button>
+
+            <button class="explore-card" data-explore="school">
+              <div class="ec-icon">🏛️</div>
+              <div class="ec-body">
+                <div class="ec-title">Explore by school</div>
+                <div class="ec-desc">FAS, YSM, SEAS, or YSPH — filter to labs in a specific Yale division.</div>
+              </div>
+              <span class="ec-arrow">→</span>
+            </button>
+
+          </div>
+        </section>
+
+        <!-- ── SEARCH + FILTER ── -->
+        <section class="search-section" aria-label="Search and filter">
+          <div class="search-section-head">Or search directly</div>
+          <div class="search-row">
+            <input class="input" id="qInput" placeholder="Topic: proteomics, aging, CRISPR, ML…" aria-label="Research topic" />
+            <select class="select" id="modeFilter" aria-label="Working style">
+              <option value="">Any style</option>
+              <option value="wet_lab">Wet lab</option>
+              <option value="computational">Computational</option>
+              <option value="hybrid">Hybrid</option>
+              <option value="field">Field</option>
+            </select>
+            <button class="primary-btn" id="searchBtn">Search</button>
+          </div>
+          <!-- filter chips -->
+          <div class="filter-bar" role="group" aria-label="Active filters">
+            <span class="filter-label">Filter:</span>
+            <button class="chip" data-f="friendly" data-v="yes">Undergrad-friendly</button>
+            <button class="chip" data-f="friendly" data-v="beginner_ok">Beginner-friendly</button>
+            <button class="chip" data-f="status" data-v="likely_open">Likely open</button>
+            <button class="chip" data-f="status" data-v="actively_recruiting">Actively recruiting</button>
+            <button class="chip" data-f="style" data-v="wet_lab">Wet lab</button>
+            <button class="chip" data-f="style" data-v="computational">Computational</button>
+            <button class="chip" data-f="style" data-v="hybrid">Hybrid</button>
+            <button class="chip" data-f="school" data-v="Faculty of Arts and Sciences">FAS</button>
+            <button class="chip" data-f="school" data-v="Yale School of Medicine">YSM</button>
+            <button class="chip" data-f="school" data-v="Yale School of Engineering and Applied Science">SEAS</button>
+            <button class="chip" data-f="school" data-v="Yale School of Public Health">YSPH</button>
+            <span class="result-count" id="resultCount"></span>
+          </div>
+        </section>
 
         <!-- cards -->
         <div class="cards-grid" id="cardsGrid" role="list" aria-live="polite"></div>
@@ -659,6 +752,18 @@
       </div>
 
     </main>
+  </div>
+</div>
+
+<!-- school picker modal -->
+<div class="school-overlay" id="schoolOverlay" role="dialog" aria-modal="true" aria-label="Explore by school">
+  <div class="school-modal">
+    <div class="school-modal-head">
+      <h3>Explore by school or division</h3>
+      <button class="drawer-close" id="schoolClose" aria-label="Close">&times;</button>
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted);margin-top:-0.5rem">Pick a Yale school to filter labs from that division.</p>
+    <div class="school-grid" id="schoolGrid"></div>
   </div>
 </div>
 
@@ -769,6 +874,7 @@ function boot() {
   renderCards(allLabs);
   buildTopicGrid(allLabs);
   buildTracksGrid(allLabs);
+  buildSchoolGrid(allLabs);
   document.getElementById('navTotal').textContent = allLabs.length;
 }
 
@@ -777,7 +883,6 @@ function updateStats(labs) {
   document.getElementById('statOpen').textContent = labs.filter(l =>
     l.openings_status === 'actively_recruiting' || l.openings_status === 'likely_open'
   ).length;
-  // count both legacy beginner_ok and new "yes" value
   document.getElementById('statBeg').textContent = labs.filter(l =>
     l.undergrad_friendly === 'beginner_ok' || l.undergrad_friendly === 'yes'
   ).length;
@@ -828,7 +933,6 @@ function fitHint(lab) {
   return null;
 }
 
-// helper: friendly label for undergrad_friendly field
 function friendlyLabel(val) {
   if (val === 'yes') return { text: 'Undergrad-friendly', cls: 'green' };
   if (val === 'beginner_ok') return { text: 'Beginner-ok', cls: 'green' };
@@ -837,7 +941,6 @@ function friendlyLabel(val) {
   return { text: 'Unknown', cls: '' };
 }
 
-// helper: opening status label
 function openingsLabel(val) {
   if (val === 'likely_open') return { text: 'Likely open', cls: 'green' };
   if (val === 'actively_recruiting') return { text: 'Actively recruiting', cls: 'green' };
@@ -857,19 +960,13 @@ function renderCards(labs) {
   grid.innerHTML = labs.map(lab => {
     const fl = friendlyLabel(lab.undergrad_friendly);
     const friendly = `<span class="tag ${fl.cls === 'green' ? 'ok' : fl.cls === 'warn' ? 'warn' : ''}">${fl.text}</span>`;
-
     const ol = openingsLabel(lab.openings_status);
     const open = `<span class="tag ${ol.cls === 'green' ? 'ok' : ol.cls === 'warn' ? 'warn' : ''}">${ol.text}</span>`;
-
     const style = lab.working_style === 'computational' ? '<span class="tag hyb">Computational</span>'
       : lab.working_style === 'hybrid' ? '<span class="tag hyb">Hybrid</span>'
       : lab.working_style === 'field' ? '<span class="tag">Field</span>'
       : '<span class="tag">Wet lab</span>';
-
-    const funding = lab.funding_level === 'high'
-      ? '<span class="tag ok">Well-funded</span>'
-      : '';
-
+    const funding = lab.funding_level === 'high' ? '<span class="tag ok">Well-funded</span>' : '';
     const topics = (lab.primary_topics || []).slice(0, 3).map(t => `<span class="tag pri">${t}</span>`).join('');
     const noteCount = (lab.student_notes || []).filter(n => n.status === 'approved').length;
     const notePill = noteCount ? `<span class="note-pill">💬 ${noteCount} note${noteCount > 1 ? 's' : ''}</span>` : '';
@@ -921,24 +1018,37 @@ document.querySelectorAll('.chip').forEach(btn => {
   });
 });
 
-// intent buttons
-document.querySelectorAll('.intent-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const intent = btn.dataset.intent;
+// ── EXPLORE CARD HANDLERS ──────────────────────────────────
+document.querySelectorAll('.explore-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const intent = card.dataset.explore;
+
     if (intent === 'quiz') { openQuiz(); return; }
+
+    if (intent === 'topics') { showView('topics'); return; }
+
+    if (intent === 'school') {
+      document.getElementById('schoolOverlay').classList.add('open');
+      return;
+    }
+
+    // filter-based intents → scroll to cards
     showView('discover');
     activeFilters = {};
     document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
     document.getElementById('qInput').value = '';
     document.getElementById('modeFilter').value = '';
-    if (intent === 'first' || intent === 'beginner') {
+
+    if (intent === 'first') {
       activeFilters.friendly = 'beginner_ok';
       const c = document.querySelector('.chip[data-v="beginner_ok"]'); if (c) c.classList.add('on');
     }
     if (intent === 'comp') {
       document.getElementById('modeFilter').value = 'computational';
     }
+
     renderCards(applyFilters(allLabs));
+    document.getElementById('cardsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
 
@@ -967,6 +1077,45 @@ document.querySelectorAll('.nav-btn[data-quick]').forEach(btn => {
     renderCards(applyFilters(allLabs));
   });
 });
+
+// ── SCHOOL GRID ────────────────────────────────────────────
+const SCHOOLS = [
+  { name: 'Faculty of Arts and Sciences', abbr: 'FAS', icon: '🎓', desc: 'Sciences, humanities, and social science departments' },
+  { name: 'Yale School of Medicine', abbr: 'YSM', icon: '🏥', desc: 'Biomedical, clinical, and translational research' },
+  { name: 'Yale School of Engineering and Applied Science', abbr: 'SEAS', icon: '⚙️', desc: 'Engineering, applied physics, and CS' },
+  { name: 'Yale School of Public Health', abbr: 'YSPH', icon: '🌍', desc: 'Epidemiology, global health, and environmental health' },
+];
+function buildSchoolGrid(labs) {
+  const grid = document.getElementById('schoolGrid');
+  grid.innerHTML = SCHOOLS.map(s => {
+    const count = labs.filter(l => l.school === s.name).length;
+    return `<button class="school-btn" data-school="${s.name}">
+      <span class="school-btn-icon">${s.icon}</span>
+      <span class="school-btn-body">
+        <span class="school-btn-name">${s.name}</span>
+        <span class="school-btn-abbr">${s.desc}</span>
+      </span>
+      <span class="school-btn-count">${count} labs →</span>
+    </button>`;
+  }).join('');
+  grid.querySelectorAll('.school-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const school = btn.dataset.school;
+      document.getElementById('schoolOverlay').classList.remove('open');
+      showView('discover');
+      activeFilters = {};
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+      document.getElementById('qInput').value = '';
+      document.getElementById('modeFilter').value = '';
+      activeFilters.school = school;
+      const c = document.querySelector(`.chip[data-v="${school}"]`); if (c) c.classList.add('on');
+      renderCards(applyFilters(allLabs));
+      document.getElementById('cardsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+document.getElementById('schoolClose').addEventListener('click', () => document.getElementById('schoolOverlay').classList.remove('open'));
+document.getElementById('schoolOverlay').addEventListener('click', e => { if (e.target === document.getElementById('schoolOverlay')) document.getElementById('schoolOverlay').classList.remove('open'); });
 
 // --- TRACKS ---
 const TRACKS = [
@@ -1041,7 +1190,13 @@ function buildTopicGrid(labs) {
 const overlay = document.getElementById('drawerOverlay');
 document.getElementById('drawerClose').addEventListener('click', () => overlay.classList.remove('open'));
 overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { overlay.classList.remove('open'); document.getElementById('quizOverlay').classList.remove('open'); } });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    overlay.classList.remove('open');
+    document.getElementById('quizOverlay').classList.remove('open');
+    document.getElementById('schoolOverlay').classList.remove('open');
+  }
+});
 
 document.getElementById('cardsGrid').addEventListener('click', e => {
   const btn = e.target.closest('[data-action="draft"]');
@@ -1057,7 +1212,6 @@ function openDrawer(lab) {
   const pi = lab.pi_name ? ` · ${lab.pi_name}` : '';
   document.getElementById('drawerLabInfo').textContent = `${lab.name}${pi} · ${lab.department}`;
 
-  // build fit signals grid
   const fl = friendlyLabel(lab.undergrad_friendly);
   const ol = openingsLabel(lab.openings_status);
   const fundingText = lab.funding_level === 'high' ? 'Well-funded' : lab.funding_level === 'medium' ? 'Medium' : 'Unknown';
@@ -1087,7 +1241,6 @@ function openDrawer(lab) {
     </div>` : ''}
   `;
 
-  // show estimated disclaimer if any field is estimated
   const estNote = document.getElementById('drawerEstNote');
   estNote.style.display = lab.metadata_estimated ? '' : 'none';
 
@@ -1227,12 +1380,8 @@ document.getElementById('quizNext').addEventListener('click', () => {
     showView('discover');
     activeFilters = {};
     document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
-    if (quizAnswers.topic) {
-      document.getElementById('qInput').value = quizAnswers.topic;
-    }
-    if (quizAnswers.style) {
-      document.getElementById('modeFilter').value = quizAnswers.style;
-    }
+    if (quizAnswers.topic) document.getElementById('qInput').value = quizAnswers.topic;
+    if (quizAnswers.style) document.getElementById('modeFilter').value = quizAnswers.style;
     if (quizAnswers.friendly) {
       activeFilters.friendly = quizAnswers.friendly;
       const c = document.querySelector(`.chip[data-v="${quizAnswers.friendly}"]`);
@@ -1244,7 +1393,6 @@ document.getElementById('quizNext').addEventListener('click', () => {
 document.getElementById('quizBack').addEventListener('click', () => { if (quizStep > 0) { quizStep--; renderQuizStep(); } });
 document.getElementById('quizClose').addEventListener('click', () => document.getElementById('quizOverlay').classList.remove('open'));
 document.getElementById('quizOverlay').addEventListener('click', e => { if (e.target === document.getElementById('quizOverlay')) document.getElementById('quizOverlay').classList.remove('open'); });
-document.getElementById('quizStartBtn').addEventListener('click', openQuiz);
 
 // theme
 document.getElementById('themeToggle').addEventListener('click', () => {
